@@ -372,6 +372,9 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 .admin-btn.danger { background: transparent; color: #ff6b6b; border-color: rgba(255, 107, 107, 0.3); }
 .admin-btn.danger:hover { background: rgba(255, 107, 107, 0.1); border-color: #ff6b6b; }
 
+/* SAFETY NET: Elements are ALWAYS visible. No JS hiding allowed. */
+.reveal { opacity: 1 !important; transform: none !important; }
+
 @media(max-width:1024px){
   .hero-content{grid-template-columns:1fr}
   .hero-visual{display:none}
@@ -1514,6 +1517,11 @@ try {
     initApp();
 } catch (e) {
     console.error("Initialization failed", e);
+}
+
+// Check for login hash immediately after script load
+if (window.location.hash === '#login') {
+    showLogin();
 }
 </script>
 </body>
