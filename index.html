@@ -5,48 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LuluLab</title>
 <!-- Favicon: Pink square with white L to match website logo -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FA9EBC'/%3E%3Ctext x='50' y='72' font-family='Arial,sans-serif' font-size='62' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23BF5B34'/%3E%3Ctext x='50' y='72' font-family='Arial,sans-serif' font-size='62' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  --bg:#0B1957; --bg-2:#0A1648; --bg-3:#0D1B5E; --bg-card:#0F1E66; --bg-elevated:#13216F;
-  --fg:#F8F3EA; --fg-2:rgba(248,243,234,.72); --fg-3:rgba(248,243,234,.42);
-  --accent:#FA9EBC; --accent-2:#FFDBD1; --accent-deep:#E87E9C;
-  --blue-accent:#7AA2FF; --blue-accent-2:#AECBFF; --blue-deep:#5E7BFF;
-  --pink-soft:rgba(250,158,188,.1); --pink-glow:rgba(250,158,188,.18);
-  --blue-soft:rgba(122,162,255,.1); 
-  --border:rgba(248,243,234,.08); --border-bright:rgba(250,158,188,.28); --border-blue:rgba(122,162,255,.28);
-  --grid-line:rgba(248,243,234,.04);
-  --display:'Space Grotesk',sans-serif; --sans:'Manrope',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  /* page surfaces — warm, elegant neutral, matching LuluLab's terracotta/green/gold palette */
+  --bg:#FAF7F3; --bg-2:#FFFFFF; --bg-3:#F2ECE3; --bg-card:#FFFFFF; --bg-elevated:#FFFFFF;
+  /* text — warm near-black */
+  --fg:#1B1714; --fg-2:rgba(27,23,20,.66); --fg-3:rgba(27,23,20,.44);
+  /* primary accent — terracotta */
+  --accent:#BF5B34; --accent-2:#D68A61; --accent-deep:#93431F;
+  /* secondary accent — green, used to tell project 2 apart */
+  --blue-accent:#3F7256; --blue-accent-2:#6FA084; --blue-deep:#2C5540;
+  /* tertiary accent — gold, used sparingly for highlights */
+  --gold:#C99A34; --gold-soft:rgba(201,154,52,.12);
+  --pink-soft:rgba(191,91,52,.08); --pink-glow:rgba(191,91,52,.16);
+  --blue-soft:rgba(63,114,86,.08);
+  --border:#E9E1D6; --border-bright:rgba(191,91,52,.26); --border-blue:rgba(63,114,86,.28);
+  --grid-line:rgba(27,23,20,.035);
+  /* the terminal panel is the one deliberately dark element on the page */
+  --term-bg:#1C1610; --term-fg:#E9DFD1; --term-fg-dim:rgba(233,223,209,.55); --term-border:rgba(255,255,255,.08);
+  --display:'Sora',sans-serif; --sans:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:1;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:1000;width:0;box-shadow:0 0 12px var(--accent)}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--gold),var(--blue-accent));z-index:1000;width:0;box-shadow:0 0 12px var(--accent)}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
-nav.scrolled{padding:.9rem 3rem;background:rgba(11,25,87,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav.scrolled{padding:.9rem 3rem;background:rgba(250,247,243,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .logo{font-family:var(--display);font-weight:600;font-size:1.4rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.1rem;color:var(--fg);text-decoration:none}
 .logo-mark{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:#fff;position:relative;overflow:hidden}
 .logo-mark::after{content:none}
 .nav-links{display:flex;gap:2.2rem;list-style:none}
-.nav-links a{color:var(--fg-2);text-decoration:none;font-size:.88rem;font-weight:500;position:relative;transition:color .3s;font-family:var(--mono);text-transform:lowercase}
+.nav-links a{color:var(--fg-2);text-decoration:none;font-size:.92rem;font-weight:500;position:relative;transition:color .2s;font-family:var(--sans)}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
 .nav-links a:hover{color:var(--fg)}
 .nav-links a:hover::after{width:100%}
-.nav-cta{padding:.6rem 1.3rem;border:1px solid var(--border-bright);color:var(--accent);text-decoration:none;font-size:.83rem;font-weight:600;border-radius:6px;transition:all .3s;background:var(--pink-soft);font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;display:inline-flex;align-items:center;gap:.5rem}
+.nav-cta{padding:.6rem 1.3rem;border:1px solid var(--border-bright);color:var(--accent);text-decoration:none;font-size:.88rem;font-weight:600;border-radius:8px;transition:all .2s;background:var(--pink-soft);font-family:var(--sans);display:inline-flex;align-items:center;gap:.5rem}
 .nav-cta:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);box-shadow:0 8px 24px rgba(250,158,188,.25)}
 
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:8rem 3rem 5rem;overflow:hidden}
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 3rem;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .mesh{position:absolute;border-radius:50%;filter:blur(90px);animation:float 22s ease-in-out infinite}
 .mesh-1{width:560px;height:560px;background:radial-gradient(circle,var(--accent),transparent 70%);top:-150px;right:-100px;opacity:.35}
 .mesh-2{width:480px;height:480px;background:radial-gradient(circle,var(--accent-2),transparent 70%);bottom:-100px;left:-150px;opacity:.25;animation-delay:-11s}
-.mesh-3{width:360px;height:360px;background:radial-gradient(circle,#5E7BFF,transparent 70%);top:35%;left:40%;opacity:.2;animation-delay:-6s}
+.mesh-3{width:360px;height:360px;background:radial-gradient(circle,var(--blue-accent),transparent 70%);top:35%;left:40%;opacity:.18;animation-delay:-6s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.08)}66%{transform:translate(-30px,30px) scale(.94)}}
 .hero-grid-deco{position:absolute;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 30% 40%,black 0%,transparent 60%);-webkit-mask-image:radial-gradient(ellipse at 30% 40%,black 0%,transparent 60%)}
 
@@ -59,41 +67,41 @@ nav.scrolled{padding:.9rem 3rem;background:rgba(11,25,87,.85);backdrop-filter:bl
 .hero h1 .display{font-weight:700;display:block}
 .hero-sub{font-size:1.08rem;color:var(--fg-2);max-width:540px;margin-bottom:2.5rem;line-height:1.7}
 .hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.btn-primary{padding:.95rem 1.8rem;background:var(--accent);color:var(--bg);border:none;border-radius:6px;font-family:var(--mono);font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
+.btn-primary{padding:.95rem 1.9rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-weight:600;font-size:.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .2s;text-decoration:none}
 .btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(250,158,188,.35)}
-.btn-secondary{padding:.95rem 1.8rem;background:transparent;color:var(--fg);border:1px solid var(--border-bright);border-radius:6px;font-family:var(--mono);font-weight:500;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
+.btn-secondary{padding:.95rem 1.9rem;background:transparent;color:var(--fg);border:1px solid var(--border);border-radius:8px;font-family:var(--sans);font-weight:500;font-size:.95rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .2s;text-decoration:none}
 .btn-secondary:hover{border-color:var(--accent);background:var(--pink-soft);color:var(--accent)}
 
-.hero-visual{position:relative;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;font-family:var(--mono);font-size:.8rem;line-height:1.85;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px var(--border-bright);overflow:hidden}
+.hero-visual{position:relative;background:var(--term-bg);border:1px solid var(--term-border);border-radius:10px;padding:1.5rem;font-family:var(--mono);font-size:.8rem;line-height:1.85;box-shadow:0 20px 60px rgba(18,20,28,.16),0 0 0 1px var(--border-bright);overflow:hidden}
 .hero-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.terminal-header{display:flex;gap:.4rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);align-items:center}
+.terminal-header{display:flex;gap:.4rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--term-border);align-items:center}
 .terminal-dot{width:9px;height:9px;border-radius:50%}
 .terminal-dot.red{background:#FF5F57}.terminal-dot.yellow{background:#FEBC2E}.terminal-dot.green{background:#28C840}
-.terminal-title{margin-left:auto;font-size:.7rem;color:var(--fg-3);letter-spacing:.05em}
-.terminal-line{color:var(--fg-2)}
-.terminal-line .prompt{color:var(--accent);margin-right:.5rem}
-.terminal-line .keyword{color:#7AA2FF}
-.terminal-line .string{color:var(--accent-2)}
-.terminal-line .function{color:var(--accent)}
-.terminal-line .comment{color:var(--fg-3);font-style:italic}
-.terminal-line .output{color:var(--fg)}
+.terminal-title{margin-left:auto;font-size:.7rem;color:var(--term-fg-dim);letter-spacing:.05em}
+.terminal-line{color:var(--term-fg-dim)}
+.terminal-line .prompt{color:var(--accent-2);margin-right:.5rem}
+.terminal-line .keyword{color:#E3B25C}
+.terminal-line .string{color:#8FC7A3}
+.terminal-line .function{color:var(--accent-2)}
+.terminal-line .comment{color:var(--term-fg-dim);font-style:italic}
+.terminal-line .output{color:var(--term-fg)}
 .terminal-line .ok{color:#4ADE80}
-.cursor-blink{display:inline-block;width:7px;height:13px;background:var(--accent);animation:blink 1s infinite;vertical-align:middle}
+.cursor-blink{display:inline-block;width:7px;height:13px;background:var(--accent-2);animation:blink 1s infinite;vertical-align:middle}
 @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
 .hero-stats{position:relative;z-index:2;max-width:1400px;margin:4.5rem auto 0;display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1.5rem}
 .stat{display:flex;flex-direction:column}
 .stat-num{font-family:var(--display);font-size:1.9rem;font-weight:600;color:var(--fg);line-height:1}
 .stat-num .plus{color:var(--accent)}
-.stat-label{font-family:var(--mono);font-size:.7rem;color:var(--fg-3);text-transform:uppercase;letter-spacing:.12em;margin-top:.4rem}
-.scroll-hint{font-family:var(--mono);font-size:.7rem;color:var(--fg-3);display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.12em}
+.stat-label{font-family:var(--mono);font-size:.76rem;color:var(--fg-3);letter-spacing:.01em;margin-top:.4rem}
+.scroll-hint{font-family:var(--mono);font-size:.76rem;color:var(--fg-3);display:flex;align-items:center;gap:.5rem;letter-spacing:.01em}
 .scroll-hint i{animation:bounce 2s infinite;color:var(--accent)}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 
 section{position:relative;padding:7rem 3rem;z-index:2}
 .container{max-width:1400px;margin:0 auto}
 .section-header{margin-bottom:4.5rem;max-width:840px}
-.section-eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--mono);font-size:.74rem;color:var(--accent);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.4rem;font-weight:500}
+.section-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--sans);font-size:.94rem;color:var(--accent);margin-bottom:1rem;font-weight:600}
 .section-eyebrow .line{width:28px;height:1px;background:var(--accent)}
 .section-eyebrow .num{color:var(--fg-3)}
 .section-title{font-family:var(--display);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:500;line-height:1.1;letter-spacing:-.025em;margin-bottom:1.4rem}
@@ -120,11 +128,11 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 
 /* Visual Profile Elements */
 .profile-contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-.contrast-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; transition: all .3s; display: flex; flex-direction: column; }
-.contrast-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.2); border-color: var(--border-bright); }
-.contrast-card.do-card { border-top: 3px solid var(--accent); }
-.contrast-card.dont-card { border-top: 3px solid rgba(255,255,255,0.15); }
-.contrast-title { font-family: var(--mono); font-size: .8rem; color: var(--fg-2); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem; font-weight: 600; }
+.contrast-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; transition: all .2s; display: flex; flex-direction: column; }
+.contrast-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(18,20,28,.08); }
+.contrast-card.do-card { border-top: 3px solid var(--accent); background: var(--pink-soft); border-left-color: var(--border-bright); border-right-color: var(--border-bright); border-bottom-color: var(--border-bright); }
+.contrast-card.dont-card { border-top: 3px solid rgba(18,20,28,.15); }
+.contrast-title { font-family: var(--sans); font-size: .92rem; color: var(--fg-2); margin-bottom: 1.2rem; display: flex; align-items: center; gap: .5rem; font-weight: 600; }
 .do-card .contrast-title { color: var(--accent); }
 .dont-card .contrast-title { color: var(--fg-3); }
 .contrast-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; flex-grow: 1; }
@@ -134,25 +142,26 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .dont-card .contrast-item i { color: var(--fg-3); }
 
 .profile-quote { padding: 2rem 2.5rem; border-radius: 12px; background: linear-gradient(135deg, var(--bg-3), var(--bg-card)); border: 1px solid var(--border-bright); position: relative; overflow: hidden; }
-.profile-quote::before { content: '"'; position: absolute; top: -1.5rem; right: 1.5rem; font-family: var(--display); font-size: 12rem; color: var(--accent); opacity: .1; line-height: 1; }
-.profile-quote p { font-family: var(--display); font-style: italic; font-size: 1.25rem; color: var(--fg); margin-bottom: .5rem; position: relative; z-index: 1; line-height: 1.4; font-weight: 500; }
-.profile-quote cite { font-family: var(--mono); font-size: .76rem; color: var(--accent); font-style: normal; text-transform: uppercase; letter-spacing: .1em; position: relative; z-index: 1; }
+.profile-quote::before { content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 1.6rem; right: 1.8rem; font-size: 2rem; color: var(--accent); opacity: .18; line-height: 1; }
+.profile-quote p { font-family: var(--display); font-style: normal; font-size: 1.25rem; color: var(--fg); margin-bottom: .5rem; position: relative; z-index: 1; line-height: 1.4; font-weight: 500; }
+.profile-quote cite { font-family: var(--sans); font-size: .85rem; color: var(--accent); font-style: normal; font-weight: 600; position: relative; z-index: 1; }
 
-.profile-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.principle-card { background: var(--bg-3); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: all .3s; }
-.principle-card:hover { border-color: var(--accent); transform: translateY(-3px); background: var(--bg-card); }
-.principle-icon { width: 36px; height: 36px; background: var(--pink-soft); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: .95rem; margin-bottom: 1rem; }
-.principle-card h5 { font-family: var(--display); font-size: 1.05rem; font-weight: 600; margin-bottom: .4rem; color: var(--fg); }
-.principle-card p { color: var(--fg-2); font-size: .85rem; line-height: 1.55; margin: 0 !important; padding: 0; font-size: .85rem !important; }
+
+.profile-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: .5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.principle-card { background: transparent; border: none; border-radius: 0; padding: 0; transition: transform .2s; }
+.principle-card:hover { transform: translateY(-2px); }
+.principle-icon { width: 34px; height: 34px; background: var(--pink-soft); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: .92rem; margin-bottom: .9rem; }
+.principle-card h5 { font-family: var(--display); font-size: 1.02rem; font-weight: 600; margin-bottom: .4rem; color: var(--fg); }
+.principle-card p { color: var(--fg-2); font-size: .87rem; line-height: 1.55; margin: 0 !important; padding: 0; }
 
 .services-section{background:var(--bg)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .service-card{background:var(--bg);padding:2.3rem;position:relative;transition:all .4s;cursor:pointer;min-height:290px;display:flex;flex-direction:column}
 .service-card:hover{background:var(--bg-card)}
 .service-card:hover .service-icon{color:var(--accent);background:var(--pink-soft);border-color:var(--border-bright)}
 .service-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--accent);transition:width .4s}
 .service-card:hover::after{width:100%}
-.service-num{font-family:var(--mono);font-size:.7rem;color:var(--fg-3);margin-bottom:1.4rem;letter-spacing:.1em;text-transform:uppercase}
+.service-num{font-family:var(--mono);font-size:.8rem;color:var(--accent);margin-bottom:1.2rem;font-weight:500}
 .service-icon{width:44px;height:44px;background:var(--bg-3);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--accent);margin-bottom:1.4rem;transition:all .3s}
 .service-title{font-family:var(--display);font-size:1.18rem;font-weight:600;margin-bottom:.7rem;letter-spacing:-.01em;color:var(--fg)}
 .service-desc{color:var(--fg-2);font-size:.92rem;line-height:1.65;flex-grow:1}
@@ -168,7 +177,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .capabilities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
 .capability{padding:1.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
 .capability:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg-card);box-shadow:0 10px 30px rgba(0,0,0,.3)}
-.capability-num{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.8rem;font-weight:500}
+.capability-num{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-bottom:.8rem;font-weight:500}
 .capability-title{font-family:var(--display);font-size:1.05rem;font-weight:600;margin-bottom:.5rem;color:var(--fg);letter-spacing:-.005em}
 .capability-desc{color:var(--fg-2);font-size:.85rem;line-height:1.55}
 
@@ -180,7 +189,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project:hover{border-color:var(--border-bright)}
 .project:nth-of-type(2):hover{border-color:var(--border-blue)}
 .project-header{padding:2.8rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(135deg,var(--bg-2) 0%,var(--bg-3) 100%)}
-.project-num{font-family:var(--mono);font-size:.72rem;color:var(--accent);margin-bottom:1rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;gap:.6rem}
+.project-num{font-family:var(--sans);font-size:.88rem;color:var(--accent);margin-bottom:.8rem;font-weight:600;display:flex;align-items:center;gap:.6rem}
 .project:nth-of-type(2) .project-num{color:var(--blue-accent)}
 .project-num .line{width:24px;height:1px;background:var(--accent)}
 .project:nth-of-type(2) .project-num .line{background:var(--blue-accent)}
@@ -196,11 +205,11 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project-stat:first-child{border-left:none;padding-left:0}
 .project-stat-num{font-family:var(--display);font-size:1.5rem;font-weight:600;color:var(--accent);line-height:1}
 .project:nth-of-type(2) .project-stat-num{color:var(--blue-accent)}
-.project-stat-label{font-family:var(--mono);font-size:.62rem;color:var(--fg-3);text-transform:uppercase;letter-spacing:.1em;margin-top:.3rem}
+.project-stat-label{font-family:var(--sans);font-size:.74rem;color:var(--fg-3);margin-top:.3rem;font-weight:500}
 
 .project-tabs{display:flex;gap:0;padding:0 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
-.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--mono);font-size:.78rem;font-weight:500;cursor:pointer;position:relative;z-index:2;pointer-events:auto;transition:color .3s;white-space:nowrap;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--sans);font-size:.92rem;font-weight:500;cursor:pointer;position:relative;z-index:2;pointer-events:auto;transition:color .2s;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
 .project-tab:hover{color:var(--fg-2)}
 .project-tab.active{color:var(--accent)}
 .project:nth-of-type(2) .project-tab.active{color:var(--blue-accent)}
@@ -249,7 +258,7 @@ body.admin-logged-in .gallery-toolbar{display:flex}
 .gallery-hint{color:var(--fg-3);font-family:var(--mono);font-size:.78rem;display:flex;align-items:center;gap:.6rem}
 .gallery-hint i{color:var(--accent)}
 .gallery-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-.gallery-btn{padding:.55rem 1rem;background:var(--bg-3);border:1px dashed var(--border-bright);color:var(--accent);border-radius:6px;font-family:var(--mono);font-size:.76rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .3s;text-transform:uppercase;letter-spacing:.05em}
+.gallery-btn{padding:.55rem 1rem;background:var(--bg-3);border:1px solid var(--border);color:var(--accent);border-radius:8px;font-family:var(--sans);font-size:.85rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .2s}
 .gallery-btn:hover{background:var(--pink-soft);border-style:solid;transform:translateY(-1px)}
 
 .note-composer{background:var(--bg);border:1px solid var(--border-bright);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;display:none}
@@ -257,13 +266,13 @@ body.admin-logged-in .note-composer.active{display:block;animation:fadeIn .3s}
 .note-composer textarea{width:100%;background:transparent;border:none;color:var(--fg);font-family:var(--sans);font-size:.95rem;resize:vertical;min-height:80px;outline:none;line-height:1.6}
 .note-composer textarea::placeholder{color:var(--fg-3)}
 .note-composer-actions{display:flex;justify-content:flex-end;gap:.5rem;margin-top:.6rem}
-.note-composer-btn{padding:.4rem .9rem;border:1px solid var(--border-bright);background:transparent;color:var(--fg-2);border-radius:6px;font-family:var(--mono);font-size:.76rem;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+.note-composer-btn{padding:.45rem 1rem;border:1px solid var(--border);background:transparent;color:var(--fg-2);border-radius:8px;font-family:var(--sans);font-size:.85rem;cursor:pointer;transition:all .2s;font-weight:500}
 .note-composer-btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .note-composer-btn:hover{background:var(--bg-3)}
 .note-composer-btn.primary:hover{background:var(--accent-2)}
 
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
-.gallery-slot{aspect-ratio:16/10;background:var(--bg);border:1px dashed var(--border);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;transition:all .3s}
+.gallery-slot{aspect-ratio:16/10;background:var(--bg-3);border:1px solid var(--border);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;transition:all .2s}
 .gallery-slot:hover{border-color:var(--accent);background:var(--bg-3)}
 .gallery-slot.has-image{cursor:default;border-style:solid}
 .gallery-slot img{width:100%;height:100%;object-fit:cover;display:block}
@@ -272,19 +281,19 @@ body.admin-logged-in .note-composer.active{display:block;animation:fadeIn .3s}
 .gallery-slot .upload-prompt{display:none}
 body.admin-logged-in .gallery-slot:not(.has-image) .upload-prompt{display:block;text-align:center;color:var(--fg-3);padding:1rem;pointer-events:none}
 .gallery-slot .upload-prompt i{font-size:1.5rem;color:var(--accent);margin-bottom:.6rem;display:block}
-.gallery-slot .upload-prompt span{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;display:block;color:var(--fg-2);font-weight:500}
+.gallery-slot .upload-prompt span{font-family:var(--sans);font-size:.85rem;display:block;color:var(--fg-2);font-weight:500}
 .gallery-slot .upload-prompt small{font-size:.68rem;color:var(--fg-3);display:block;margin-top:.3rem}
 
 .gallery-slot.dragover{border-color:var(--accent);background:var(--pink-soft);transform:scale(1.02)}
-.gallery-slot .remove-btn{position:absolute;top:.5rem;right:.5rem;width:26px;height:26px;background:rgba(11,25,87,.85);border:1px solid var(--border-bright);color:var(--fg);border-radius:6px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;backdrop-filter:blur(4px)}
+.gallery-slot .remove-btn{position:absolute;top:.5rem;right:.5rem;width:26px;height:26px;background:rgba(15,17,23,.72);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:6px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;backdrop-filter:blur(4px)}
 body.admin-logged-in .gallery-slot.has-image .remove-btn{display:flex}
 .gallery-slot .remove-btn:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
-.gallery-slot .caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem .8rem;background:linear-gradient(0deg,rgba(11,25,87,.95),transparent);font-size:.74rem;color:var(--fg);font-family:var(--mono);opacity:0;transition:opacity .3s}
+.gallery-slot .caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem .8rem;background:linear-gradient(0deg,rgba(15,17,23,.85),transparent);font-size:.74rem;color:#fff;font-family:var(--mono);opacity:0;transition:opacity .3s}
 .gallery-slot.has-image:hover .caption{opacity:1}
 
 .gallery-note{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:1.4rem;position:relative;animation:fadeIn .4s}
 .project:nth-of-type(2) .gallery-note{border-left-color:var(--blue-accent)}
-.gallery-note .note-label{font-family:var(--mono);font-size:.66rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem;font-weight:500}
+.gallery-note .note-label{font-family:var(--sans);font-size:.8rem;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem;font-weight:600}
 .project:nth-of-type(2) .gallery-note .note-label{color:var(--blue-accent)}
 .gallery-note .note-text{color:var(--fg);font-size:.92rem;line-height:1.65;font-family:var(--sans)}
 .gallery-note .note-remove{position:absolute;top:1rem;right:1rem;background:var(--bg-3);border:1px solid var(--border);color:var(--fg-3);cursor:pointer;font-size:.75rem;width:24px;height:24px;border-radius:6px;transition:all .2s;display:flex;align-items:center;justify-content:center}
@@ -313,7 +322,7 @@ body.admin-logged-in .gallery-slot.has-image .remove-btn{display:flex}
 .contact-form{background:var(--bg-2);border:1px solid var(--border);border-radius:12px;padding:2.3rem;position:relative;overflow:hidden}
 .contact-form::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 .form-group{margin-bottom:1.2rem}
-.form-group label{display:block;font-family:var(--mono);font-size:.7rem;color:var(--fg-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;font-weight:500}
+.form-group label{display:block;font-family:var(--sans);font-size:.85rem;color:var(--fg-2);margin-bottom:.5rem;font-weight:600}
 .form-group input,.form-group textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;color:var(--fg);font-family:var(--sans);font-size:.93rem;outline:none;transition:all .3s}
 .form-group input::placeholder,.form-group textarea::placeholder{color:var(--fg-3)}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--accent);background:var(--bg-3);box-shadow:0 0 0 3px var(--pink-soft)}
@@ -323,12 +332,12 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;max-width:1400px;margin:0 auto 2.5rem}
 .footer-brand{font-family:var(--display);font-size:1.6rem;font-weight:600;margin-bottom:1rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.1rem}
 .footer-brand-desc{color:var(--fg-2);max-width:360px;line-height:1.65;font-size:.92rem}
-.footer-col h5{font-family:var(--mono);font-size:.7rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;font-weight:500}
+.footer-col h5{font-family:var(--sans);font-size:.94rem;color:var(--fg);margin-bottom:1rem;font-weight:600}
 .footer-col ul{list-style:none}
 .footer-col ul li{margin-bottom:.55rem}
 .footer-col a{color:var(--fg-2);text-decoration:none;font-size:.9rem;transition:color .3s;font-family:var(--mono)}
 .footer-col a:hover{color:var(--accent)}
-.footer-bottom{max-width:1400px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.74rem;color:var(--fg-3);flex-wrap:wrap;gap:1rem;text-transform:uppercase;letter-spacing:.08em}
+.footer-bottom{max-width:1400px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--sans);font-size:.85rem;color:var(--fg-3);flex-wrap:wrap;gap:1rem}
 
 /* Hidden admin trigger in footer - made clickable on copyright text */
 .admin-trigger { cursor: pointer; transition: color 0.3s; }
@@ -339,22 +348,22 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .toast i{color:var(--accent)}
 
 /* === CMS EDIT MODE STYLES === */
-[data-cms-id]:hover { outline: 1px dashed rgba(250, 158, 188, 0.4); outline-offset: 4px; }
-body.edit-mode [data-cms-id] { outline: 1px dashed rgba(250, 158, 188, 0.3); outline-offset: 4px; transition: outline-color 0.2s; cursor: text; }
-body.edit-mode [data-cms-id]:hover { outline-color: var(--accent); background: rgba(250, 158, 188, 0.05); }
+/* Editable outline/background only ever show while logged in and in edit mode — never for regular visitors */
+body.edit-mode [data-cms-id] { outline: 1px dashed rgba(193, 89, 46, 0.3); outline-offset: 4px; transition: outline-color 0.2s; cursor: text; }
+body.edit-mode [data-cms-id]:hover { outline-color: var(--accent); background: rgba(193, 89, 46, 0.05); }
 body.edit-mode img[data-cms-id] { cursor: pointer; }
 body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 /* === LOGIN MODAL === */
-.login-modal { position: fixed; inset: 0; background: rgba(11, 25, 87, 0.8); backdrop-filter: blur(12px); z-index: 10001; display: none; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
+.login-modal { position: fixed; inset: 0; background: rgba(15, 17, 23, 0.5); backdrop-filter: blur(12px); z-index: 10001; display: none; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
 .login-modal.active { display: flex; }
 .login-box { background: var(--bg-2); border: 1px solid var(--border-bright); padding: 2.5rem; border-radius: 12px; width: 100%; max-width: 380px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 .login-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
 .login-box h3 { font-family: var(--display); font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--fg); }
-.login-box p { font-family: var(--mono); font-size: 0.72rem; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.8rem; }
+.login-box p { font-family: var(--sans); font-size: 0.9rem; color: var(--fg-3); margin-bottom: 1.8rem; }
 .login-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 0.8rem 1rem; color: var(--fg); font-family: var(--sans); font-size: 0.95rem; outline:none; transition: all 0.3s; margin-bottom: 1rem; }
 .login-input:focus { border-color: var(--accent); background: var(--bg-3); box-shadow: 0 0 0 3px var(--pink-soft); }
-.login-btn { width: 100%; padding: 0.8rem; background: var(--accent); color: var(--bg); border: none; border-radius: 6px; font-family: var(--mono); font-weight: 600; font-size: 0.85rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; transition: all 0.2s; }
+.login-btn { width: 100%; padding: 0.85rem; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
 .login-btn:hover { background: var(--accent-2); }
 .login-error { color: #ff6b6b; font-size: 0.85rem; font-family: var(--mono); margin-top: 1rem; text-align: center; display: none; }
 .login-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--fg-3); font-size: 1.2rem; cursor: pointer; transition: color 0.2s; }
@@ -363,9 +372,9 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 /* === ADMIN TOOLBAR === */
 .admin-toolbar { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: var(--bg-elevated); border: 1px solid var(--accent); border-radius: 12px; padding: 0.6rem 1rem; display: none; align-items: center; gap: 0.8rem; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.4); font-family: var(--mono); flex-wrap: wrap; justify-content: center; }
 .admin-toolbar.active { display: flex; }
-.admin-status { font-size: 0.75rem; color: var(--fg-2); text-transform: uppercase; letter-spacing: 0.08em; padding-right: 0.8rem; border-right: 1px solid var(--border); display: flex; align-items: center; gap: 0.4rem; }
+.admin-status { font-size: 0.85rem; color: var(--fg-2); font-weight: 500; padding-right: 0.8rem; border-right: 1px solid var(--border); display: flex; align-items: center; gap: 0.4rem; }
 .admin-status .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
-.admin-btn { padding: 0.5rem 0.9rem; background: var(--bg-3); border: 1px solid var(--border-bright); color: var(--fg); border-radius: 6px; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.4rem; }
+.admin-btn { padding: 0.5rem 0.9rem; background: var(--bg-3); border: 1px solid var(--border-bright); color: var(--fg); border-radius: 8px; font-size: 0.83rem; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
 .admin-btn:hover { background: var(--bg-card); border-color: var(--accent); }
 .admin-btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 .admin-btn.primary:hover { background: var(--accent-2); }
@@ -438,7 +447,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     <div class="hero-text">
       <div class="hero-eyebrow"><span class="dot"></span>Custom Web Application Studio</div>
       <h1>Software,<br><span class="accent">engineered</span><br><span class="display">for your business.</span></h1>
-      <p class="hero-sub">LuluLab designs and builds custom web applications from a blank page — no templates, no frameworks chasing trends. Just purpose-built software, written line by line, in direct collaboration with the people who will use it.</p>
+      <p class="hero-sub">LuluLab builds custom web applications from scratch — no templates, no page builders. We design around how your business actually works, and build it directly with the people who'll use it.</p>
       <div class="hero-actions">
         <a href="#portfolio" class="btn-primary">View Our Work <i class="fas fa-arrow-right"></i></a>
         <a href="#contact" class="btn-secondary"><i class="far fa-envelope"></i>Start a Brief</a>
@@ -467,25 +476,19 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       </div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num" data-target="2">0</span><span class="stat-label">Production Apps</span></div>
-    <div class="stat"><span class="stat-num" data-target="135">0</span><span class="plus">+</span><span class="stat-label">Functions Shipped</span></div>
-    <div class="stat"><span class="stat-num" data-target="4580">0</span><span class="plus">+</span><span class="stat-label">Lines of Code</span></div>
-    <div class="stat"><span class="stat-num" data-target="15">0</span><span class="plus">+</span><span class="stat-label">Database Tables</span></div>
-    <div class="scroll-hint"><span>Scroll</span><i class="fas fa-arrow-down"></i></div>
   </div>
 </section>
 
 <section class="profile-section" id="profile">
   <div class="container">
     <div class="section-header">
-      <div class="section-eyebrow"><span class="line"></span><span class="num">01</span>Studio Profile</div>
-      <h2 class="section-title">A studio built on <span class="accent">first principles</span>, not borrowed templates.</h2>
+      <div class="section-eyebrow"><span class="line"></span>Studio Profile</div>
+      <h2 class="section-title">We build around how your business actually works.</h2>
     </div>
     <div class="profile-grid">
       <div class="profile-sticky">
         <h3>Who we are</h3>
-        <p>LuluLab is a custom web application studio. We build software the long way — from a blank canvas to a deployed product — for businesses whose workflows don't fit inside off-the-shelf tools.</p>
+        <p>LuluLab is a custom web application studio. We build software from scratch — from first conversation to deployed product — for businesses whose workflows don't fit off-the-shelf tools.</p>
         <div class="id-card">
           <div class="row"><span class="key">studio</span><span class="val">LuluLab</span></div>
           <div class="row"><span class="key">founded</span><span class="val">2024</span></div>
@@ -496,11 +499,11 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
         </div>
       </div>
       <div class="profile-content">
-        <p class="lead">Every project starts with a single question — <em>"What does your business actually need?"</em> — and ends with software written specifically to answer it.</p>
+        <p class="lead">We start with your workflow, not a template, and build software specifically for what your business needs.</p>
         
-        <p><strong>No templates. No recycled themes. No frameworks chasing trends.</strong> Just purpose-built applications, engineered end-to-end in direct collaboration with the people who will use them every day.</p>
-        <p>Our work lives at the intersection of product thinking, relational database design, and interface craft. We don't ship CRUD demos — we model real workflows: leave management systems with multi-role permissions, payroll engines with audit trails, billing systems with real-time collaboration, performance scoreboards with dispute resolution baked in.</p>
-        <p>Each engagement is treated as an ongoing partnership rather than a one-off deliverable. Features evolve through dozens of iterations shaped by the people actually using the software. The result is applications that fit the business — not the other way around.</p>
+        <p>We build applications end-to-end, working directly with the people who'll use them day to day.</p>
+        <p>Our work combines product thinking, relational database design, and interface design. We model real workflows — leave management with multi-role permissions, payroll with audit trails, billing with real-time collaboration, performance tracking with dispute resolution — not generic CRUD demos.</p>
+        <p>Each engagement runs as an ongoing partnership, not a one-off delivery. Features evolve through iteration, shaped by the people using the software — so the application fits the business, not the other way around.</p>
         
         <div class="profile-contrast">
           <div class="contrast-card do-card">
@@ -525,24 +528,23 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
         <div class="profile-quote">
           <p>If your problem can be solved by an existing product, we'll tell you. If it can't, we'll build the solution.</p>
-          <cite>— LuluLab operating principle</cite>
         </div>
 
         <div class="profile-principles">
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-pen-ruler"></i></div>
             <h5>Purpose-Built</h5>
-            <p>No templates. No recycled themes. Every line of code is written for your specific use case and remains entirely yours.</p>
+            <p>Every line of code is written for your specific use case, and it's yours — no shared codebase, no template.</p>
           </div>
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-handshake"></i></div>
             <h5>Iterative Partnership</h5>
-            <p>Engaged as an ongoing partnership. Features evolve through dozens of iterations shaped by the people actually using the software.</p>
+            <p>An ongoing partnership, not a one-off delivery. Features evolve through iteration, shaped by the people using the software.</p>
           </div>
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-diagram-project"></i></div>
             <h5>Real Architecture</h5>
-            <p>Product thinking, relational database design, and interface craft intersect to model real workflows, not CRUD demos.</p>
+            <p>Product thinking, database design, and interface craft, used to model real workflows — not CRUD demos.</p>
           </div>
         </div>
       </div>
@@ -553,65 +555,65 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="services-section" id="services">
   <div class="container">
     <div class="section-header">
-      <div class="section-eyebrow"><span class="line"></span><span class="num">02</span>What We Do</div>
-      <h2 class="section-title">Eight capabilities, <span class="accent">one studio</span>.</h2>
-      <p class="section-sub">A focused service offering covering the full lifecycle of a custom business application — from first conversation to ongoing evolution.</p>
+      <div class="section-eyebrow"><span class="line"></span>What We Do</div>
+      <h2 class="section-title">What we cover, start to finish.</h2>
+      <p class="section-sub">The full lifecycle of a custom business application — from first conversation to ongoing evolution.</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-num">01 / Service</div>
+        <div class="service-num">01</div>
         <div class="service-icon"><i class="fas fa-code"></i></div>
         <div class="service-title">Custom Web Application Development</div>
-        <div class="service-desc">Bespoke applications built from scratch in vanilla JavaScript — no frameworks, no build steps, no templates. Every line of code is written for your specific use case and remains entirely yours.</div>
+        <div class="service-desc">Applications built from scratch in vanilla JavaScript — no frameworks, no build step. Every line of code is written for your specific use case and stays yours.</div>
         <div class="service-tags"><span class="service-tag">Vanilla JS</span><span class="service-tag">Single-File</span><span class="service-tag">SPA</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">02 / Service</div>
+        <div class="service-num">02</div>
         <div class="service-icon"><i class="fas fa-diagram-project"></i></div>
         <div class="service-title">Business Process Digitization</div>
-        <div class="service-desc">We take manual, spreadsheet-driven, or paper-based workflows and turn them into live, multi-user systems. Leave management, payroll, billing, performance tracking, task assignment — modeled after how your team actually works.</div>
+        <div class="service-desc">We turn manual, spreadsheet-driven, or paper-based workflows into live, multi-user systems: leave management, payroll, billing, performance tracking, task assignment — modeled on how your team actually works.</div>
         <div class="service-tags"><span class="service-tag">Workflow</span><span class="service-tag">Audit Trail</span><span class="service-tag">Real Ops</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">03 / Service</div>
+        <div class="service-num">03</div>
         <div class="service-icon"><i class="fas fa-bolt"></i></div>
         <div class="service-title">Real-Time Data Systems</div>
         <div class="service-desc">WebSocket-powered live sync across every connected device. Changes from one user appear instantly for everyone else — no polling, no refreshes, no stale data. Built on Supabase Realtime subscriptions.</div>
         <div class="service-tags"><span class="service-tag">WebSocket</span><span class="service-tag">Live Sync</span><span class="service-tag">Multi-User</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">04 / Service</div>
+        <div class="service-num">04</div>
         <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
         <div class="service-title">Role-Based Access Engineering</div>
-        <div class="service-desc">Genuine multi-role permission systems — not simple admin/user toggles. Five-role architectures, dual-role support, named super-user exceptions, and per-row permission checks enforced at both the interface and database layers.</div>
+        <div class="service-desc">Multi-role permission systems, not simple admin/user toggles — five-role architectures, dual-role support, named super-user exceptions, and per-row permission checks enforced at the interface and database layers.</div>
         <div class="service-tags"><span class="service-tag">RBAC</span><span class="service-tag">Per-Row</span><span class="service-tag">Multi-Role</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">05 / Service</div>
+        <div class="service-num">05</div>
         <div class="service-icon"><i class="fas fa-database"></i></div>
         <div class="service-title">Cloud-Native Backends</div>
         <div class="service-desc">Production-grade PostgreSQL database design via Supabase — proper relational schemas, upsert patterns, paginated reads, race condition handling, and per-table targeted re-fetches for minimal egress.</div>
         <div class="service-tags"><span class="service-tag">PostgreSQL</span><span class="service-tag">Supabase</span><span class="service-tag">Scalable</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">06 / Service</div>
+        <div class="service-num">06</div>
         <div class="service-icon"><i class="fas fa-cloud-arrow-up"></i></div>
         <div class="service-title">Single-File, Zero-DevOps Deployment</div>
-        <div class="service-desc">Entire applications deployed as a single portable HTML file — trivial to host, version, and hand off. No servers to maintain, no DevOps overhead, no monthly infrastructure costs beyond the database itself.</div>
+        <div class="service-desc">Applications deployed as a single portable HTML file — easy to host, version, and hand off. No servers to maintain, no DevOps overhead, no infrastructure cost beyond the database itself.</div>
         <div class="service-tags"><span class="service-tag">Zero-DevOps</span><span class="service-tag">Portable</span><span class="service-tag">Low-Cost</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">07 / Service</div>
+        <div class="service-num">07</div>
         <div class="service-icon"><i class="fas fa-palette"></i></div>
         <div class="service-title">UI / UX & Visual Identity</div>
-        <div class="service-desc">Fully custom visual systems — colors and typography matched to your brand guidelines, purpose-built status colors, responsive interaction patterns, and layouts engineered for clarity during long working sessions.</div>
+        <div class="service-desc">Custom visual systems — colors and typography matched to your brand, purpose-built status colors, and layouts designed for clarity during long working sessions.</div>
         <div class="service-tags"><span class="service-tag">Bespoke UI</span><span class="service-tag">Brand-Matched</span><span class="service-tag">Accessible</span></div>
       </div>
       <div class="service-card">
-        <div class="service-num">08 / Service</div>
+        <div class="service-num">08</div>
         <div class="service-icon"><i class="fas fa-arrows-rotate"></i></div>
         <div class="service-title">Iterative Partnership</div>
-        <div class="service-desc">Software that evolves with your business. We work in feature rounds shaped by the people using the software, shipping dozens of iterations over an engagement rather than vanishing after launch.</div>
+        <div class="service-desc">Software that keeps evolving with your business. We work in feature rounds shaped by the people using it, and stay on after launch instead of moving on.</div>
         <div class="service-tags"><span class="service-tag">Ongoing</span><span class="service-tag">Feature Rounds</span><span class="service-tag">Partnership</span></div>
       </div>
     </div>
@@ -621,9 +623,9 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="capabilities-section" id="capabilities">
   <div class="container">
     <div class="section-header">
-      <div class="section-eyebrow"><span class="line"></span><span class="num">03</span>Capabilities</div>
-      <h2 class="section-title">The stack we <span class="accent">actually</span> master.</h2>
-      <p class="section-sub">A deliberately small, deeply understood toolkit. We'd rather know eight things completely than thirty things superficially.</p>
+      <div class="section-eyebrow"><span class="line"></span>Capabilities</div>
+      <h2 class="section-title">A small toolkit, known well.</h2>
+      <p class="section-sub">We'd rather know eight things completely than thirty things superficially.</p>
     </div>
   </div>
   <div class="marquee">
@@ -651,42 +653,42 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
   <div class="container">
     <div class="capabilities-grid">
       <div class="capability">
-        <div class="capability-num">CAP / 01</div>
+        <div class="capability-num">01</div>
         <div class="capability-title">Relational Database Design</div>
         <div class="capability-desc">Proper schema design across 15+ interconnected tables — leave balances, performance entries, QA disputes, billing rates — with upsert patterns and race condition handling.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 02</div>
+        <div class="capability-num">02</div>
         <div class="capability-title">Real-Time Architecture</div>
         <div class="capability-desc">WebSocket subscriptions per table, scroll-position-preserving re-renders, auto-reconnect with backoff, and fallback polling for networks that block WebSockets.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 03</div>
+        <div class="capability-num">03</div>
         <div class="capability-title">Permission Engineering</div>
         <div class="capability-desc">Five-role access systems, dual-role accounts, named super-user exceptions, and per-row permission checks enforced at both UI and database layers.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 04</div>
+        <div class="capability-num">04</div>
         <div class="capability-title">Cloud File Storage</div>
         <div class="capability-desc">Genuine image uploads via Supabase Storage — drag-and-drop, clipboard-paste support, attached to disputes, evidence records, and team-fund QR codes.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 05</div>
+        <div class="capability-num">05</div>
         <div class="capability-title">Audit-Safe Workflows</div>
         <div class="capability-desc">Full audit trails with images, three-way dispute resolution, correction request routing, time-gated emergency unlocks, and explicit "no call-out" confirmations.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 06</div>
+        <div class="capability-num">06</div>
         <div class="capability-title">Egress Optimization</div>
         <div class="capability-desc">Targeted re-fetches on WebSocket change events reduce database reads by ~90% compared to polling architectures — only the affected table is re-fetched.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 07</div>
+        <div class="capability-num">07</div>
         <div class="capability-title">Custom UI Engineering</div>
         <div class="capability-desc">Searchable dropdowns with keyboard navigation, layout-stable modals, persistent sessions, staged loading, print-optimized reports, and toast feedback systems.</div>
       </div>
       <div class="capability">
-        <div class="capability-num">CAP / 08</div>
+        <div class="capability-num">08</div>
         <div class="capability-title">Production Deployment</div>
         <div class="capability-desc">Single-file architecture deployed via GitHub Pages with zero DevOps. Version-aware refresh prompts keep every user on the latest version without manual cache-clearing.</div>
       </div>
@@ -697,9 +699,9 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="portfolio-section" id="portfolio">
   <div class="container">
     <div class="section-header">
-      <div class="section-eyebrow"><span class="line"></span><span class="num">04</span>Selected Work</div>
-      <h2 class="section-title">Two production apps. <span class="accent">Zero templates.</span></h2>
-      <p class="section-sub">Each project below is a real, deployed business application — built from scratch, in collaboration with the client, and currently in daily use. Click through the tabs to explore the architecture, modules, and gallery of each.</p>
+      <div class="section-eyebrow"><span class="line"></span>Selected Work</div>
+      <h2 class="section-title">Two production apps, both live.</h2>
+      <p class="section-sub">Each project below is a real, deployed application — built from scratch with the client and in daily use. Use the tabs to see the architecture, modules, and gallery for each.</p>
     </div>
 
     <div class="portfolio-projects">
@@ -707,10 +709,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       <div class="project" data-project="1">
         <div class="project-header">
           <div>
-            <div class="project-num"><span class="line"></span>PROJECT 01 / OPERATIONS</div>
+            <div class="project-num"><span class="line"></span>Operations</div>
             <h3 class="project-title">DRS Leave Tracker Hub</h3>
-            <div class="project-tagline">A full operations command center for a 30+ person Philippine-based team.</div>
-            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">A full-featured, single-file web application covering leave management, individual performance scoring, payroll confirmation, priority task tracking, team funds, and more — all backed by a live Supabase database with real-time sync across every connected device.</p>
+            <div class="project-tagline">Operations system for a 30+ person Philippine-based team.</div>
+            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Single-file web application covering leave management, performance scoring, payroll confirmation, priority task tracking, team funds, and more — backed by Supabase with real-time sync across every device.</p>
             <div class="project-meta">
               <span class="meta-chip accent">Vanilla JS</span>
               <span class="meta-chip accent">Supabase</span>
@@ -723,7 +725,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <div class="project-stats">
             <div class="project-stat"><div class="project-stat-num">5</div><div class="project-stat-label">Roles</div></div>
             <div class="project-stat"><div class="project-stat-num">15+</div><div class="project-stat-label">DB Tables</div></div>
-            <div class="project-stat"><div class="project-stat-num">8+</div><div class="project-stat-label">Modules</div></div>
+            <div class="project-stat"><div class="project-stat-num">10+</div><div class="project-stat-label">Modules</div></div>
             <div class="project-stat"><div class="project-stat-num">30+</div><div class="project-stat-label">Daily Users</div></div>
           </div>
         </div>
@@ -737,12 +739,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
         <div class="project-content">
           <div class="tab-panel active" data-tab="overview">
-            <h4>Built for a real operations team — not a demo.</h4>
-            <p>This application was built entirely in HTML, CSS, and vanilla JavaScript with a Supabase (PostgreSQL) backend — no framework, no build step, deployed as a single portable file. It demonstrates end-to-end product thinking: multi-role permission systems, live data sync, file storage integration, audit-safe workflows, and a fully custom-designed interface.</p>
-            <p>The system covers leave management, individual performance scoring, payroll confirmation, priority task tracking, team funds, and more — every module backed by a live Supabase database with real-time sync across every connected device. Changes made by one person appear instantly for everyone else logged in, with no page refresh required.</p>
-            <p>Developed iteratively over dozens of feature rounds in direct collaboration with the end client, the project reflects hands-on experience across the full stack: relational database design, real-time architecture, role-based access control, cloud file storage, and a polished, purpose-built interface.</p>
+            <h4>Built for a real team, not a demo.</h4>
+            <p>Built in HTML, CSS, and vanilla JavaScript with a Supabase (PostgreSQL) backend — no framework, no build step, deployed as a single file.</p>
+            <p>Covers leave management, performance scoring, payroll confirmation, priority tasks, and team funds. Every module runs on a live Supabase database with real-time sync — changes made by one person appear instantly for everyone else, no refresh required.</p>
+            <p>Built iteratively with the client across dozens of feature rounds, covering relational database design, real-time architecture, role-based access control, cloud file storage, and interface design.</p>
             <div class="roles-visual">
-              <h5><i class="fas fa-user-shield"></i>Five distinct roles, each scoped to exactly the features they need:</h5>
+              <h5><i class="fas fa-user-shield"></i>Five roles, each scoped to exactly what they need:</h5>
               <div class="roles-display">
                 <span class="role-pill">Staff <span class="role-desc">— daily entries, leave requests</span></span>
                 <span class="role-pill">Admin <span class="role-desc">— full roster & approval control</span></span>
@@ -750,37 +752,39 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
                 <span class="role-pill">IPS <span class="role-desc">— performance scoring</span></span>
                 <span class="role-pill">QA <span class="role-desc">— incident tracking & disputes</span></span>
               </div>
-              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support allows any account to hold a primary role plus an optional second role (e.g. a Treasurer who is also QA) without needing a separate account. Named super-user exceptions layer additional control on top of the role system.</p>
+              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support lets one account hold a primary role plus a second — a Treasurer who's also QA, for example — without a separate login. Named super-user exceptions add extra control for high-trust actions like final dispute resolution.</p>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="architecture">
             <h4>Single-file deployment, live backend.</h4>
-            <p>The entire application — interface, logic, and styling — lives in one portable HTML file, making it trivially easy to host, version, and hand off. The backend is powered by Supabase (PostgreSQL + real-time subscriptions + file storage), so changes made by one person appear instantly for everyone else logged in.</p>
+            <p>The entire application — interface, logic, and styling — lives in one portable HTML file. The backend runs on Supabase: PostgreSQL, real-time subscriptions, and file storage, so changes appear instantly for everyone logged in.</p>
             <div class="arch-grid">
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File Deployment</div><div class="arch-item-desc">The entire application — interface, logic, and styling — lives in one portable HTML file. Trivial to host, version, and hand off.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-database"></i>Live Supabase Backend</div><div class="arch-item-desc">PostgreSQL + real-time subscriptions + file storage power every module, so changes appear instantly across all connected devices.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-arrows-rotate"></i>Real-Time Sync (15+ Tables)</div><div class="arch-item-desc">Leave requests, performance entries, QA disputes, notifications, and more all update live via dedicated WebSocket channels.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud-arrow-up"></i>Cloud File Storage</div><div class="arch-item-desc">Genuine image uploads via Supabase Storage with drag-and-drop and clipboard-paste support — not just image links.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-link"></i>URL-Aware Navigation</div><div class="arch-item-desc">Each major section has its own shareable, bookmarkable link via hash-based routing. Back/forward browser navigation works correctly.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-rotate"></i>Version-Aware Refresh</div><div class="arch-item-desc">Background checks for new deployments prompt a refresh, keeping every user on the latest version without manual cache-clearing.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-shield-halved"></i>Per-Row Permission Checks</div><div class="arch-item-desc">Not just "can you see this page" but "can you edit this specific record" — enforced both in the interface and re-verified at the database layer.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-fingerprint"></i>Named Super-User Exceptions</div><div class="arch-item-desc">Specific high-trust actions like final dispute resolution are restricted to two named administrators, layered on top of the role system.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File Deployment</div><div class="arch-item-desc">One portable HTML file — easy to host, version, and hand off.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-database"></i>Live Supabase Backend</div><div class="arch-item-desc">PostgreSQL, real-time subscriptions, and file storage power every module. Changes sync instantly across devices.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-arrows-rotate"></i>Real-Time Sync (15+ Tables)</div><div class="arch-item-desc">Leave requests, performance entries, QA disputes, notifications, and more update live over dedicated WebSocket channels.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud-arrow-up"></i>Cloud File Storage</div><div class="arch-item-desc">Image uploads via Supabase Storage, with drag-and-drop and clipboard-paste support — not just links.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-link"></i>URL-Aware Navigation</div><div class="arch-item-desc">Each section has its own shareable, bookmarkable link via hash-based routing. Back/forward navigation works correctly.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-rotate"></i>Version-Aware Refresh</div><div class="arch-item-desc">Background checks for new deployments prompt a refresh, keeping every user on the latest version.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-shield-halved"></i>Per-Row Permission Checks</div><div class="arch-item-desc">Checks go beyond page access to specific records, enforced in the interface and re-verified at the database layer.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-fingerprint"></i>Named Super-User Exceptions</div><div class="arch-item-desc">High-trust actions like final dispute resolution are restricted to two named administrators.</div></div>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="modules">
-            <h4>Eight modules, one cohesive system.</h4>
-            <p>Each module below is a full sub-system with its own workflows, permissions, and real-time data flow — not a CRUD table with a form attached.</p>
+            <h4>Ten modules, one system.</h4>
+            <p>Each module is a full sub-system with its own workflows and permissions — not a CRUD table with a form attached.</p>
             <div class="features-list">
-              <div class="feature-item"><div class="feature-title">Leave Tracker</div><div class="feature-desc">Full lifecycle (request, approve, reject, cancel) for Vacation, Sick, Emergency leave with half-day and hourly increments. Automatic VL/SL balance management with sick-to-vacation spillover, LWOP detection, interactive color-coded calendar, and live admin approval queue.</div></div>
-              <div class="feature-item"><div class="feature-title">IPS — Individual Performance Score</div><div class="feature-desc">Weighted scoring (QA Accuracy 50%, Productivity 30%, Error Correction 20%), leave-aware targets, structured QA incident tracking, employee dispute workflow, three-way resolution (Approve / Reject / Reject-Count-as-Minor), full audit trail with images, year-at-a-glance view, downloadable reports.</div></div>
-              <div class="feature-item"><div class="feature-title">PrioList & Red Files</div><div class="feature-desc">Daily priority list that auto-resets at a fixed time. Red Files claim system with one-active-claim-at-a-time enforcement prevents two people from working the same flagged file simultaneously. Admin-controlled visibility toggle.</div></div>
-              <div class="feature-item"><div class="feature-title">Payroll Confirmation</div><div class="feature-desc">A structured sign-off workflow for payroll periods, integrated with leave balances and OT filing for clean period closeouts.</div></div>
-              <div class="feature-item"><div class="feature-title">OT Hours Filing</div><div class="feature-desc">Overtime request submission with an amendment flow (correcting actual hours without un-confirming an entry) and admin-only deletion controls.</div></div>
-              <div class="feature-item"><div class="feature-title">Team Funds</div><div class="feature-desc">Shared account tracking with QR code upload support for payment collection, including drag-and-drop and paste image upload.</div></div>
-              <div class="feature-item"><div class="feature-title">Employee Management</div><div class="feature-desc">Centralized roster control restricted to named administrators — account creation, role assignment, starting leave balances, and full lifecycle management.</div></div>
-              <div class="feature-item"><div class="feature-title">Notifications & Live Alerts</div><div class="feature-desc">Personal "My Alerts" bubble, role-aware notification bells (Leave, Team Funds, OT, IPS), one-click deep links to specific records, and browser-tab badge counts.</div></div>
+              <div class="feature-item"><div class="feature-title">Leave Tracker</div><div class="feature-desc">Full lifecycle — request, approve, reject, cancel — for Vacation, Sick, and Emergency leave, with half-day and hourly increments. Automatic VL/SL balance tracking with sick-to-vacation spillover, leave-without-pay detection, a color-coded calendar, and a live admin approval queue.</div></div>
+              <div class="feature-item"><div class="feature-title">IPS — Individual Performance Score</div><div class="feature-desc">Weighted scoring (QA Accuracy 50%, Productivity 30%, Error Correction 20%), leave-aware targets, structured QA incident tracking, an employee dispute workflow with three-way resolution, full audit trail with images, year-at-a-glance view, and downloadable reports.</div></div>
+              <div class="feature-item"><div class="feature-title">PrioList & Red Files</div><div class="feature-desc">Daily priority list that resets automatically. Red Files claim system prevents two people from working the same flagged file at once. Admin-controlled visibility toggle.</div></div>
+              <div class="feature-item"><div class="feature-title">Payroll Confirmation</div><div class="feature-desc">Structured sign-off workflow for payroll periods, integrated with leave balances and OT filing.</div></div>
+              <div class="feature-item"><div class="feature-title">OT Hours Filing</div><div class="feature-desc">Overtime requests with an amendment flow for correcting hours without un-confirming an entry, plus admin-only deletion.</div></div>
+              <div class="feature-item"><div class="feature-title">Team Funds</div><div class="feature-desc">Shared account tracking with QR code upload for payment collection, including drag-and-drop and paste image upload.</div></div>
+              <div class="feature-item"><div class="feature-title">Employee Management</div><div class="feature-desc">Centralized roster control for named administrators — account creation, role assignment, starting leave balances.</div></div>
+              <div class="feature-item"><div class="feature-title">LI Restriction Daily Report</div><div class="feature-desc">Dedicated tracking view with a live countdown ticker.</div></div>
+              <div class="feature-item"><div class="feature-title">Task Manager</div><div class="feature-desc">Private task-tracking space for the two lead administrators.</div></div>
+              <div class="feature-item"><div class="feature-title">Notifications & Live Alerts</div><div class="feature-desc">Personal alerts bubble, role-aware notification bells, one-click deep links to records, and browser-tab badge counts.</div></div>
             </div>
           </div>
 
@@ -813,10 +817,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       <div class="project" data-project="2">
         <div class="project-header">
           <div>
-            <div class="project-num"><span class="line"></span>PROJECT 02 / PAYROLL & BILLING</div>
+            <div class="project-num"><span class="line"></span>Payroll &amp; Billing</div>
             <h3 class="project-title">Dream Rental Solutions — Invoice & Payroll System</h3>
-            <div class="project-tagline">A production-grade payroll and invoicing platform for a real short-term rental business.</div>
-            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">A fully custom, production-grade payroll and invoicing management system built as a single-file HTML application deployed via GitHub Pages, backed by a live Supabase (PostgreSQL) cloud database. Replaces manual spreadsheets with a secure, real-time, multi-user platform — with zero server maintenance cost.</p>
+            <div class="project-tagline">Payroll and invoicing platform for a short-term rental business.</div>
+            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Custom payroll and invoicing system, deployed as a single HTML file via GitHub Pages with a live Supabase (PostgreSQL) database. Replaces manual spreadsheets with a secure, real-time, multi-user platform — zero server maintenance.</p>
             <div class="project-meta">
               <span class="meta-chip accent">Vanilla JS</span>
               <span class="meta-chip accent">Supabase</span>
@@ -843,47 +847,47 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
         <div class="project-content">
           <div class="tab-panel active" data-tab="overview">
-            <h4>Real business logic — not a CRUD demo.</h4>
-            <p>Designed for a real short-term rental property management business, this system replaces manual spreadsheets with a secure, real-time, multi-user platform that handles employee payroll tracking, client billing, and operational data management — all with zero server maintenance cost.</p>
-            <p>The application is built entirely in vanilla JavaScript without React, Vue, or any UI library, demonstrating deep language fundamentals. It's a production-grade database design — proper use of upsert/dedup patterns, paginated reads, WebSocket subscriptions, and race condition handling. It models actual payroll workflows, billing groupings, and multi-user audit trails.</p>
-            <p>Deployed and live — not a local prototype — running in production for a real business on GitHub Pages with a cloud database backend. Both users see each other's changes appear instantly, with no page refresh needed, and the system intelligently re-fetches only the affected table on any change event.</p>
+            <h4>Real payroll logic, not a CRUD demo.</h4>
+            <p>Built for a short-term rental property management business. Replaces manual spreadsheets with a secure, real-time, multi-user platform for payroll tracking, client billing, and operational data — zero server maintenance cost.</p>
+            <p>Built in vanilla JavaScript, no framework or UI library. Database design uses upsert/dedup patterns, paginated reads, WebSocket subscriptions, and race condition handling — modeling real payroll workflows, billing groupings, and multi-user audit trails.</p>
+            <p>Live in production on GitHub Pages with a cloud database backend. Changes from one user appear instantly for the other, with no refresh — the system re-fetches only the affected table on each change.</p>
             <div class="roles-visual">
-              <h5><i class="fas fa-user-shield"></i>Two-user system with surgically scoped permissions:</h5>
+              <h5><i class="fas fa-user-shield"></i>Two users, tightly scoped permissions:</h5>
               <div class="roles-display">
                 <span class="role-pill">Admin (Jeinna) <span class="role-desc">— full access, all 6 tabs</span></span>
                 <span class="role-pill">Limited (Greg) <span class="role-desc">— locked to Payroll tab only</span></span>
               </div>
-              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Greg can log new work entries and edit additional rate / notes fields, but cannot touch Summary, Database, or Billing records. Every action Greg performs is logged with a timestamp and visible to the admin via a bell icon — and only the specific field he changed turns bright yellow, never the whole row.</p>
+              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Greg can log work entries and edit additional-rate and notes fields, but can't touch Summary, Database, or Billing. Every action he takes is logged with a timestamp and visible to the admin — only the field he changed turns yellow, never the whole row.</p>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="architecture">
             <h4>~90% fewer database reads than polling.</h4>
-            <p>Built on Supabase Realtime WebSocket subscriptions rather than polling, the system re-fetches only the affected table on any change event — not all tables. This minimises egress significantly while keeping every view live.</p>
+            <p>Built on Supabase Realtime WebSocket subscriptions instead of polling. The system re-fetches only the affected table on each change event, cutting egress significantly while keeping every view live.</p>
             <div class="arch-grid">
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File SPA</div><div class="arch-item-desc">No build tools or frameworks. The entire application ships as one HTML file with vanilla JS and CSS custom properties.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-bolt"></i>Realtime WebSocket</div><div class="arch-item-desc">Push-based change notifications on every subscribed table — no polling. Auto-reconnects with 5-second backoff; falls back to 10-second polling if WebSocket unavailable.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-key"></i>Session-Based Auth</div><div class="arch-item-desc">Role-aware authentication with 1-hour inactivity timeout and sessionStorage persistence. Users land back on the exact tab they were on after a refresh.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-list-ol"></i>Paginated REST Fetches</div><div class="arch-item-desc">HTTP Range headers bypass Supabase's hard 1,000-row API cap — supports unlimited historical data with seed fingerprint-based deduplication.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud"></i>GitHub Pages Deployment</div><div class="arch-item-desc">Drag-and-drop deploy with zero DevOps overhead. The application runs in production on free static hosting backed by a cloud database.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-gauge-high"></i>Egress Optimization</div><div class="arch-item-desc">Targeted re-fetches on WebSocket events: idle = zero requests, entry saved = entries table only. ~90% fewer reads than the previous polling architecture.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-arrows-up-down"></i>Scroll Position Preservation</div><div class="arch-item-desc">Double-requestAnimationFrame restore eliminates the scroll-jump issue common with innerHTML replacement. overflow-anchor: none prevents browser scroll-anchoring interference.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-eraser"></i>Fresh-State Logout</div><div class="arch-item-desc">Every field, filter, report, and cached state is wiped clean on sign-out so the next session always starts blank — no leftover data from the previous user.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File SPA</div><div class="arch-item-desc">No build tools or frameworks. Ships as one HTML file with vanilla JS and CSS custom properties.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-bolt"></i>Realtime WebSocket</div><div class="arch-item-desc">Push-based change notifications on every subscribed table — no polling. Reconnects automatically with backoff; falls back to 10-second polling if WebSocket is unavailable.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-key"></i>Session-Based Auth</div><div class="arch-item-desc">Role-aware authentication with a 1-hour inactivity timeout and sessionStorage persistence. Refreshing returns users to the exact tab they were on.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-list-ol"></i>Paginated REST Fetches</div><div class="arch-item-desc">HTTP Range headers bypass Supabase's 1,000-row API cap, supporting unlimited historical data with fingerprint-based deduplication.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud"></i>GitHub Pages Deployment</div><div class="arch-item-desc">Drag-and-drop deploy, zero DevOps overhead. Runs in production on free static hosting backed by a cloud database.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-gauge-high"></i>Egress Optimization</div><div class="arch-item-desc">Targeted re-fetches on WebSocket events: idle means zero requests, a saved entry re-fetches only that table. About 90% fewer reads than the previous polling setup.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-arrows-up-down"></i>Scroll Position Preservation</div><div class="arch-item-desc">Double-requestAnimationFrame restore prevents the scroll-jump issue common with innerHTML replacement.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-eraser"></i>Fresh-State Logout</div><div class="arch-item-desc">Every field, filter, and cached state clears on sign-out, so the next session always starts blank.</div></div>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="modules">
-            <h4>Six functional sections, one cohesive platform.</h4>
-            <p>Each tab below is a complete workspace — with its own filters, inline editing rules, export options, and real-time data flow.</p>
+            <h4>Six sections, one platform.</h4>
+            <p>Each tab is a complete workspace, with its own filters, inline editing rules, export options, and real-time data flow.</p>
             <div class="features-list">
-              <div class="feature-item"><div class="feature-title">Dashboard</div><div class="feature-desc">4 live stat cards (current month payroll, all-time payroll, active cleaner count, properties in database), recent entries table, top earners panel. Entries touched by the limited user are highlighted in yellow for admin visibility.</div></div>
-              <div class="feature-item"><div class="feature-title">Log Work Entry</div><div class="feature-desc">Structured form with auto-populating cleaner dropdown, property dropdown narrowed dynamically to the selected cleaner, and rate auto-fill from the database. Three work types: Cleaning, Inspection, Misc/Bonus. Form state preserved across tab switches.</div></div>
-              <div class="feature-item"><div class="feature-title">Sorted Summary</div><div class="feature-desc">Complete payroll record with 4 live filters (From Date, To Date, Cleaner, Property). Admin inline editing: date picker, rate override, additional rate, notes, delete. Greg's edits highlighted field-by-field in yellow. CSV export.</div></div>
-              <div class="feature-item"><div class="feature-title">Employee Payroll Report</div><div class="feature-desc">Per-cleaner pay-statement cards with active staff sidebar. Admin inline editing with confirmation dialogs. Manual pay row button for bonuses/adjustments. Bidirectional sync with Summary tab. Print/PDF and CSV export.</div></div>
-              <div class="feature-item"><div class="feature-title">Billing System</div><div class="feature-desc">Generates client-facing invoices grouped by property brand (Dream, Thomas, Dwellish, Lotus, Kinga, etc.). Misc items panel per group, running subtotals that update live, grand total card. CSV export includes billing table and all misc line items.</div></div>
-              <div class="feature-item"><div class="feature-title">Database Editor (Admin Only)</div><div class="feature-desc">Employee Rates, Billing Rates, and Add New tabs — view, filter, edit, delete, and add rate records, employees, and billing properties. Duplicate detection warns instead of silently creating a second copy.</div></div>
-              <div class="feature-item"><div class="feature-title">Floating Chat (Messaging)</div><div class="feature-desc">Private chat between users accessible from any tab via a floating bubble. Unread count badge, messages grouped by sender with timestamps, messages persist permanently in Supabase. Realtime-powered, no polling.</div></div>
-              <div class="feature-item"><div class="feature-title">Activity Log & Change Tracking</div><div class="feature-desc">Admin-only bell icon with unread badge. Logs every action by the limited user — new entries, rate overrides, deletions, manual pay rows. Mark All Read / Clear Log. Capped at 500 entries. Yellow highlight on edited fields only.</div></div>
+              <div class="feature-item"><div class="feature-title">Dashboard</div><div class="feature-desc">Four live stat cards — current month payroll, all-time payroll, active cleaner count, properties in database — plus a recent entries table and top earners panel. Entries touched by the limited user are highlighted for admin visibility.</div></div>
+              <div class="feature-item"><div class="feature-title">Log Work Entry</div><div class="feature-desc">Cleaner dropdown auto-populates from the database; property dropdown narrows to the selected cleaner; rate auto-fills. Three work types — Cleaning, Inspection, Misc/Bonus. Form state persists across tab switches.</div></div>
+              <div class="feature-item"><div class="feature-title">Sorted Summary</div><div class="feature-desc">Full payroll record with four live filters — date range, cleaner, property. Admin inline editing: date, rate override, additional rate, notes, delete. Greg's edits highlighted field-by-field. CSV export.</div></div>
+              <div class="feature-item"><div class="feature-title">Employee Payroll Report</div><div class="feature-desc">Per-cleaner pay-statement cards with an active staff sidebar. Inline editing with confirmation dialogs, manual pay rows for bonuses, and two-way sync with Summary. Print/PDF and CSV export.</div></div>
+              <div class="feature-item"><div class="feature-title">Billing System</div><div class="feature-desc">Client-facing invoices grouped by property brand. Misc line items per group with live-updating subtotals and a grand total card. CSV export includes billing and misc line items.</div></div>
+              <div class="feature-item"><div class="feature-title">Database Editor</div><div class="feature-desc">Employee rates, billing rates, and an add-new tab for rates, employees, and properties — admin only. Duplicate detection warns before creating a second copy.</div></div>
+              <div class="feature-item"><div class="feature-title">Floating Chat</div><div class="feature-desc">Private messaging between the two users from any tab, with an unread badge and persistent history in Supabase. Realtime-powered, no polling.</div></div>
+              <div class="feature-item"><div class="feature-title">Activity Log</div><div class="feature-desc">Admin-only log of every action the limited user takes — new entries, rate overrides, deletions, manual pay rows. Capped at 500 entries, with mark-all-read and clear options.</div></div>
             </div>
           </div>
 
@@ -918,9 +922,9 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="process-section" id="process">
   <div class="container">
     <div class="section-header">
-      <div class="section-eyebrow"><span class="line"></span><span class="num">05</span>How We Work</div>
-      <h2 class="section-title">From blank page to <span class="accent">daily use</span>.</h2>
-      <p class="section-sub">A five-stage engagement model designed to keep the people who'll actually use the software at the center of every decision.</p>
+      <div class="section-eyebrow"><span class="line"></span>How We Work</div>
+      <h2 class="section-title">From first conversation to daily use.</h2>
+      <p class="section-sub">Five stages, built around the people who'll actually use the software.</p>
     </div>
     <div class="process-timeline">
       <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We sit down with your team, watch the actual workflow, and map every step — including the ones that currently live in spreadsheets and group chats.</div></div>
@@ -936,8 +940,8 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
   <div class="container">
     <div class="contact-grid">
       <div>
-        <div class="section-eyebrow"><span class="line"></span><span class="num">06</span>Start a Project</div>
-        <h2 class="contact-title">Got a workflow that <em>doesn't fit</em> a template?</h2>
+        <div class="section-eyebrow"><span class="line"></span>Start a Project</div>
+        <h2 class="contact-title">Have a workflow that doesn't fit a template?</h2>
         <p class="contact-sub">Tell us what your team is doing by hand — spreadsheets, group chats, paper forms, workarounds. We'll tell you honestly whether it's worth building custom, and if it is, what it would take.</p>
         <div class="contact-info">
           <a href="mailto:hello@lululab.studio" class="contact-info-item"><i class="far fa-envelope"></i><span>hello@lululab.studio</span></a>
@@ -960,7 +964,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
   <div class="footer-grid">
     <div>
       <div class="footer-brand"><span class="logo-mark">L</span>ululab</div>
-      <p class="footer-brand-desc">A custom web application studio building bespoke business software from scratch — no templates, no frameworks, no recycled themes. Just purpose-built applications, written line by line.</p>
+      <p class="footer-brand-desc">A custom web application studio, building business software from scratch — no templates, no page builders.</p>
     </div>
     <div class="footer-col"><h5>Studio</h5><ul><li><a href="#profile">about</a></li><li><a href="#services">services</a></li><li><a href="#capabilities">capabilities</a></li><li><a href="#process">process</a></li></ul></div>
     <div class="footer-col"><h5>Work</h5><ul><li><a href="#portfolio">portfolio</a></li><li><a href="#contact">start a project</a></li><li><a href="mailto:hello@lululab.studio">email us</a></li><li><a href="#">github</a></li></ul></div>
@@ -978,7 +982,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     <button type="button" class="login-close" onclick="hideLogin()"><i class="fas fa-times"></i></button>
     <h3>Studio Access</h3>
     <p>Restricted Edit Mode</p>
-    <input type="email" id="login-user" class="login-input" placeholder="Email" autocomplete="username">
+    <input type="text" id="login-user" class="login-input" placeholder="Username" autocomplete="username">
     <input type="password" id="login-pass" class="login-input" placeholder="Password" autocomplete="current-password">
     <button type="button" class="login-btn" onclick="attemptLogin()">Enter Edit Mode</button>
     <div id="login-error" class="login-error">Invalid credentials. Please try again.</div>
@@ -1018,7 +1022,8 @@ try {
 }
 
 // Use v2 keys to bust old broken localStorage saves
-let isLoggedIn = isSupabaseConfigured ? false : localStorage.getItem('lululab_admin_v2') === 'true';
+// Always check the local flag — login no longer depends on Supabase Auth.
+let isLoggedIn = localStorage.getItem('lululab_admin_v2') === 'true';
 let isEditMode = false;
 
 // === UI EFFECTS (Safe & Static) ===
@@ -1068,40 +1073,25 @@ function initCmsIds() {
 
 async function initApp() {
     initCmsIds();
-    
+
+    // Simple, DRS-Payroll-style auth: no Supabase Auth accounts, no dashboard
+    // user creation. "isLoggedIn" is just a local flag checked against a
+    // hardcoded username/password in attemptLogin(). Supabase (if configured)
+    // is used purely as a database for content/images, not for accounts.
+    if (isLoggedIn) {
+        document.body.classList.add('admin-logged-in');
+        document.getElementById('admin-toolbar').classList.add('active');
+    }
+
     if (isSupabaseConfigured) {
         try {
-            const { data: { session } } = await sb.auth.getSession();
-            if (session) {
-                isLoggedIn = true;
-                document.body.classList.add('admin-logged-in');
-                document.getElementById('admin-toolbar').classList.add('active');
-            }
-            
-            sb.auth.onAuthStateChange((event, session) => {
-                if (event === 'SIGNED_IN') {
-                    isLoggedIn = true;
-                    document.body.classList.add('admin-logged-in');
-                    document.getElementById('admin-toolbar').classList.add('active');
-                } else if (event === 'SIGNED_OUT') {
-                    isLoggedIn = false;
-                    isEditMode = false;
-                    document.body.classList.remove('edit-mode', 'admin-logged-in');
-                    document.getElementById('admin-toolbar').classList.remove('active');
-                }
-            });
-
             await loadCmsData();
         } catch (e) {
-            console.error("Supabase session error, falling back", e);
+            console.error("Supabase load error, falling back", e);
             isSupabaseConfigured = false;
             loadLocalCmsData();
         }
     } else {
-        if (isLoggedIn) {
-            document.body.classList.add('admin-logged-in');
-            document.getElementById('admin-toolbar').classList.add('active');
-        }
         loadLocalCmsData();
     }
 }
@@ -1371,37 +1361,28 @@ function hideLogin() {
     document.getElementById('login-modal').classList.remove('active');
 }
 
+// Simple hardcoded credential check — same approach as DRS Payroll.
+// No Supabase Auth account is needed; this is purely a client-side gate.
+const ADMIN_USERNAME = 'Jeinna';
+const ADMIN_PASSWORD = '$Jeinna1802$';
+
 async function attemptLogin() {
-    const email = document.getElementById('login-user').value;
+    const username = document.getElementById('login-user').value.trim();
     const pass = document.getElementById('login-pass').value;
     const errBox = document.getElementById('login-error');
-    
-    if (isSupabaseConfigured) {
-        const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
-        if (error) {
-            // Surface the real Supabase error instead of a generic message,
-            // so you can tell "no such user" apart from "wrong password".
-            errBox.textContent = 'Login failed: ' + error.message;
-            console.error('Supabase auth error:', error);
-            errBox.style.display = 'block';
-            setTimeout(() => errBox.style.display = 'none', 5000);
-        } else {
-            hideLogin();
-            showToast('Edit mode unlocked.', 'fa-unlock');
-            await loadCmsData(); 
-        }
+
+    if (username === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+        isLoggedIn = true;
+        localStorage.setItem('lululab_admin_v2', 'true');
+        document.body.classList.add('admin-logged-in');
+        document.getElementById('admin-toolbar').classList.add('active');
+        hideLogin();
+        showToast('Edit mode unlocked.', 'fa-unlock');
+        if (isSupabaseConfigured) await loadCmsData();
     } else {
-        if (email === 'Jeinna' && btoa(pass) === 'JEplaW5uYTE4MDIk') {
-            isLoggedIn = true;
-            localStorage.setItem('lululab_admin_v2', 'true');
-            document.body.classList.add('admin-logged-in');
-            document.getElementById('admin-toolbar').classList.add('active');
-            hideLogin();
-            showToast('Edit mode unlocked.', 'fa-unlock');
-        } else {
-            errBox.style.display = 'block';
-            setTimeout(() => errBox.style.display = 'none', 3000);
-        }
+        errBox.textContent = 'Invalid credentials. Please try again.';
+        errBox.style.display = 'block';
+        setTimeout(() => errBox.style.display = 'none', 3000);
     }
 }
 
@@ -1509,16 +1490,12 @@ function exportHTML() {
     showToast('Exporting updated HTML file...', 'fa-download');
 }
 
-async function logoutAdmin() {
-    if (isSupabaseConfigured) {
-        await sb.auth.signOut();
-    } else {
-        localStorage.removeItem('lululab_admin_v2');
-        isLoggedIn = false;
-        isEditMode = false;
-        document.body.classList.remove('edit-mode', 'admin-logged-in');
-        document.getElementById('admin-toolbar').classList.remove('active');
-    }
+function logoutAdmin() {
+    localStorage.removeItem('lululab_admin_v2');
+    isLoggedIn = false;
+    isEditMode = false;
+    document.body.classList.remove('edit-mode', 'admin-logged-in');
+    document.getElementById('admin-toolbar').classList.remove('active');
     showToast('Logged out successfully.', 'fa-sign-out-alt');
 }
 
@@ -1544,8 +1521,7 @@ async function runConnectionDiagnostic() {
         return;
     }
     try {
-        const { data: authUsers, error: authErr } = await sb.auth.getSession();
-        console.log('Auth session check:', authErr ? `ERROR: ${authErr.message}` : (authUsers.session ? 'logged in' : 'no active session'));
+        console.log('Edit-mode login: client-side check only (no Supabase Auth account needed).');
 
         const { error: cmsErr } = await sb.from('cms_content').select('id').limit(1);
         console.log('cms_content table:', cmsErr ? `MISSING or blocked — ${cmsErr.message}` : 'reachable');
