@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>document.documentElement.classList.add('js-enabled');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LuluLab</title>
@@ -50,7 +51,7 @@ nav.scrolled{padding:.9rem 3rem;background:rgba(250,247,243,.85);backdrop-filter
 .nav-cta:hover{background:var(--accent);color:var(--bg);border-color:var(--accent);box-shadow:0 8px 24px rgba(250,158,188,.25)}
 
 .hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:8rem 3rem 3rem;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg{position:absolute;inset:0;z-index:0;transition:transform .3s ease-out}
 .mesh{position:absolute;border-radius:50%;filter:blur(90px);animation:float 22s ease-in-out infinite}
 .mesh-1{width:560px;height:560px;background:radial-gradient(circle,var(--accent),transparent 70%);top:-150px;right:-100px;opacity:.35}
 .mesh-2{width:480px;height:480px;background:radial-gradient(circle,var(--accent-2),transparent 70%);bottom:-100px;left:-150px;opacity:.25;animation-delay:-11s}
@@ -76,21 +77,22 @@ nav.scrolled{padding:.9rem 3rem;background:rgba(250,247,243,.85);backdrop-filter
 .hero-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
 
 .hero-floaters{position:absolute;inset:0;pointer-events:none;z-index:1}
-.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:100px;box-shadow:0 8px 24px rgba(27,23,20,.08);font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--fg-2);white-space:nowrap;animation:float 5s ease-in-out infinite}
+.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:100px;box-shadow:0 8px 24px rgba(27,23,20,.08);font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--fg-2);white-space:nowrap;animation:chipFloat 5s ease-in-out infinite}
 .float-chip i{font-size:.72rem;color:var(--accent)}
 .chip-1{top:8%;left:46%;--rot:-3deg;animation-delay:0s}
 .chip-2{top:66%;left:42%;--rot:2deg;animation-delay:-1.7s}
 .chip-3{top:80%;left:46%;--rot:-2deg;animation-delay:-3.3s}
 .chip-2 i{color:var(--blue-accent)}
 .chip-3 i{color:var(--gold)}
-@keyframes float{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-10px) rotate(var(--rot,0deg))}}
+@keyframes chipFloat{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-10px) rotate(var(--rot,0deg))}}
 @media(max-width:1300px){.hero-floaters{display:none}}
 
 .terminal-header{display:flex;gap:.4rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--term-border);align-items:center}
 .terminal-dot{width:9px;height:9px;border-radius:50%}
 .terminal-dot.red{background:#FF5F57}.terminal-dot.yellow{background:#FEBC2E}.terminal-dot.green{background:#28C840}
 .terminal-title{margin-left:auto;font-size:.7rem;color:var(--term-fg-dim);letter-spacing:.05em}
-.terminal-line{color:var(--term-fg-dim)}
+.terminal-line{color:var(--term-fg-dim);opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
+.terminal-line.show{opacity:1;transform:translateY(0)}
 .terminal-line .prompt{color:var(--accent-2);margin-right:.5rem}
 .terminal-line .keyword{color:#E3B25C}
 .terminal-line .string{color:#8FC7A3}
@@ -390,8 +392,13 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 .admin-btn.danger { background: transparent; color: #ff6b6b; border-color: rgba(255, 107, 107, 0.3); }
 .admin-btn.danger:hover { background: rgba(255, 107, 107, 0.1); border-color: #ff6b6b; }
 
-/* SAFETY NET: Elements are ALWAYS visible. No JS hiding allowed. */
-.reveal { opacity: 1 !important; transform: none !important; }
+/* Scroll-reveal: fade + slide up once when a section enters view. Respects reduced motion.
+   Only hides content when JS is confirmed running (html.js-enabled) — if JS fails, everything stays visible. */
+html.js-enabled .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){
+  html.js-enabled .reveal{opacity:1!important;transform:none!important;transition:none!important}
+}
 
 @media(max-width:1024px){
   .hero-content{grid-template-columns:1fr}
@@ -495,12 +502,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="profile-section" id="profile">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>Studio Profile</div>
       <h2 class="section-title">We build around how your business actually works.</h2>
     </div>
     <div class="profile-grid">
-      <div class="profile-sticky">
+      <div class="profile-sticky reveal">
         <h3>Who we are</h3>
         <p>LuluLab is a custom web application studio. We build software from scratch for businesses whose workflows don't fit off-the-shelf tools.</p>
         <div class="id-card">
@@ -512,7 +519,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <div class="row"><span class="key">templates</span><span class="val">0</span></div>
         </div>
       </div>
-      <div class="profile-content">
+      <div class="profile-content reveal">
         <p class="lead">We start with your workflow, not a template, and build software specifically for what your business needs.</p>
         <p>Our work combines product thinking, database design, and interface design — modeling real workflows, not CRUD demos. Each engagement runs as an ongoing partnership: features evolve through iteration, shaped by the people using the software.</p>
         <div class="profile-contrast">
@@ -560,12 +567,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="services-section" id="services">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>What We Do</div>
       <h2 class="section-title">What we cover, start to finish.</h2>
       <p class="section-sub">The full lifecycle of a custom business application.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid reveal">
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-icon"><i class="fas fa-code"></i></div>
@@ -628,7 +635,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="capabilities-section" id="capabilities">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>Capabilities</div>
       <h2 class="section-title">A small toolkit, known well.</h2>
       <p class="section-sub">We'd rather know eight things completely than thirty things superficially.</p>
@@ -657,7 +664,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     </div>
   </div>
   <div class="container">
-    <div class="capabilities-grid">
+    <div class="capabilities-grid reveal">
       <div class="capability">
         <div class="capability-num">01</div>
         <div class="capability-title">Relational Database Design</div>
@@ -704,7 +711,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="portfolio-section" id="portfolio">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>Selected Work</div>
       <h2 class="section-title">Two production apps, both live.</h2>
       <p class="section-sub">Each project below is a real, deployed application — built from scratch with the client and in daily use. Use the tabs to see the architecture, modules, and gallery for each.</p>
@@ -712,7 +719,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
     <div class="portfolio-projects">
       <!-- PROJECT 1 -->
-      <div class="project" data-project="1">
+      <div class="project reveal" data-project="1">
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>Operations</div>
@@ -729,10 +736,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
             </div>
           </div>
           <div class="project-stats">
-            <div class="project-stat"><div class="project-stat-num">5</div><div class="project-stat-label">Roles</div></div>
-            <div class="project-stat"><div class="project-stat-num">15+</div><div class="project-stat-label">DB Tables</div></div>
-            <div class="project-stat"><div class="project-stat-num">10+</div><div class="project-stat-label">Modules</div></div>
-            <div class="project-stat"><div class="project-stat-num">30+</div><div class="project-stat-label">Daily Users</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="5" data-suffix="">0</div><div class="project-stat-label">Roles</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="15" data-suffix="+">0</div><div class="project-stat-label">DB Tables</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="10" data-suffix="+">0</div><div class="project-stat-label">Modules</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="30" data-suffix="+">0</div><div class="project-stat-label">Daily Users</div></div>
           </div>
         </div>
 
@@ -819,7 +826,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       </div>
 
       <!-- PROJECT 2 -->
-      <div class="project" data-project="2">
+      <div class="project reveal" data-project="2">
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>Payroll &amp; Billing</div>
@@ -836,10 +843,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
             </div>
           </div>
           <div class="project-stats">
-            <div class="project-stat"><div class="project-stat-num">4,580</div><div class="project-stat-label">Lines of Code</div></div>
-            <div class="project-stat"><div class="project-stat-num">135+</div><div class="project-stat-label">Functions</div></div>
-            <div class="project-stat"><div class="project-stat-num">5</div><div class="project-stat-label">DB Tables</div></div>
-            <div class="project-stat"><div class="project-stat-num">130+</div><div class="project-stat-label">Properties</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="4580" data-suffix="" data-comma="1">0</div><div class="project-stat-label">Lines of Code</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="135" data-suffix="+">0</div><div class="project-stat-label">Functions</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="5" data-suffix="">0</div><div class="project-stat-label">DB Tables</div></div>
+            <div class="project-stat"><div class="project-stat-num" data-target="130" data-suffix="+">0</div><div class="project-stat-label">Properties</div></div>
           </div>
         </div>
 
@@ -925,12 +932,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="process-section" id="process">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>How We Work</div>
       <h2 class="section-title">From first conversation to daily use.</h2>
       <p class="section-sub">Five stages, built around the people who'll actually use the software.</p>
     </div>
-    <div class="process-timeline">
+    <div class="process-timeline reveal">
       <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We watch how your team actually works, including the parts still living in spreadsheets and group chats.</div></div>
       <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permissions, and module breakdown — the schema everything else follows.</div></div>
       <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early — not mockups.</div></div>
@@ -943,7 +950,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="contact-grid">
-      <div>
+      <div class="reveal">
         <div class="section-eyebrow"><span class="line"></span>Start a Project</div>
         <h2 class="contact-title">Have a workflow that doesn't fit a template?</h2>
         <p class="contact-sub">Tell us what your team is doing by hand. We'll tell you honestly whether it's worth building custom.</p>
@@ -953,7 +960,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <a href="#" class="contact-info-item"><i class="fas fa-clock"></i><span>Response within 24 hours</span></a>
         </div>
       </div>
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form reveal" id="contact-form">
         <div class="form-group"><label>Your Name</label><input type="text" id="form-name" required placeholder="Jane Reyes"></div>
         <div class="form-group"><label>Email</label><input type="email" id="form-email" required placeholder="jane@company.com"></div>
         <div class="form-group"><label>Company</label><input type="text" id="form-company" placeholder="Acme Operations Inc."></div>
@@ -1008,7 +1015,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 // ==========================================
 // SUPABASE CONFIGURATION
 // ==========================================
-const SUPABASE_URL = 'https://pcvuwufszpqrzjwvrjtg.sb.co';
+const SUPABASE_URL = 'https://pcvuwufszpqrzjwvrjtg.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdnV3dWZzenBxcnpqd3ZyanRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwOTE3NTQsImV4cCI6MjEwNDY2Nzc1NH0.2ADlgzddIxku4SDJiy9y1MCR3nxBywswEQoeTUzDGjc';
 
 let sb = null;
@@ -1038,6 +1045,74 @@ window.addEventListener('scroll',()=>{
   scrollProgress.style.width=(window.scrollY/total*100)+'%';
   nav.classList.toggle('scrolled',window.scrollY>50);
 });
+
+// === SCROLL-REVEAL: fade+slide each section in once, the first time it's visible ===
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// === TERMINAL TYPEWRITER: reveal each line in sequence, once, on load ===
+(function initTerminalReveal() {
+  const lines = document.querySelectorAll('.hero-visual .terminal-line');
+  if (!lines.length) return;
+  if (prefersReducedMotion) { lines.forEach(l => l.classList.add('show')); return; }
+  lines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('show'), 280 + i * 160);
+  });
+})();
+
+// === HERO PARALLAX: background blobs drift slightly toward the cursor ===
+(function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  const heroBg = document.querySelector('.hero-bg');
+  if (!hero || !heroBg || prefersReducedMotion) return;
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    heroBg.style.transform = `translate(${x * 24}px, ${y * 24}px)`;
+  });
+  hero.addEventListener('mouseleave', () => { heroBg.style.transform = 'translate(0,0)'; });
+})();
+
+// === STAT COUNT-UP: portfolio numbers animate from 0 the first time they're visible ===
+(function initStatCounters() {
+  const nums = document.querySelectorAll('.project-stat-num[data-target]');
+  if (!nums.length) return;
+  function animate(el) {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    const suffix = el.dataset.suffix || '';
+    const useComma = el.dataset.comma === '1';
+    const format = v => (useComma ? v.toLocaleString() : String(v)) + suffix;
+    if (prefersReducedMotion) { el.textContent = format(target); return; }
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = format(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(tick); else el.textContent = format(target);
+    }
+    requestAnimationFrame(tick);
+  }
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  nums.forEach(el => statObserver.observe(el));
+})();
 
 // ==========================================
 // IMMEDIATE TAB SETUP (No waiting for Supabase)
