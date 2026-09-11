@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="js-enabled">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LuluLab</title>
 <!-- Favicon: Pink square with white L to match website logo -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FA9EBC'/%3E%3Ctext x='50' y='72' font-family='Arial,sans-serif' font-size='62' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<!-- Safety Net: Only apply JS styles if JS actually runs -->
+<script>document.documentElement.classList.add('js-loaded');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,11 +26,15 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none;position:relative}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto;position:relative}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:1;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
-.cursor{position:fixed;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.4}
-@media(max-width:900px){body{cursor:auto}.cursor,.cursor-ring{display:none}}
+
+/* Safety Net: Only hide cursor if JS loads */
+.js-loaded body { cursor: none; }
+.js-loaded .cursor, .js-loaded .cursor-ring { display: block; }
+.cursor{position:fixed;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;display:none}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.4;display:none}
+@media(max-width:900px){.cursor,.cursor-ring{display:none !important}.js-loaded body{cursor:auto}}
 .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:1000;width:0;box-shadow:0 0 12px var(--accent)}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
@@ -342,8 +348,8 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 
 /* Safety Net: Elements are visible by default, only hide if JS runs */
 .reveal { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
-html.js-enabled .reveal { opacity: 0; transform: translateY(30px); }
-html.js-enabled .reveal.visible { opacity: 1; transform: translateY(0); }
+.js-loaded .reveal { opacity: 0; transform: translateY(30px); }
+.js-loaded .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* === CMS EDIT MODE STYLES === */
 [data-cms-id]:hover { outline: 1px dashed rgba(250, 158, 188, 0.4); outline-offset: 4px; }
