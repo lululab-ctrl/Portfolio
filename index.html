@@ -6,8 +6,6 @@
 <title>LuluLab</title>
 <!-- Favicon: Pink square with white L to match website logo -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FA9EBC'/%3E%3Ctext x='50' y='72' font-family='Arial,sans-serif' font-size='62' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
-<!-- Safety Net: Only apply JS styles if JS actually runs -->
-<script>document.documentElement.classList.add('js-loaded');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,15 +24,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:auto;position:relative}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:1;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%)}
-
-/* Safety Net: Only hide cursor if JS loads */
-.js-loaded body { cursor: none; }
-.js-loaded .cursor, .js-loaded .cursor-ring { display: block; }
-.cursor{position:fixed;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;display:none}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.4;display:none}
-@media(max-width:900px){.cursor,.cursor-ring{display:none !important}.js-loaded body{cursor:auto}}
 .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:1000;width:0;box-shadow:0 0 12px var(--accent)}
 
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
@@ -68,9 +59,9 @@ nav.scrolled{padding:.9rem 3rem;background:rgba(11,25,87,.85);backdrop-filter:bl
 .hero h1 .display{font-weight:700;display:block}
 .hero-sub{font-size:1.08rem;color:var(--fg-2);max-width:540px;margin-bottom:2.5rem;line-height:1.7}
 .hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.btn-primary{padding:.95rem 1.8rem;background:var(--accent);color:var(--bg);border:none;border-radius:6px;font-family:var(--mono);font-weight:600;font-size:.85rem;cursor:none;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
+.btn-primary{padding:.95rem 1.8rem;background:var(--accent);color:var(--bg);border:none;border-radius:6px;font-family:var(--mono);font-weight:600;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
 .btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(250,158,188,.35)}
-.btn-secondary{padding:.95rem 1.8rem;background:transparent;color:var(--fg);border:1px solid var(--border-bright);border-radius:6px;font-family:var(--mono);font-weight:500;font-size:.85rem;cursor:none;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
+.btn-secondary{padding:.95rem 1.8rem;background:transparent;color:var(--fg);border:1px solid var(--border-bright);border-radius:6px;font-family:var(--mono);font-weight:500;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem;transition:all .3s;text-decoration:none;text-transform:uppercase;letter-spacing:.06em}
 .btn-secondary:hover{border-color:var(--accent);background:var(--pink-soft);color:var(--accent)}
 
 .hero-visual{position:relative;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:1.5rem;font-family:var(--mono);font-size:.8rem;line-height:1.85;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px var(--border-bright);overflow:hidden}
@@ -156,7 +147,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 
 .services-section{background:var(--bg)}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.service-card{background:var(--bg);padding:2.3rem;position:relative;transition:all .4s;cursor:none;min-height:290px;display:flex;flex-direction:column}
+.service-card{background:var(--bg);padding:2.3rem;position:relative;transition:all .4s;cursor:pointer;min-height:290px;display:flex;flex-direction:column}
 .service-card:hover{background:var(--bg-card)}
 .service-card:hover .service-icon{color:var(--accent);background:var(--pink-soft);border-color:var(--border-bright)}
 .service-card::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--accent);transition:width .4s}
@@ -175,7 +166,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .marquee-item{font-family:var(--display);font-size:2.2rem;font-weight:400;color:var(--fg-3);display:flex;align-items:center;gap:3rem}
 .marquee-item::after{content:'/';color:var(--accent);font-weight:300}
 .capabilities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
-.capability{padding:1.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);transition:all .3s;cursor:none;position:relative;overflow:hidden}
+.capability{padding:1.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
 .capability:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg-card);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .capability-num{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.8rem;font-weight:500}
 .capability-title{font-family:var(--display);font-size:1.05rem;font-weight:600;margin-bottom:.5rem;color:var(--fg);letter-spacing:-.005em}
@@ -209,7 +200,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 
 .project-tabs{display:flex;gap:0;padding:0 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
-.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--mono);font-size:.78rem;font-weight:500;cursor:none;position:relative;transition:color .3s;white-space:nowrap;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--mono);font-size:.78rem;font-weight:500;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.08em}
 .project-tab:hover{color:var(--fg-2)}
 .project-tab.active{color:var(--accent)}
 .project:nth-of-type(2) .project-tab.active{color:var(--blue-accent)}
@@ -258,7 +249,7 @@ body.admin-logged-in .gallery-toolbar{display:flex}
 .gallery-hint{color:var(--fg-3);font-family:var(--mono);font-size:.78rem;display:flex;align-items:center;gap:.6rem}
 .gallery-hint i{color:var(--accent)}
 .gallery-actions{display:flex;gap:.5rem;flex-wrap:wrap}
-.gallery-btn{padding:.55rem 1rem;background:var(--bg-3);border:1px dashed var(--border-bright);color:var(--accent);border-radius:6px;font-family:var(--mono);font-size:.76rem;font-weight:500;cursor:none;display:inline-flex;align-items:center;gap:.45rem;transition:all .3s;text-transform:uppercase;letter-spacing:.05em}
+.gallery-btn{padding:.55rem 1rem;background:var(--bg-3);border:1px dashed var(--border-bright);color:var(--accent);border-radius:6px;font-family:var(--mono);font-size:.76rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:all .3s;text-transform:uppercase;letter-spacing:.05em}
 .gallery-btn:hover{background:var(--pink-soft);border-style:solid;transform:translateY(-1px)}
 
 .note-composer{background:var(--bg);border:1px solid var(--border-bright);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;display:none}
@@ -266,15 +257,15 @@ body.admin-logged-in .note-composer.active{display:block;animation:fadeIn .3s}
 .note-composer textarea{width:100%;background:transparent;border:none;color:var(--fg);font-family:var(--sans);font-size:.95rem;resize:vertical;min-height:80px;outline:none;line-height:1.6}
 .note-composer textarea::placeholder{color:var(--fg-3)}
 .note-composer-actions{display:flex;justify-content:flex-end;gap:.5rem;margin-top:.6rem}
-.note-composer-btn{padding:.4rem .9rem;border:1px solid var(--border-bright);background:transparent;color:var(--fg-2);border-radius:6px;font-family:var(--mono);font-size:.76rem;cursor:none;transition:all .2s;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+.note-composer-btn{padding:.4rem .9rem;border:1px solid var(--border-bright);background:transparent;color:var(--fg-2);border-radius:6px;font-family:var(--mono);font-size:.76rem;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
 .note-composer-btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .note-composer-btn:hover{background:var(--bg-3)}
 .note-composer-btn.primary:hover{background:var(--accent-2)}
 
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
-.gallery-slot{aspect-ratio:16/10;background:var(--bg);border:1px dashed var(--border);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:none;transition:all .3s}
+.gallery-slot{aspect-ratio:16/10;background:var(--bg);border:1px dashed var(--border);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;transition:all .3s}
 .gallery-slot:hover{border-color:var(--accent);background:var(--bg-3)}
-.gallery-slot.has-image{cursor:none;border-style:solid}
+.gallery-slot.has-image{cursor:default;border-style:solid}
 .gallery-slot img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* Hide upload prompts and remove buttons from visitors */
@@ -285,7 +276,7 @@ body.admin-logged-in .gallery-slot:not(.has-image) .upload-prompt{display:block;
 .gallery-slot .upload-prompt small{font-size:.68rem;color:var(--fg-3);display:block;margin-top:.3rem}
 
 .gallery-slot.dragover{border-color:var(--accent);background:var(--pink-soft);transform:scale(1.02)}
-.gallery-slot .remove-btn{position:absolute;top:.5rem;right:.5rem;width:26px;height:26px;background:rgba(11,25,87,.85);border:1px solid var(--border-bright);color:var(--fg);border-radius:6px;cursor:none;display:none;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;backdrop-filter:blur(4px)}
+.gallery-slot .remove-btn{position:absolute;top:.5rem;right:.5rem;width:26px;height:26px;background:rgba(11,25,87,.85);border:1px solid var(--border-bright);color:var(--fg);border-radius:6px;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.7rem;transition:all .2s;backdrop-filter:blur(4px)}
 body.admin-logged-in .gallery-slot.has-image .remove-btn{display:flex}
 .gallery-slot .remove-btn:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
 .gallery-slot .caption{position:absolute;bottom:0;left:0;right:0;padding:.6rem .8rem;background:linear-gradient(0deg,rgba(11,25,87,.95),transparent);font-size:.74rem;color:var(--fg);font-family:var(--mono);opacity:0;transition:opacity .3s}
@@ -296,7 +287,7 @@ body.admin-logged-in .gallery-slot.has-image .remove-btn{display:flex}
 .gallery-note .note-label{font-family:var(--mono);font-size:.66rem;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem;font-weight:500}
 .project:nth-of-type(2) .gallery-note .note-label{color:var(--blue-accent)}
 .gallery-note .note-text{color:var(--fg);font-size:.92rem;line-height:1.65;font-family:var(--sans)}
-.gallery-note .note-remove{position:absolute;top:1rem;right:1rem;background:var(--bg-3);border:1px solid var(--border);color:var(--fg-3);cursor:none;font-size:.75rem;width:24px;height:24px;border-radius:6px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.gallery-note .note-remove{position:absolute;top:1rem;right:1rem;background:var(--bg-3);border:1px solid var(--border);color:var(--fg-3);cursor:pointer;font-size:.75rem;width:24px;height:24px;border-radius:6px;transition:all .2s;display:flex;align-items:center;justify-content:center}
 .gallery-note .note-remove:hover{background:var(--accent-deep);color:var(--fg);border-color:var(--accent-deep)}
 
 .process-section{background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -346,10 +337,9 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .toast.show{transform:translateX(-50%) translateY(-10rem);opacity:1}
 .toast i{color:var(--accent)}
 
-/* Safety Net: Elements are visible by default, only hide if JS runs */
+/* REMOVED Scroll Reveal hiding to prevent blank screens */
 .reveal { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
-.js-loaded .reveal { opacity: 0; transform: translateY(30px); }
-.js-loaded .reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* === CMS EDIT MODE STYLES === */
 [data-cms-id]:hover { outline: 1px dashed rgba(250, 158, 188, 0.4); outline-offset: 4px; }
@@ -423,8 +413,6 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 </head>
 <body>
 
-<div class="cursor"></div>
-<div class="cursor-ring"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav id="nav">
@@ -490,12 +478,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="profile-section" id="profile">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span><span class="num">01</span>Studio Profile</div>
       <h2 class="section-title">A studio built on <span class="accent">first principles</span>, not borrowed templates.</h2>
     </div>
     <div class="profile-grid">
-      <div class="profile-sticky reveal">
+      <div class="profile-sticky">
         <h3>Who we are</h3>
         <p>LuluLab is a custom web application studio. We build software the long way — from a blank canvas to a deployed product — for businesses whose workflows don't fit inside off-the-shelf tools.</p>
         <div class="id-card">
@@ -507,7 +495,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <div class="row"><span class="key">templates</span><span class="val">0</span></div>
         </div>
       </div>
-      <div class="profile-content reveal">
+      <div class="profile-content">
         <p class="lead">Every project starts with a single question — <em>"What does your business actually need?"</em> — and ends with software written specifically to answer it.</p>
         
         <p><strong>No templates. No recycled themes. No frameworks chasing trends.</strong> Just purpose-built applications, engineered end-to-end in direct collaboration with the people who will use them every day.</p>
@@ -564,12 +552,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="services-section" id="services">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span><span class="num">02</span>What We Do</div>
       <h2 class="section-title">Eight capabilities, <span class="accent">one studio</span>.</h2>
       <p class="section-sub">A focused service offering covering the full lifecycle of a custom business application — from first conversation to ongoing evolution.</p>
     </div>
-    <div class="services-grid reveal">
+    <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01 / Service</div>
         <div class="service-icon"><i class="fas fa-code"></i></div>
@@ -632,13 +620,13 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="capabilities-section" id="capabilities">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span><span class="num">03</span>Capabilities</div>
       <h2 class="section-title">The stack we <span class="accent">actually</span> master.</h2>
       <p class="section-sub">A deliberately small, deeply understood toolkit. We'd rather know eight things completely than thirty things superficially.</p>
     </div>
   </div>
-  <div class="marquee reveal">
+  <div class="marquee">
     <div class="marquee-track">
       <span class="marquee-item">Vanilla JavaScript</span>
       <span class="marquee-item">Supabase</span>
@@ -661,7 +649,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     </div>
   </div>
   <div class="container">
-    <div class="capabilities-grid reveal">
+    <div class="capabilities-grid">
       <div class="capability">
         <div class="capability-num">CAP / 01</div>
         <div class="capability-title">Relational Database Design</div>
@@ -708,7 +696,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="portfolio-section" id="portfolio">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span><span class="num">04</span>Selected Work</div>
       <h2 class="section-title">Two production apps. <span class="accent">Zero templates.</span></h2>
       <p class="section-sub">Each project below is a real, deployed business application — built from scratch, in collaboration with the client, and currently in daily use. Click through the tabs to explore the architecture, modules, and gallery of each.</p>
@@ -716,7 +704,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
     <div class="portfolio-projects">
       <!-- PROJECT 1 -->
-      <div class="project reveal" data-project="1">
+      <div class="project" data-project="1">
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>PROJECT 01 / OPERATIONS</div>
@@ -822,7 +810,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       </div>
 
       <!-- PROJECT 2 -->
-      <div class="project reveal" data-project="2">
+      <div class="project" data-project="2">
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>PROJECT 02 / PAYROLL & BILLING</div>
@@ -929,12 +917,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 
 <section class="process-section" id="process">
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span><span class="num">05</span>How We Work</div>
       <h2 class="section-title">From blank page to <span class="accent">daily use</span>.</h2>
       <p class="section-sub">A five-stage engagement model designed to keep the people who'll actually use the software at the center of every decision.</p>
     </div>
-    <div class="process-timeline reveal">
+    <div class="process-timeline">
       <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We sit down with your team, watch the actual workflow, and map every step — including the ones that currently live in spreadsheets and group chats.</div></div>
       <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permission structure, and module breakdown. The schema is the contract — get it right and everything else follows.</div></div>
       <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early — not mockups, not prototypes, actual working features.</div></div>
@@ -947,7 +935,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="contact-grid">
-      <div class="reveal">
+      <div>
         <div class="section-eyebrow"><span class="line"></span><span class="num">06</span>Start a Project</div>
         <h2 class="contact-title">Got a workflow that <em>doesn't fit</em> a template?</h2>
         <p class="contact-sub">Tell us what your team is doing by hand — spreadsheets, group chats, paper forms, workarounds. We'll tell you honestly whether it's worth building custom, and if it is, what it would take.</p>
@@ -957,7 +945,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <a href="#" class="contact-info-item"><i class="fas fa-clock"></i><span>Response within 24 hours</span></a>
         </div>
       </div>
-      <form class="contact-form reveal" id="contact-form">
+      <form class="contact-form" id="contact-form">
         <div class="form-group"><label>Your Name</label><input type="text" id="form-name" required placeholder="Jane Reyes"></div>
         <div class="form-group"><label>Email</label><input type="email" id="form-email" required placeholder="jane@company.com"></div>
         <div class="form-group"><label>Company</label><input type="text" id="form-company" placeholder="Acme Operations Inc."></div>
@@ -1034,19 +1022,7 @@ try {
 let isLoggedIn = isSupabaseConfigured ? false : localStorage.getItem('lululab_admin_v2') === 'true';
 let isEditMode = false;
 
-// === CURSOR & UI EFFECTS ===
-const cursor=document.querySelector('.cursor');
-const cursorRing=document.querySelector('.cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
-function ring(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cursorRing.style.left=rx+'px';cursorRing.style.top=ry+'px';requestAnimationFrame(ring);}
-ring();
-const hoverSelector='a,button,.service-card,.gallery-slot,.project-tab,.capability,.arch-item,.feature-item,.process-step,.contrast-card,.principle-card';
-document.querySelectorAll(hoverSelector).forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='12px';cursor.style.height='12px';cursor.style.background='var(--accent-2)';cursorRing.style.width='52px';cursorRing.style.height='52px';cursorRing.style.opacity='0.8';});
-  el.addEventListener('mouseleave',()=>{cursor.style.width='6px';cursor.style.height='6px';cursor.style.background='var(--accent)';cursorRing.style.width='32px';cursorRing.style.height='32px';cursorRing.style.opacity='0.4';});
-});
-
+// === UI EFFECTS (Safe & Static) ===
 const scrollProgress=document.getElementById('scrollProgress');
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{
@@ -1054,24 +1030,6 @@ window.addEventListener('scroll',()=>{
   scrollProgress.style.width=(window.scrollY/total*100)+'%';
   nav.classList.toggle('scrolled',window.scrollY>50);
 });
-
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}});
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-function animateCounter(el,target){
-  const duration=1800;const start=0;const startTime=performance.now();
-  function update(now){
-    const elapsed=now-startTime;
-    const progress=Math.min(elapsed/duration,1);
-    const ease=1-Math.pow(1-progress,3);
-    const value=Math.floor(start+(target-start)*ease);
-    el.textContent=value.toLocaleString();
-    if(progress<1)requestAnimationFrame(update);
-  }
-  requestAnimationFrame(update);
-}
 
 // ==========================================
 // INITIALIZATION
@@ -1127,16 +1085,7 @@ async function initApp() {
         loadLocalCmsData();
     }
 
-    window.addEventListener('load',()=>{
-      document.querySelectorAll('.stat-num').forEach(el=>{
-        const target=parseInt(el.dataset.target);
-        setTimeout(()=>animateCounter(el,target),400);
-      });
-      if (window.location.hash === '#login') {
-        showLogin();
-      }
-    });
-
+    // Setup tabs
     document.querySelectorAll('.project').forEach(project=>{
       const tabs=project.querySelectorAll('.project-tab');
       const panels=project.querySelectorAll('.tab-panel');
@@ -1563,7 +1512,12 @@ document.getElementById('login-modal').addEventListener('click', (e) => {
     if (e.target.id === 'login-modal') hideLogin();
 });
 
-initApp();
+// Run initialization safely
+try {
+    initApp();
+} catch (e) {
+    console.error("Initialization failed", e);
+}
 </script>
 </body>
 </html>
