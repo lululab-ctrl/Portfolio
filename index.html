@@ -330,16 +330,13 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .footer-col a:hover{color:var(--accent)}
 .footer-bottom{max-width:1400px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.74rem;color:var(--fg-3);flex-wrap:wrap;gap:1rem;text-transform:uppercase;letter-spacing:.08em}
 
-/* Hidden admin trigger in footer */
-.admin-trigger{position:absolute;bottom:15px;right:20px;width:20px;height:20px;cursor:pointer;opacity:0;z-index:10}
+/* Hidden admin trigger in footer - made clickable on copyright text */
+.admin-trigger { cursor: pointer; transition: color 0.3s; }
+.admin-trigger:hover { color: var(--accent); }
 
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-elevated);border:1px solid var(--accent);color:var(--fg);padding:.85rem 1.4rem;border-radius:8px;font-size:.88rem;z-index:10002;opacity:0;transition:all .4s;display:flex;align-items:center;gap:.55rem;box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 0 1px var(--border-bright);font-family:var(--mono);font-weight:500}
 .toast.show{transform:translateX(-50%) translateY(-10rem);opacity:1}
 .toast i{color:var(--accent)}
-
-/* REMOVED Scroll Reveal hiding to prevent blank screens */
-.reveal { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* === CMS EDIT MODE STYLES === */
 [data-cms-id]:hover { outline: 1px dashed rgba(250, 158, 188, 0.4); outline-offset: 4px; }
@@ -966,11 +963,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     <div class="footer-col"><h5>Work</h5><ul><li><a href="#portfolio">portfolio</a></li><li><a href="#contact">start a project</a></li><li><a href="mailto:hello@lululab.studio">email us</a></li><li><a href="#">github</a></li></ul></div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 LuluLab — Built from scratch, by hand</span>
+    <!-- Made the copyright text clickable to open the login -->
+    <span class="admin-trigger" onclick="showLogin()" title="Admin Access">© 2025 LuluLab — Built from scratch, by hand</span>
     <span>Vanilla JS · Supabase · Zero Templates</span>
   </div>
-  <!-- Hidden Admin Trigger (Invisible button in bottom right) -->
-  <div class="admin-trigger" onclick="showLogin()" title="Admin"></div>
 </footer>
 
 <!-- HIDDEN LOGIN MODAL -->
@@ -1341,8 +1337,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 // ==========================================
 // AUTHENTICATION & CMS SAVING
 // ==========================================
+// Fixed Mac Shortcut: e.code works across all layouts
 document.addEventListener('keydown', (e) => {
-    if (e.altKey && (e.key === 'l' || e.key === 'L')) {
+    if (e.altKey && e.code === 'KeyL') {
         e.preventDefault();
         if (!isLoggedIn) {
             showLogin();
