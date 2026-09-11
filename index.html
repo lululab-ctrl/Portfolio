@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="js-enabled">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -340,8 +340,10 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .toast.show{transform:translateX(-50%) translateY(-10rem);opacity:1}
 .toast i{color:var(--accent)}
 
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* Safety Net: Elements are visible by default, only hide if JS runs */
+.reveal { opacity: 1; transform: translateY(0); transition: opacity .8s ease, transform .8s ease; }
+html.js-enabled .reveal { opacity: 0; transform: translateY(30px); }
+html.js-enabled .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* === CMS EDIT MODE STYLES === */
 [data-cms-id]:hover { outline: 1px dashed rgba(250, 158, 188, 0.4); outline-offset: 4px; }
@@ -501,6 +503,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       </div>
       <div class="profile-content reveal">
         <p class="lead">Every project starts with a single question — <em>"What does your business actually need?"</em> — and ends with software written specifically to answer it.</p>
+        
+        <p><strong>No templates. No recycled themes. No frameworks chasing trends.</strong> Just purpose-built applications, engineered end-to-end in direct collaboration with the people who will use them every day.</p>
+        <p>Our work lives at the intersection of product thinking, relational database design, and interface craft. We don't ship CRUD demos — we model real workflows: leave management systems with multi-role permissions, payroll engines with audit trails, billing systems with real-time collaboration, performance scoreboards with dispute resolution baked in.</p>
+        <p>Each engagement is treated as an ongoing partnership rather than a one-off deliverable. Features evolve through dozens of iterations shaped by the people actually using the software. The result is applications that fit the business — not the other way around.</p>
         
         <div class="profile-contrast">
           <div class="contrast-card do-card">
@@ -1001,18 +1007,25 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 // ==========================================
 // SUPABASE CONFIGURATION
 // ==========================================
-const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // REPLACE WITH YOUR SUPABASE URL
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // REPLACE WITH YOUR SUPABASE ANON KEY
+const SUPABASE_URL = 'https://pcvuwufszpqrzjwvrjtg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdnV3dWZzenBxcnpqd3ZyanRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwOTE3NTQsImV4cCI6MjEwNDY2Nzc1NH0.2ADlgzddIxku4SDJiy9y1MCR3nxBywswEQoeTUzDGjc';
 
 let supabase = null;
-let isSupabaseConfigured = SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_URL.startsWith('http');
+let isSupabaseConfigured = false;
 
-if (isSupabaseConfigured) {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Safely attempt to initialize Supabase
+try {
+    if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_URL.startsWith('http') && window.supabase) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        isSupabaseConfigured = true;
+    }
+} catch (e) {
+    console.error("Supabase init failed, falling back to local.", e);
+    isSupabaseConfigured = false;
 }
 
-// Fallback to localStorage if not configured (so site still works out of the box)
-let isLoggedIn = isSupabaseConfigured ? false : localStorage.getItem('lululab_admin') === 'true';
+// Use v2 keys to bust old broken localStorage saves
+let isLoggedIn = isSupabaseConfigured ? false : localStorage.getItem('lululab_admin_v2') === 'true';
 let isEditMode = false;
 
 // === CURSOR & UI EFFECTS ===
@@ -1073,32 +1086,34 @@ async function initApp() {
     initCmsIds();
     
     if (isSupabaseConfigured) {
-        // Check Supabase session
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
-            isLoggedIn = true;
-            document.body.classList.add('admin-logged-in');
-            document.getElementById('admin-toolbar').classList.add('active');
-        }
-        
-        // Listen to auth changes
-        supabase.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN') {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
                 isLoggedIn = true;
                 document.body.classList.add('admin-logged-in');
                 document.getElementById('admin-toolbar').classList.add('active');
-            } else if (event === 'SIGNED_OUT') {
-                isLoggedIn = false;
-                isEditMode = false;
-                document.body.classList.remove('edit-mode', 'admin-logged-in');
-                document.getElementById('admin-toolbar').classList.remove('active');
             }
-        });
+            
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (event === 'SIGNED_IN') {
+                    isLoggedIn = true;
+                    document.body.classList.add('admin-logged-in');
+                    document.getElementById('admin-toolbar').classList.add('active');
+                } else if (event === 'SIGNED_OUT') {
+                    isLoggedIn = false;
+                    isEditMode = false;
+                    document.body.classList.remove('edit-mode', 'admin-logged-in');
+                    document.getElementById('admin-toolbar').classList.remove('active');
+                }
+            });
 
-        // Load CMS data from Supabase
-        await loadCmsData();
+            await loadCmsData();
+        } catch (e) {
+            console.error("Supabase session error, falling back", e);
+            isSupabaseConfigured = false;
+            loadLocalCmsData();
+        }
     } else {
-        // Fallback to localStorage
         if (isLoggedIn) {
             document.body.classList.add('admin-logged-in');
             document.getElementById('admin-toolbar').classList.add('active');
@@ -1106,7 +1121,6 @@ async function initApp() {
         loadLocalCmsData();
     }
 
-    // Load stats
     window.addEventListener('load',()=>{
       document.querySelectorAll('.stat-num').forEach(el=>{
         const target=parseInt(el.dataset.target);
@@ -1117,7 +1131,6 @@ async function initApp() {
       }
     });
 
-    // Setup tabs
     document.querySelectorAll('.project').forEach(project=>{
       const tabs=project.querySelectorAll('.project-tab');
       const panels=project.querySelectorAll('.tab-panel');
@@ -1138,29 +1151,36 @@ async function initApp() {
 // ==========================================
 async function loadCmsData() {
     if (!supabase) return loadLocalCmsData();
-    const { data, error } = await supabase.from('cms_content').select('*');
-    if (error) return console.error("CMS Load Error", error);
-    
-    const cmsMap = {};
-    data.forEach(row => cmsMap[row.id] = row.content);
-    
-    document.querySelectorAll('[data-cms-id]').forEach(el => {
-        const id = el.dataset.cmsId;
-        if (cmsMap[id]) {
-            if (el.tagName === 'IMG') el.src = cmsMap[id];
-            else el.innerHTML = cmsMap[id];
+    try {
+        const { data, error } = await supabase.from('cms_content').select('*');
+        if (error) {
+            console.error("CMS Load Error", error);
+            return;
         }
-    });
+        
+        const cmsMap = {};
+        data.forEach(row => cmsMap[row.id] = row.content);
+        
+        document.querySelectorAll('[data-cms-id]').forEach(el => {
+            const id = el.dataset.cmsId;
+            if (cmsMap[id] !== undefined && cmsMap[id] !== '') {
+                if (el.tagName === 'IMG') el.src = cmsMap[id];
+                else el.innerHTML = cmsMap[id];
+            }
+        });
+    } catch(e) {
+        console.error("Supabase CMS Load Exception", e);
+    }
 }
 
 function loadLocalCmsData() {
-    const saved = localStorage.getItem('lululab_cms_data');
+    const saved = localStorage.getItem('lululab_cms_data_v2');
     if (!saved) return;
     try {
         const data = JSON.parse(saved);
         for (const [id, content] of Object.entries(data)) {
             const el = document.querySelector(`[data-cms-id="${id}"]`);
-            if (el) {
+            if (el && content !== '') { 
                 if (el.tagName === 'IMG') el.src = content;
                 else el.innerHTML = content;
             }
@@ -1178,7 +1198,7 @@ function setupSlot(slot){
   const removeBtn=slot.querySelector('.remove-btn');
   
   slot.addEventListener('click',async e=>{
-    if(!isLoggedIn) return; // Block visitors
+    if(!isLoggedIn) return; 
     if(e.target===removeBtn||removeBtn.contains(e.target))return;
     if(!slot.classList.contains('has-image')&&input){input.click();}
   });
@@ -1213,7 +1233,6 @@ async function handleImageUpload(slot,file){
   if(file.size>10*1024*1024){showToast('Image too large (max 10MB)','fa-triangle-exclamation');return;}
   
   if (isSupabaseConfigured) {
-      // Upload to Supabase Storage
       const fileName = `gallery_${Date.now()}_${file.name}`;
       const { data, error } = await supabase.storage.from('cms-images').upload(fileName, file);
       if (error) {
@@ -1233,7 +1252,6 @@ async function handleImageUpload(slot,file){
         showToast('Screenshot added! Click Save to keep.','fa-check-circle');
       }
   } else {
-      // Fallback to base64 local storage
       const reader=new FileReader();
       reader.onload=e=>{
         const img=slot.querySelector('img');
@@ -1351,7 +1369,6 @@ document.getElementById('contact-form')?.addEventListener('submit', async e => {
   }
 });
 
-// Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const id=a.getAttribute('href');
@@ -1402,13 +1419,12 @@ async function attemptLogin() {
         } else {
             hideLogin();
             showToast('Edit mode unlocked.', 'fa-unlock');
-            await loadCmsData(); // Reload DB data
+            await loadCmsData(); 
         }
     } else {
-        // Fallback local auth
         if (email === 'Jeinna' && btoa(pass) === 'JEplaW5uYTE4MDIk') {
             isLoggedIn = true;
-            localStorage.setItem('lululab_admin', 'true');
+            localStorage.setItem('lululab_admin_v2', 'true');
             document.body.classList.add('admin-logged-in');
             document.getElementById('admin-toolbar').classList.add('active');
             hideLogin();
@@ -1498,10 +1514,9 @@ async function saveChanges() {
             showToast('Error saving to database.', 'fa-triangle-exclamation');
         }
     } else {
-        // Fallback
         const data = {};
         rows.forEach(row => data[row.id] = row.content);
-        localStorage.setItem('lululab_cms_data', JSON.stringify(data));
+        localStorage.setItem('lululab_cms_data_v2', JSON.stringify(data));
         showToast('Changes saved to browser successfully.', 'fa-check-circle');
     }
 }
@@ -1529,7 +1544,7 @@ async function logoutAdmin() {
     if (isSupabaseConfigured) {
         await supabase.auth.signOut();
     } else {
-        localStorage.removeItem('lululab_admin');
+        localStorage.removeItem('lululab_admin_v2');
         isLoggedIn = false;
         isEditMode = false;
         document.body.classList.remove('edit-mode', 'admin-logged-in');
@@ -1538,12 +1553,10 @@ async function logoutAdmin() {
     showToast('Logged out successfully.', 'fa-sign-out-alt');
 }
 
-// Close login modal on outside click
 document.getElementById('login-modal').addEventListener('click', (e) => {
     if (e.target.id === 'login-modal') hideLogin();
 });
 
-// Start the app
 initApp();
 </script>
 </body>
