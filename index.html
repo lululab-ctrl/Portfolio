@@ -729,10 +729,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
         </div>
 
         <div class="project-tabs">
-          <button class="project-tab active" data-tab="overview"><i class="fas fa-circle-info"></i>Overview</button>
-          <button class="project-tab" data-tab="architecture"><i class="fas fa-cubes"></i>Architecture</button>
-          <button class="project-tab" data-tab="modules"><i class="fas fa-layer-group"></i>Modules</button>
-          <button class="project-tab" data-tab="gallery"><i class="fas fa-images"></i>Gallery</button>
+          <button type="button" class="project-tab active" data-tab="overview"><i class="fas fa-circle-info"></i>Overview</button>
+          <button type="button" class="project-tab" data-tab="architecture"><i class="fas fa-cubes"></i>Architecture</button>
+          <button type="button" class="project-tab" data-tab="modules"><i class="fas fa-layer-group"></i>Modules</button>
+          <button type="button" class="project-tab" data-tab="gallery"><i class="fas fa-images"></i>Gallery</button>
         </div>
 
         <div class="project-content">
@@ -788,15 +788,15 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
             <div class="gallery-toolbar">
               <div class="gallery-hint"><i class="fas fa-circle-info"></i>Click any slot to upload a screenshot, or drag-and-drop. Add notes to annotate.</div>
               <div class="gallery-actions">
-                <button class="gallery-btn add-image-btn"><i class="fas fa-plus"></i>Add Image Slot</button>
-                <button class="gallery-btn add-note-btn"><i class="fas fa-pen"></i>Add Text Note</button>
+                <button type="button" class="gallery-btn add-image-btn"><i class="fas fa-plus"></i>Add Image Slot</button>
+                <button type="button" class="gallery-btn add-note-btn"><i class="fas fa-pen"></i>Add Text Note</button>
               </div>
             </div>
             <div class="note-composer">
               <textarea placeholder="Write a note about this project — a feature highlight, a technical decision, a result..."></textarea>
               <div class="note-composer-actions">
-                <button class="note-composer-btn cancel">Cancel</button>
-                <button class="note-composer-btn primary save">Save Note</button>
+                <button type="button" class="note-composer-btn cancel">Cancel</button>
+                <button type="button" class="note-composer-btn primary save">Save Note</button>
               </div>
             </div>
             <div class="gallery-grid">
@@ -835,10 +835,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
         </div>
 
         <div class="project-tabs">
-          <button class="project-tab active" data-tab="overview"><i class="fas fa-circle-info"></i>Overview</button>
-          <button class="project-tab" data-tab="architecture"><i class="fas fa-cubes"></i>Architecture</button>
-          <button class="project-tab" data-tab="modules"><i class="fas fa-layer-group"></i>Features</button>
-          <button class="project-tab" data-tab="gallery"><i class="fas fa-images"></i>Gallery</button>
+          <button type="button" class="project-tab active" data-tab="overview"><i class="fas fa-circle-info"></i>Overview</button>
+          <button type="button" class="project-tab" data-tab="architecture"><i class="fas fa-cubes"></i>Architecture</button>
+          <button type="button" class="project-tab" data-tab="modules"><i class="fas fa-layer-group"></i>Features</button>
+          <button type="button" class="project-tab" data-tab="gallery"><i class="fas fa-images"></i>Gallery</button>
         </div>
 
         <div class="project-content">
@@ -891,15 +891,15 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
             <div class="gallery-toolbar">
               <div class="gallery-hint"><i class="fas fa-circle-info"></i>Click any slot to upload a screenshot, or drag-and-drop. Add notes to annotate.</div>
               <div class="gallery-actions">
-                <button class="gallery-btn add-image-btn"><i class="fas fa-plus"></i>Add Image Slot</button>
-                <button class="gallery-btn add-note-btn"><i class="fas fa-pen"></i>Add Text Note</button>
+                <button type="button" class="gallery-btn add-image-btn"><i class="fas fa-plus"></i>Add Image Slot</button>
+                <button type="button" class="gallery-btn add-note-btn"><i class="fas fa-pen"></i>Add Text Note</button>
               </div>
             </div>
             <div class="note-composer">
               <textarea placeholder="Write a note about this project — a feature highlight, a technical decision, a result..."></textarea>
               <div class="note-composer-actions">
-                <button class="note-composer-btn cancel">Cancel</button>
-                <button class="note-composer-btn primary save">Save Note</button>
+                <button type="button" class="note-composer-btn cancel">Cancel</button>
+                <button type="button" class="note-composer-btn primary save">Save Note</button>
               </div>
             </div>
             <div class="gallery-grid">
@@ -975,12 +975,12 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <!-- HIDDEN LOGIN MODAL -->
 <div id="login-modal" class="login-modal">
   <div class="login-box">
-    <button class="login-close" onclick="hideLogin()"><i class="fas fa-times"></i></button>
+    <button type="button" class="login-close" onclick="hideLogin()"><i class="fas fa-times"></i></button>
     <h3>Studio Access</h3>
     <p>Restricted Edit Mode</p>
     <input type="email" id="login-user" class="login-input" placeholder="Email" autocomplete="username">
     <input type="password" id="login-pass" class="login-input" placeholder="Password" autocomplete="current-password">
-    <button class="login-btn" onclick="attemptLogin()">Enter Edit Mode</button>
+    <button type="button" class="login-btn" onclick="attemptLogin()">Enter Edit Mode</button>
     <div id="login-error" class="login-error">Invalid credentials. Please try again.</div>
   </div>
 </div>
@@ -988,10 +988,10 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 <!-- HIDDEN ADMIN TOOLBAR -->
 <div id="admin-toolbar" class="admin-toolbar">
   <div class="admin-status"><span class="dot"></span>Admin Mode</div>
-  <button class="admin-btn" id="toggle-edit-btn" onclick="toggleEditMode()"><i class="fas fa-pen"></i>Toggle Edit</button>
-  <button class="admin-btn primary" onclick="saveChanges()"><i class="fas fa-save"></i>Save Changes</button>
-  <button class="admin-btn" onclick="exportHTML()"><i class="fas fa-download"></i>Export HTML</button>
-  <button class="admin-btn danger" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i>Logout</button>
+  <button type="button" class="admin-btn" id="toggle-edit-btn" onclick="toggleEditMode()"><i class="fas fa-pen"></i>Toggle Edit</button>
+  <button type="button" class="admin-btn primary" onclick="saveChanges()"><i class="fas fa-save"></i>Save Changes</button>
+  <button type="button" class="admin-btn" onclick="exportHTML()"><i class="fas fa-download"></i>Export HTML</button>
+  <button type="button" class="admin-btn danger" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i>Logout</button>
 </div>
 
 <!-- SUPABASE JS SDK -->
@@ -1031,7 +1031,25 @@ window.addEventListener('scroll',()=>{
 });
 
 // ==========================================
-// INITIALIZATION
+// IMMEDIATE TAB SETUP (No waiting for Supabase)
+// ==========================================
+document.querySelectorAll('.project').forEach(project=>{
+  const tabs=project.querySelectorAll('.project-tab');
+  const panels=project.querySelectorAll('.tab-panel');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',(e)=>{
+      e.preventDefault(); // Prevent any default button behavior
+      const target=tab.dataset.tab;
+      tabs.forEach(t=>t.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      project.querySelector(`.tab-panel[data-tab="${target}"]`).classList.add('active');
+    });
+  });
+});
+
+// ==========================================
+// INITIALIZATION (Async Supabase stuff)
 // ==========================================
 function initCmsIds() {
     const textSelectors = 'h1, h2, h3, h4, h5, p, .stat-num, .project-title, .project-tagline, .service-title, .service-desc, .capability-title, .capability-desc, .feature-title, .feature-desc, .arch-item-title, .arch-item-desc, .process-step-title, .process-step-desc, .contact-title, .contact-sub, .role-pill, .contrast-item, .principle-card p';
@@ -1083,21 +1101,6 @@ async function initApp() {
         }
         loadLocalCmsData();
     }
-
-    // Setup tabs
-    document.querySelectorAll('.project').forEach(project=>{
-      const tabs=project.querySelectorAll('.project-tab');
-      const panels=project.querySelectorAll('.tab-panel');
-      tabs.forEach(tab=>{
-        tab.addEventListener('click',()=>{
-          const target=tab.dataset.tab;
-          tabs.forEach(t=>t.classList.remove('active'));
-          panels.forEach(p=>p.classList.remove('active'));
-          tab.classList.add('active');
-          project.querySelector(`.tab-panel[data-tab="${target}"]`).classList.add('active');
-        });
-      });
-    });
 }
 
 // ==========================================
@@ -1224,7 +1227,8 @@ async function handleImageUpload(slot,file){
 document.querySelectorAll('.gallery-slot').forEach(setupSlot);
 
 document.querySelectorAll('.add-image-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click',(e)=>{
+    e.preventDefault();
     if(!isLoggedIn) return;
     const gallery=btn.closest('.tab-panel').querySelector('.gallery-grid');
     const slot=document.createElement('label');
@@ -1243,7 +1247,8 @@ document.querySelectorAll('.add-image-btn').forEach(btn=>{
 });
 
 document.querySelectorAll('.add-note-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click',(e)=>{
+    e.preventDefault();
     if(!isLoggedIn) return;
     const panel=btn.closest('.tab-panel');
     const composer=panel.querySelector('.note-composer');
@@ -1252,14 +1257,16 @@ document.querySelectorAll('.add-note-btn').forEach(btn=>{
   });
 });
 document.querySelectorAll('.note-composer-btn.cancel').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click',(e)=>{
+    e.preventDefault();
     const composer=btn.closest('.note-composer');
     composer.classList.remove('active');
     composer.querySelector('textarea').value='';
   });
 });
 document.querySelectorAll('.note-composer-btn.save').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+  btn.addEventListener('click',(e)=>{
+    e.preventDefault();
     if(!isLoggedIn) return;
     const composer=btn.closest('.note-composer');
     const textarea=composer.querySelector('textarea');
