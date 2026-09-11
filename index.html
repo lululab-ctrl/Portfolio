@@ -74,6 +74,18 @@ nav.scrolled{padding:.9rem 3rem;background:rgba(250,247,243,.85);backdrop-filter
 
 .hero-visual{position:relative;background:var(--term-bg);border:1px solid var(--term-border);border-radius:10px;padding:1.5rem;font-family:var(--mono);font-size:.8rem;line-height:1.85;box-shadow:0 20px 60px rgba(18,20,28,.16),0 0 0 1px var(--border-bright);overflow:hidden}
 .hero-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+
+.hero-floaters{position:absolute;inset:0;pointer-events:none;z-index:1}
+.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:100px;box-shadow:0 8px 24px rgba(27,23,20,.08);font-family:var(--mono);font-size:.76rem;font-weight:500;color:var(--fg-2);white-space:nowrap;animation:float 5s ease-in-out infinite}
+.float-chip i{font-size:.72rem;color:var(--accent)}
+.chip-1{top:8%;left:46%;--rot:-3deg;animation-delay:0s}
+.chip-2{top:66%;left:42%;--rot:2deg;animation-delay:-1.7s}
+.chip-3{top:80%;left:46%;--rot:-2deg;animation-delay:-3.3s}
+.chip-2 i{color:var(--blue-accent)}
+.chip-3 i{color:var(--gold)}
+@keyframes float{0%,100%{transform:translateY(0) rotate(var(--rot,0deg))}50%{transform:translateY(-10px) rotate(var(--rot,0deg))}}
+@media(max-width:1300px){.hero-floaters{display:none}}
+
 .terminal-header{display:flex;gap:.4rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--term-border);align-items:center}
 .terminal-dot{width:9px;height:9px;border-radius:50%}
 .terminal-dot.red{background:#FF5F57}.terminal-dot.yellow{background:#FEBC2E}.terminal-dot.green{background:#28C840}
@@ -449,6 +461,11 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
         <a href="#portfolio" class="btn-primary">View Our Work <i class="fas fa-arrow-right"></i></a>
         <a href="#contact" class="btn-secondary"><i class="far fa-envelope"></i>Start a Brief</a>
       </div>
+    </div>
+    <div class="hero-floaters">
+      <div class="float-chip chip-1"><i class="fas fa-bolt"></i><span>Real-time sync</span></div>
+      <div class="float-chip chip-2"><i class="fas fa-shield-halved"></i><span>Role-based access</span></div>
+      <div class="float-chip chip-3"><i class="fas fa-cloud"></i><span>Zero DevOps</span></div>
     </div>
     <div class="hero-visual">
       <div class="terminal-header">
