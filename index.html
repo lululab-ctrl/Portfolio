@@ -200,7 +200,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 
 .project-tabs{display:flex;gap:0;padding:0 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
-.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--mono);font-size:.78rem;font-weight:500;cursor:pointer;position:relative;transition:color .3s;white-space:nowrap;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--mono);font-size:.78rem;font-weight:500;cursor:pointer;position:relative;z-index:2;pointer-events:auto;transition:color .3s;white-space:nowrap;display:flex;align-items:center;gap:.5rem;text-transform:uppercase;letter-spacing:.08em}
 .project-tab:hover{color:var(--fg-2)}
 .project-tab.active{color:var(--accent)}
 .project:nth-of-type(2) .project-tab.active{color:var(--blue-accent)}
@@ -1058,7 +1058,10 @@ function initCmsIds() {
         el.dataset.cmsId = 'txt_' + txtCounter++;
     });
     let imgCounter = 0;
-    document.querySelectorAll('img').forEach(el => {
+    // Exclude gallery placeholder images: their DOM position shifts whenever a
+    // slot is added/removed, which would corrupt the auto-numbered img_N ids
+    // and cause saved images to load into the wrong slot.
+    document.querySelectorAll('img:not(.gallery-slot img)').forEach(el => {
         el.dataset.cmsId = 'img_' + imgCounter++;
     });
 }
@@ -1376,8 +1379,12 @@ async function attemptLogin() {
     if (isSupabaseConfigured) {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
         if (error) {
+            // Surface the real Supabase error instead of a generic message,
+            // so you can tell "no such user" apart from "wrong password".
+            errBox.textContent = 'Login failed: ' + error.message;
+            console.error('Supabase auth error:', error);
             errBox.style.display = 'block';
-            setTimeout(() => errBox.style.display = 'none', 3000);
+            setTimeout(() => errBox.style.display = 'none', 5000);
         } else {
             hideLogin();
             showToast('Edit mode unlocked.', 'fa-unlock');
@@ -1525,6 +1532,34 @@ try {
 } catch (e) {
     console.error("Initialization failed", e);
 }
+
+// ==========================================
+// SELF-DIAGNOSTIC (check devtools console)
+// ==========================================
+async function runConnectionDiagnostic() {
+    console.log('%c[LuluLab CMS Diagnostic]', 'color:#FA9EBC;font-weight:bold');
+    console.log('Supabase configured:', isSupabaseConfigured);
+    if (!isSupabaseConfigured) {
+        console.warn('Supabase is NOT configured — check SUPABASE_URL / SUPABASE_ANON_KEY, and that the SDK script loaded.');
+        return;
+    }
+    try {
+        const { data: authUsers, error: authErr } = await supabase.auth.getSession();
+        console.log('Auth session check:', authErr ? `ERROR: ${authErr.message}` : (authUsers.session ? 'logged in' : 'no active session'));
+
+        const { error: cmsErr } = await supabase.from('cms_content').select('id').limit(1);
+        console.log('cms_content table:', cmsErr ? `MISSING or blocked — ${cmsErr.message}` : 'reachable');
+
+        const { error: contactErr } = await supabase.from('contact_messages').select('id').limit(1);
+        console.log('contact_messages table:', contactErr ? `MISSING or blocked — ${contactErr.message}` : 'reachable');
+
+        const { data: bucketData, error: bucketErr } = await supabase.storage.from('cms-images').list('', { limit: 1 });
+        console.log('cms-images storage bucket:', bucketErr ? `MISSING or blocked — ${bucketErr.message}` : 'reachable');
+    } catch (e) {
+        console.error('Diagnostic failed:', e);
+    }
+}
+runConnectionDiagnostic();
 
 // Check for login hash immediately after script load
 if (window.location.hash === '#login') {
