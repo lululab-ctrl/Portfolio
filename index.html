@@ -1000,16 +1000,16 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 // ==========================================
 // SUPABASE CONFIGURATION
 // ==========================================
-const SUPABASE_URL = 'https://pcvuwufszpqrzjwvrjtg.supabase.co';
+const SUPABASE_URL = 'https://pcvuwufszpqrzjwvrjtg.sb.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjdnV3dWZzenBxcnpqd3ZyanRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkwOTE3NTQsImV4cCI6MjEwNDY2Nzc1NH0.2ADlgzddIxku4SDJiy9y1MCR3nxBywswEQoeTUzDGjc';
 
-let supabase = null;
+let sb = null;
 let isSupabaseConfigured = false;
 
 // Safely attempt to initialize Supabase
 try {
     if (SUPABASE_URL !== 'YOUR_SUPABASE_URL' && SUPABASE_URL.startsWith('http') && window.supabase) {
-        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         isSupabaseConfigured = true;
     }
 } catch (e) {
@@ -1071,14 +1071,14 @@ async function initApp() {
     
     if (isSupabaseConfigured) {
         try {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await sb.auth.getSession();
             if (session) {
                 isLoggedIn = true;
                 document.body.classList.add('admin-logged-in');
                 document.getElementById('admin-toolbar').classList.add('active');
             }
             
-            supabase.auth.onAuthStateChange((event, session) => {
+            sb.auth.onAuthStateChange((event, session) => {
                 if (event === 'SIGNED_IN') {
                     isLoggedIn = true;
                     document.body.classList.add('admin-logged-in');
@@ -1110,9 +1110,9 @@ async function initApp() {
 // DATA LOADING
 // ==========================================
 async function loadCmsData() {
-    if (!supabase) return loadLocalCmsData();
+    if (!sb) return loadLocalCmsData();
     try {
-        const { data, error } = await supabase.from('cms_content').select('*');
+        const { data, error } = await sb.from('cms_content').select('*');
         if (error) {
             console.error("CMS Load Error", error);
             return;
@@ -1194,12 +1194,12 @@ async function handleImageUpload(slot,file){
   
   if (isSupabaseConfigured) {
       const fileName = `gallery_${Date.now()}_${file.name}`;
-      const { data, error } = await supabase.storage.from('cms-images').upload(fileName, file);
+      const { data, error } = await sb.storage.from('cms-images').upload(fileName, file);
       if (error) {
           showToast('Upload failed', 'fa-triangle-exclamation');
           return;
       }
-      const { data: urlData } = supabase.storage.from('cms-images').getPublicUrl(fileName);
+      const { data: urlData } = sb.storage.from('cms-images').getPublicUrl(fileName);
       const publicUrl = urlData.publicUrl;
       
       const img=slot.querySelector('img');
@@ -1320,7 +1320,7 @@ document.getElementById('contact-form')?.addEventListener('submit', async e => {
   const message = document.getElementById('form-message').value;
 
   if (isSupabaseConfigured) {
-      const { error } = await supabase.from('contact_messages').insert([{ name, email, company, message }]);
+      const { error } = await sb.from('contact_messages').insert([{ name, email, company, message }]);
       if (error) {
           showToast('Error sending message.', 'fa-triangle-exclamation');
       } else {
@@ -1377,7 +1377,7 @@ async function attemptLogin() {
     const errBox = document.getElementById('login-error');
     
     if (isSupabaseConfigured) {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+        const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
         if (error) {
             // Surface the real Supabase error instead of a generic message,
             // so you can tell "no such user" apart from "wrong password".
@@ -1445,9 +1445,9 @@ async function handleImageEdit(e) {
         if (file) {
             if (isSupabaseConfigured) {
                 const fileName = `cms_${Date.now()}_${file.name}`;
-                const { data, error } = await supabase.storage.from('cms-images').upload(fileName, file);
+                const { data, error } = await sb.storage.from('cms-images').upload(fileName, file);
                 if (!error) {
-                    const { data: urlData } = supabase.storage.from('cms-images').getPublicUrl(fileName);
+                    const { data: urlData } = sb.storage.from('cms-images').getPublicUrl(fileName);
                     e.target.src = urlData.publicUrl;
                     showToast('Image updated. Click Save to keep.', 'fa-image');
                 } else {
@@ -1476,7 +1476,7 @@ async function saveChanges() {
     });
 
     if (isSupabaseConfigured) {
-        const { error } = await supabase.from('cms_content').upsert(rows, { onConflict: 'id' });
+        const { error } = await sb.from('cms_content').upsert(rows, { onConflict: 'id' });
         if (!error) {
             showToast('Saved to Supabase successfully.', 'fa-check-circle');
         } else {
@@ -1511,7 +1511,7 @@ function exportHTML() {
 
 async function logoutAdmin() {
     if (isSupabaseConfigured) {
-        await supabase.auth.signOut();
+        await sb.auth.signOut();
     } else {
         localStorage.removeItem('lululab_admin_v2');
         isLoggedIn = false;
@@ -1544,16 +1544,16 @@ async function runConnectionDiagnostic() {
         return;
     }
     try {
-        const { data: authUsers, error: authErr } = await supabase.auth.getSession();
+        const { data: authUsers, error: authErr } = await sb.auth.getSession();
         console.log('Auth session check:', authErr ? `ERROR: ${authErr.message}` : (authUsers.session ? 'logged in' : 'no active session'));
 
-        const { error: cmsErr } = await supabase.from('cms_content').select('id').limit(1);
+        const { error: cmsErr } = await sb.from('cms_content').select('id').limit(1);
         console.log('cms_content table:', cmsErr ? `MISSING or blocked — ${cmsErr.message}` : 'reachable');
 
-        const { error: contactErr } = await supabase.from('contact_messages').select('id').limit(1);
+        const { error: contactErr } = await sb.from('contact_messages').select('id').limit(1);
         console.log('contact_messages table:', contactErr ? `MISSING or blocked — ${contactErr.message}` : 'reachable');
 
-        const { data: bucketData, error: bucketErr } = await supabase.storage.from('cms-images').list('', { limit: 1 });
+        const { data: bucketData, error: bucketErr } = await sb.storage.from('cms-images').list('', { limit: 1 });
         console.log('cms-images storage bucket:', bucketErr ? `MISSING or blocked — ${bucketErr.message}` : 'reachable');
     } catch (e) {
         console.error('Diagnostic failed:', e);
