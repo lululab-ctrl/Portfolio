@@ -141,10 +141,7 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .do-card .contrast-item i { color: var(--accent); }
 .dont-card .contrast-item i { color: var(--fg-3); }
 
-.profile-quote { padding: 2rem 2.5rem; border-radius: 12px; background: linear-gradient(135deg, var(--bg-3), var(--bg-card)); border: 1px solid var(--border-bright); position: relative; overflow: hidden; }
-.profile-quote::before { content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 1.6rem; right: 1.8rem; font-size: 2rem; color: var(--accent); opacity: .18; line-height: 1; }
-.profile-quote p { font-family: var(--display); font-style: normal; font-size: 1.25rem; color: var(--fg); margin-bottom: .5rem; position: relative; z-index: 1; line-height: 1.4; font-weight: 500; }
-.profile-quote cite { font-family: var(--sans); font-size: .85rem; color: var(--accent); font-style: normal; font-weight: 600; position: relative; z-index: 1; }
+
 
 
 .profile-principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: .5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
@@ -175,8 +172,8 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .marquee-item{font-family:var(--display);font-size:2.2rem;font-weight:400;color:var(--fg-3);display:flex;align-items:center;gap:3rem}
 .marquee-item::after{content:'/';color:var(--accent);font-weight:300}
 .capabilities-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem}
-.capability{padding:1.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
-.capability:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg-card);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.capability{padding:1.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg);transition:transform .2s,box-shadow .2s,border-color .2s,background .2s;cursor:pointer;position:relative}
+.capability:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--bg-card);box-shadow:0 10px 24px rgba(18,20,28,.1)}
 .capability-num{font-family:var(--mono);font-size:.78rem;color:var(--accent);margin-bottom:.8rem;font-weight:500}
 .capability-title{font-family:var(--display);font-size:1.05rem;font-weight:600;margin-bottom:.5rem;color:var(--fg);letter-spacing:-.005em}
 .capability-desc{color:var(--fg-2);font-size:.85rem;line-height:1.55}
@@ -488,7 +485,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     <div class="profile-grid">
       <div class="profile-sticky">
         <h3>Who we are</h3>
-        <p>LuluLab is a custom web application studio. We build software from scratch — from first conversation to deployed product — for businesses whose workflows don't fit off-the-shelf tools.</p>
+        <p>LuluLab is a custom web application studio. We build software from scratch for businesses whose workflows don't fit off-the-shelf tools.</p>
         <div class="id-card">
           <div class="row"><span class="key">studio</span><span class="val">LuluLab</span></div>
           <div class="row"><span class="key">founded</span><span class="val">2024</span></div>
@@ -500,51 +497,43 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       </div>
       <div class="profile-content">
         <p class="lead">We start with your workflow, not a template, and build software specifically for what your business needs.</p>
-        
-        <p>We build applications end-to-end, working directly with the people who'll use them day to day.</p>
-        <p>Our work combines product thinking, relational database design, and interface design. We model real workflows — leave management with multi-role permissions, payroll with audit trails, billing with real-time collaboration, performance tracking with dispute resolution — not generic CRUD demos.</p>
-        <p>Each engagement runs as an ongoing partnership, not a one-off delivery. Features evolve through iteration, shaped by the people using the software — so the application fits the business, not the other way around.</p>
-        
+        <p>Our work combines product thinking, database design, and interface design — modeling real workflows, not CRUD demos. Each engagement runs as an ongoing partnership: features evolve through iteration, shaped by the people using the software.</p>
         <div class="profile-contrast">
           <div class="contrast-card do-card">
             <div class="contrast-title"><i class="fas fa-check-circle"></i> What We Do</div>
             <ul class="contrast-list">
-              <li class="contrast-item"><i class="fas fa-check"></i> Sit down with the team & map the actual workflow</li>
-              <li class="contrast-item"><i class="fas fa-check"></i> Design the data model and permission structure</li>
-              <li class="contrast-item"><i class="fas fa-check"></i> Prototype the interface and ship working features</li>
-              <li class="contrast-item"><i class="fas fa-check"></i> Iterate, round after round, with the users</li>
+              <li class="contrast-item"><i class="fas fa-check"></i> Map the actual workflow with your team</li>
+              <li class="contrast-item"><i class="fas fa-check"></i> Design the data model and permissions</li>
+              <li class="contrast-item"><i class="fas fa-check"></i> Ship working features early</li>
+              <li class="contrast-item"><i class="fas fa-check"></i> Iterate with the people using it</li>
             </ul>
           </div>
           <div class="contrast-card dont-card">
             <div class="contrast-title"><i class="fas fa-times-circle"></i> What We Avoid</div>
             <ul class="contrast-list">
-              <li class="contrast-item"><i class="fas fa-times"></i> WordPress themes & Shopify tweaks</li>
-              <li class="contrast-item"><i class="fas fa-times"></i> Template customization or bloated page builders</li>
+              <li class="contrast-item"><i class="fas fa-times"></i> WordPress or Shopify tweaks</li>
+              <li class="contrast-item"><i class="fas fa-times"></i> Page builders and templates</li>
               <li class="contrast-item"><i class="fas fa-times"></i> Framework-of-the-week experiments</li>
-              <li class="contrast-item"><i class="fas fa-times"></i> Off-the-shelf solutions for unique problems</li>
+              <li class="contrast-item"><i class="fas fa-times"></i> Off-the-shelf fixes for unique problems</li>
             </ul>
           </div>
-        </div>
-
-        <div class="profile-quote">
-          <p>If your problem can be solved by an existing product, we'll tell you. If it can't, we'll build the solution.</p>
         </div>
 
         <div class="profile-principles">
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-pen-ruler"></i></div>
             <h5>Purpose-Built</h5>
-            <p>Every line of code is written for your specific use case, and it's yours — no shared codebase, no template.</p>
+            <p>Every line is written for your use case, and it's yours.</p>
           </div>
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-handshake"></i></div>
             <h5>Iterative Partnership</h5>
-            <p>An ongoing partnership, not a one-off delivery. Features evolve through iteration, shaped by the people using the software.</p>
+            <p>An ongoing partnership. Features evolve with your team.</p>
           </div>
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-diagram-project"></i></div>
             <h5>Real Architecture</h5>
-            <p>Product thinking, database design, and interface craft, used to model real workflows — not CRUD demos.</p>
+            <p>Real workflows, modeled properly — not CRUD demos.</p>
           </div>
         </div>
       </div>
@@ -557,63 +546,63 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
     <div class="section-header">
       <div class="section-eyebrow"><span class="line"></span>What We Do</div>
       <h2 class="section-title">What we cover, start to finish.</h2>
-      <p class="section-sub">The full lifecycle of a custom business application — from first conversation to ongoing evolution.</p>
+      <p class="section-sub">The full lifecycle of a custom business application.</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01</div>
         <div class="service-icon"><i class="fas fa-code"></i></div>
         <div class="service-title">Custom Web Application Development</div>
-        <div class="service-desc">Applications built from scratch in vanilla JavaScript — no frameworks, no build step. Every line of code is written for your specific use case and stays yours.</div>
+        <div class="service-desc">Built from scratch in vanilla JavaScript — no frameworks, no build step. Every line is written for your use case and stays yours.</div>
         <div class="service-tags"><span class="service-tag">Vanilla JS</span><span class="service-tag">Single-File</span><span class="service-tag">SPA</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-icon"><i class="fas fa-diagram-project"></i></div>
         <div class="service-title">Business Process Digitization</div>
-        <div class="service-desc">We turn manual, spreadsheet-driven, or paper-based workflows into live, multi-user systems: leave management, payroll, billing, performance tracking, task assignment — modeled on how your team actually works.</div>
+        <div class="service-desc">We turn manual, spreadsheet-driven workflows into live, multi-user systems — leave, payroll, billing, performance tracking — modeled on how your team works.</div>
         <div class="service-tags"><span class="service-tag">Workflow</span><span class="service-tag">Audit Trail</span><span class="service-tag">Real Ops</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
         <div class="service-icon"><i class="fas fa-bolt"></i></div>
         <div class="service-title">Real-Time Data Systems</div>
-        <div class="service-desc">WebSocket-powered live sync across every connected device. Changes from one user appear instantly for everyone else — no polling, no refreshes, no stale data. Built on Supabase Realtime subscriptions.</div>
+        <div class="service-desc">Live sync across every connected device. Changes from one user appear instantly for everyone else — no polling, no refreshes.</div>
         <div class="service-tags"><span class="service-tag">WebSocket</span><span class="service-tag">Live Sync</span><span class="service-tag">Multi-User</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
         <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
         <div class="service-title">Role-Based Access Engineering</div>
-        <div class="service-desc">Multi-role permission systems, not simple admin/user toggles — five-role architectures, dual-role support, named super-user exceptions, and per-row permission checks enforced at the interface and database layers.</div>
+        <div class="service-desc">Multi-role permission systems, not simple admin/user toggles — dual-role support and per-row checks enforced at both the interface and database layers.</div>
         <div class="service-tags"><span class="service-tag">RBAC</span><span class="service-tag">Per-Row</span><span class="service-tag">Multi-Role</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">05</div>
         <div class="service-icon"><i class="fas fa-database"></i></div>
         <div class="service-title">Cloud-Native Backends</div>
-        <div class="service-desc">Production-grade PostgreSQL database design via Supabase — proper relational schemas, upsert patterns, paginated reads, race condition handling, and per-table targeted re-fetches for minimal egress.</div>
+        <div class="service-desc">Production-grade PostgreSQL design via Supabase — proper schemas, paginated reads, and targeted re-fetches for minimal egress.</div>
         <div class="service-tags"><span class="service-tag">PostgreSQL</span><span class="service-tag">Supabase</span><span class="service-tag">Scalable</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">06</div>
         <div class="service-icon"><i class="fas fa-cloud-arrow-up"></i></div>
         <div class="service-title">Single-File, Zero-DevOps Deployment</div>
-        <div class="service-desc">Applications deployed as a single portable HTML file — easy to host, version, and hand off. No servers to maintain, no DevOps overhead, no infrastructure cost beyond the database itself.</div>
+        <div class="service-desc">Deployed as a single portable HTML file — easy to host and hand off. No servers, no DevOps overhead.</div>
         <div class="service-tags"><span class="service-tag">Zero-DevOps</span><span class="service-tag">Portable</span><span class="service-tag">Low-Cost</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">07</div>
         <div class="service-icon"><i class="fas fa-palette"></i></div>
         <div class="service-title">UI / UX & Visual Identity</div>
-        <div class="service-desc">Custom visual systems — colors and typography matched to your brand, purpose-built status colors, and layouts designed for clarity during long working sessions.</div>
+        <div class="service-desc">Custom visual systems — colors and typography matched to your brand, with layouts designed for clarity.</div>
         <div class="service-tags"><span class="service-tag">Bespoke UI</span><span class="service-tag">Brand-Matched</span><span class="service-tag">Accessible</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">08</div>
         <div class="service-icon"><i class="fas fa-arrows-rotate"></i></div>
         <div class="service-title">Iterative Partnership</div>
-        <div class="service-desc">Software that keeps evolving with your business. We work in feature rounds shaped by the people using it, and stay on after launch instead of moving on.</div>
+        <div class="service-desc">Software that keeps evolving with your business, in feature rounds shaped by the people using it.</div>
         <div class="service-tags"><span class="service-tag">Ongoing</span><span class="service-tag">Feature Rounds</span><span class="service-tag">Partnership</span></div>
       </div>
     </div>
@@ -655,42 +644,42 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       <div class="capability">
         <div class="capability-num">01</div>
         <div class="capability-title">Relational Database Design</div>
-        <div class="capability-desc">Proper schema design across 15+ interconnected tables — leave balances, performance entries, QA disputes, billing rates — with upsert patterns and race condition handling.</div>
+        <div class="capability-desc">Proper schema design across 15+ interconnected tables, with upsert patterns and race condition handling.</div>
       </div>
       <div class="capability">
         <div class="capability-num">02</div>
         <div class="capability-title">Real-Time Architecture</div>
-        <div class="capability-desc">WebSocket subscriptions per table, scroll-position-preserving re-renders, auto-reconnect with backoff, and fallback polling for networks that block WebSockets.</div>
+        <div class="capability-desc">WebSocket subscriptions per table, auto-reconnect with backoff, and fallback polling if WebSockets are blocked.</div>
       </div>
       <div class="capability">
         <div class="capability-num">03</div>
         <div class="capability-title">Permission Engineering</div>
-        <div class="capability-desc">Five-role access systems, dual-role accounts, named super-user exceptions, and per-row permission checks enforced at both UI and database layers.</div>
+        <div class="capability-desc">Five-role access systems with dual-role accounts and per-row permission checks at both UI and database layers.</div>
       </div>
       <div class="capability">
         <div class="capability-num">04</div>
         <div class="capability-title">Cloud File Storage</div>
-        <div class="capability-desc">Genuine image uploads via Supabase Storage — drag-and-drop, clipboard-paste support, attached to disputes, evidence records, and team-fund QR codes.</div>
+        <div class="capability-desc">Image uploads via Supabase Storage — drag-and-drop and clipboard-paste, attached to disputes and records.</div>
       </div>
       <div class="capability">
         <div class="capability-num">05</div>
         <div class="capability-title">Audit-Safe Workflows</div>
-        <div class="capability-desc">Full audit trails with images, three-way dispute resolution, correction request routing, time-gated emergency unlocks, and explicit "no call-out" confirmations.</div>
+        <div class="capability-desc">Full audit trails with images, three-way dispute resolution, and time-gated emergency unlocks.</div>
       </div>
       <div class="capability">
         <div class="capability-num">06</div>
         <div class="capability-title">Egress Optimization</div>
-        <div class="capability-desc">Targeted re-fetches on WebSocket change events reduce database reads by ~90% compared to polling architectures — only the affected table is re-fetched.</div>
+        <div class="capability-desc">Targeted re-fetches on change events cut database reads by ~90% compared to polling.</div>
       </div>
       <div class="capability">
         <div class="capability-num">07</div>
         <div class="capability-title">Custom UI Engineering</div>
-        <div class="capability-desc">Searchable dropdowns with keyboard navigation, layout-stable modals, persistent sessions, staged loading, print-optimized reports, and toast feedback systems.</div>
+        <div class="capability-desc">Searchable dropdowns with keyboard navigation, layout-stable modals, and staged loading.</div>
       </div>
       <div class="capability">
         <div class="capability-num">08</div>
         <div class="capability-title">Production Deployment</div>
-        <div class="capability-desc">Single-file architecture deployed via GitHub Pages with zero DevOps. Version-aware refresh prompts keep every user on the latest version without manual cache-clearing.</div>
+        <div class="capability-desc">Single-file architecture deployed via GitHub Pages, zero DevOps. Version-aware prompts keep every user current.</div>
       </div>
     </div>
   </div>
@@ -741,8 +730,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
           <div class="tab-panel active" data-tab="overview">
             <h4>Built for a real team, not a demo.</h4>
             <p>Built in HTML, CSS, and vanilla JavaScript with a Supabase (PostgreSQL) backend — no framework, no build step, deployed as a single file.</p>
-            <p>Covers leave management, performance scoring, payroll confirmation, priority tasks, and team funds. Every module runs on a live Supabase database with real-time sync — changes made by one person appear instantly for everyone else, no refresh required.</p>
-            <p>Built iteratively with the client across dozens of feature rounds, covering relational database design, real-time architecture, role-based access control, cloud file storage, and interface design.</p>
+            <p>Covers leave management, performance scoring, payroll confirmation, priority tasks, and team funds — all on a live database with real-time sync, so changes appear instantly for everyone.</p>
             <div class="roles-visual">
               <h5><i class="fas fa-user-shield"></i>Five roles, each scoped to exactly what they need:</h5>
               <div class="roles-display">
@@ -752,13 +740,13 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
                 <span class="role-pill">IPS <span class="role-desc">— performance scoring</span></span>
                 <span class="role-pill">QA <span class="role-desc">— incident tracking & disputes</span></span>
               </div>
-              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support lets one account hold a primary role plus a second — a Treasurer who's also QA, for example — without a separate login. Named super-user exceptions add extra control for high-trust actions like final dispute resolution.</p>
+              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support lets one account hold a second role — a Treasurer who's also QA, for example — without a separate login.</p>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="architecture">
             <h4>Single-file deployment, live backend.</h4>
-            <p>The entire application — interface, logic, and styling — lives in one portable HTML file. The backend runs on Supabase: PostgreSQL, real-time subscriptions, and file storage, so changes appear instantly for everyone logged in.</p>
+            <p>One portable HTML file. The backend runs on Supabase — PostgreSQL, real-time subscriptions, file storage — so changes appear instantly for everyone.</p>
             <div class="arch-grid">
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File Deployment</div><div class="arch-item-desc">One portable HTML file — easy to host, version, and hand off.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-database"></i>Live Supabase Backend</div><div class="arch-item-desc">PostgreSQL, real-time subscriptions, and file storage power every module. Changes sync instantly across devices.</div></div>
@@ -848,22 +836,21 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
         <div class="project-content">
           <div class="tab-panel active" data-tab="overview">
             <h4>Real payroll logic, not a CRUD demo.</h4>
-            <p>Built for a short-term rental property management business. Replaces manual spreadsheets with a secure, real-time, multi-user platform for payroll tracking, client billing, and operational data — zero server maintenance cost.</p>
-            <p>Built in vanilla JavaScript, no framework or UI library. Database design uses upsert/dedup patterns, paginated reads, WebSocket subscriptions, and race condition handling — modeling real payroll workflows, billing groupings, and multi-user audit trails.</p>
-            <p>Live in production on GitHub Pages with a cloud database backend. Changes from one user appear instantly for the other, with no refresh — the system re-fetches only the affected table on each change.</p>
+            <p>Built for a short-term rental property management business. Replaces manual spreadsheets with a secure, real-time, multi-user platform for payroll, billing, and operational data — zero server maintenance.</p>
+            <p>Vanilla JavaScript, no framework. Live in production on GitHub Pages with a cloud database — changes from one user appear instantly for the other, no refresh needed.</p>
             <div class="roles-visual">
               <h5><i class="fas fa-user-shield"></i>Two users, tightly scoped permissions:</h5>
               <div class="roles-display">
                 <span class="role-pill">Admin (Jeinna) <span class="role-desc">— full access, all 6 tabs</span></span>
                 <span class="role-pill">Limited (Greg) <span class="role-desc">— locked to Payroll tab only</span></span>
               </div>
-              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Greg can log work entries and edit additional-rate and notes fields, but can't touch Summary, Database, or Billing. Every action he takes is logged with a timestamp and visible to the admin — only the field he changed turns yellow, never the whole row.</p>
+              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Greg can log entries but can't touch Summary, Database, or Billing. Every action he takes is logged and visible to the admin.</p>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="architecture">
             <h4>~90% fewer database reads than polling.</h4>
-            <p>Built on Supabase Realtime WebSocket subscriptions instead of polling. The system re-fetches only the affected table on each change event, cutting egress significantly while keeping every view live.</p>
+            <p>Built on Supabase Realtime WebSocket subscriptions instead of polling — only the affected table re-fetches on each change, cutting egress significantly.</p>
             <div class="arch-grid">
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File SPA</div><div class="arch-item-desc">No build tools or frameworks. Ships as one HTML file with vanilla JS and CSS custom properties.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-bolt"></i>Realtime WebSocket</div><div class="arch-item-desc">Push-based change notifications on every subscribed table — no polling. Reconnects automatically with backoff; falls back to 10-second polling if WebSocket is unavailable.</div></div>
@@ -927,11 +914,11 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       <p class="section-sub">Five stages, built around the people who'll actually use the software.</p>
     </div>
     <div class="process-timeline">
-      <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We sit down with your team, watch the actual workflow, and map every step — including the ones that currently live in spreadsheets and group chats.</div></div>
-      <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permission structure, and module breakdown. The schema is the contract — get it right and everything else follows.</div></div>
-      <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early — not mockups, not prototypes, actual working features.</div></div>
-      <div class="process-step"><div class="process-step-num">04</div><div class="process-step-title">Iterate</div><div class="process-step-desc">Feature rounds shaped by real usage. Your team uses the software, tells us what's missing, and we ship the next round. Dozens of cycles over the engagement.</div></div>
-      <div class="process-step"><div class="process-step-num">05</div><div class="process-step-title">Evolve</div><div class="process-step-desc">The software stays in daily use and keeps evolving with the business. New modules, new roles, new workflows — added as your needs grow.</div></div>
+      <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We watch how your team actually works, including the parts still living in spreadsheets and group chats.</div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permissions, and module breakdown — the schema everything else follows.</div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early — not mockups.</div></div>
+      <div class="process-step"><div class="process-step-num">04</div><div class="process-step-title">Iterate</div><div class="process-step-desc">Your team uses the software, tells us what's missing, and we ship the next round.</div></div>
+      <div class="process-step"><div class="process-step-num">05</div><div class="process-step-title">Evolve</div><div class="process-step-desc">The software stays in daily use, with new modules and roles added as your needs grow.</div></div>
     </div>
   </div>
 </section>
@@ -942,7 +929,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
       <div>
         <div class="section-eyebrow"><span class="line"></span>Start a Project</div>
         <h2 class="contact-title">Have a workflow that doesn't fit a template?</h2>
-        <p class="contact-sub">Tell us what your team is doing by hand — spreadsheets, group chats, paper forms, workarounds. We'll tell you honestly whether it's worth building custom, and if it is, what it would take.</p>
+        <p class="contact-sub">Tell us what your team is doing by hand. We'll tell you honestly whether it's worth building custom.</p>
         <div class="contact-info">
           <a href="mailto:hello@lululab.studio" class="contact-info-item"><i class="far fa-envelope"></i><span>hello@lululab.studio</span></a>
           <a href="#" class="contact-info-item"><i class="fab fa-github"></i><span>github.com/lululab-ctrl</span></a>
