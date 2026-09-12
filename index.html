@@ -231,14 +231,18 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project-toggle i{transition:transform .25s}
 .project.expanded .project-toggle i{transform:rotate(180deg)}
 
-.project-tabs{display:flex;gap:0;padding:0 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
+.project-back{display:none;align-items:center;gap:.5rem;padding:1.1rem 2rem .4rem;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--accent)}
+.project:nth-of-type(2) .project-back{color:var(--blue-accent)}
+.project-back:hover{text-decoration:underline}
+.project.expanded .project-back{display:flex}
+.project.expanded .project-toggle{display:none}
+
+.project-tabs{display:flex;gap:.4rem;padding:.9rem 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
-.project-tab{padding:1.1rem 1.4rem;background:transparent;border:none;color:var(--fg-3);font-family:var(--sans);font-size:.92rem;font-weight:500;cursor:pointer;position:relative;z-index:2;pointer-events:auto;transition:color .2s;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
-.project-tab:hover{color:var(--fg-2)}
-.project-tab.active{color:var(--accent)}
+.project-tab{padding:.65rem 1.2rem;background:transparent;border:none;border-radius:8px;color:var(--fg-2);font-family:var(--sans);font-size:.9rem;font-weight:500;cursor:pointer;position:relative;z-index:2;pointer-events:auto;transition:color .2s,background .2s,box-shadow .2s;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
+.project-tab:hover{color:var(--fg);background:rgba(27,23,20,.04)}
+.project-tab.active{color:var(--accent);background:var(--bg-card);box-shadow:0 2px 8px rgba(27,23,20,.1),0 0 0 1px var(--border)}
 .project:nth-of-type(2) .project-tab.active{color:var(--blue-accent)}
-.project-tab.active::after{content:'';position:absolute;bottom:-1px;left:1.4rem;right:1.4rem;height:2px;background:var(--accent);box-shadow:0 0 8px var(--accent)}
-.project:nth-of-type(2) .project-tab.active::after{background:var(--blue-accent);box-shadow:0 0 8px var(--blue-accent)}
 .project-content{padding:2.8rem;min-height:400px;background:var(--bg-2)}
 .tab-panel{display:none;animation:fadeIn .4s ease}
 .tab-panel.active{display:block}
@@ -738,6 +742,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="portfolio-projects">
       <!-- PROJECT 1 -->
       <div class="project reveal" data-project="1">
+        <button type="button" class="project-back" onclick="toggleProject(this)"><i class="fas fa-arrow-left"></i>Back to all projects</button>
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>Operations</div>
@@ -849,6 +854,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
 
       <!-- PROJECT 2 -->
       <div class="project reveal" data-project="2">
+        <button type="button" class="project-back" onclick="toggleProject(this)"><i class="fas fa-arrow-left"></i>Back to all projects</button>
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>Payroll &amp; Billing</div>
@@ -1165,11 +1171,9 @@ document.querySelectorAll('.project').forEach(project=>{
 function toggleProject(btn) {
   const project = btn.closest('.project');
   const nowExpanded = project.classList.toggle('expanded');
-  const label = btn.querySelector('.toggle-label');
-  label.textContent = nowExpanded ? 'See Less' : 'See More';
-  if (nowExpanded) {
-    setTimeout(() => project.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-  }
+  const label = project.querySelector('.project-toggle .toggle-label');
+  if (label) label.textContent = nowExpanded ? 'See Less' : 'See More';
+  setTimeout(() => project.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
 }
 
 // ==========================================
