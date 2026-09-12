@@ -13,15 +13,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  /* page surfaces — warm, elegant neutral, matching LuluLab's terracotta/green/gold palette */
+  /* page surfaces: warm, elegant neutral, matching LuluLab's terracotta/green/gold palette */
   --bg:#FAF7F3; --bg-2:#FFFFFF; --bg-3:#F2ECE3; --bg-card:#FFFFFF; --bg-elevated:#FFFFFF;
-  /* text — warm near-black */
+  /* text: warm near-black */
   --fg:#1B1714; --fg-2:rgba(27,23,20,.66); --fg-3:rgba(27,23,20,.44);
-  /* primary accent — terracotta */
+  /* primary accent: terracotta */
   --accent:#BF5B34; --accent-2:#D68A61; --accent-deep:#93431F;
-  /* secondary accent — green, used to tell project 2 apart */
+  /* secondary accent: green, used to tell project 2 apart */
   --blue-accent:#3F7256; --blue-accent-2:#6FA084; --blue-deep:#2C5540;
-  /* tertiary accent — gold, used sparingly for highlights */
+  /* tertiary accent: gold, used sparingly for highlights */
   --gold:#C99A34; --gold-soft:rgba(201,154,52,.12);
   --pink-soft:rgba(191,91,52,.08); --pink-glow:rgba(191,91,52,.16);
   --blue-soft:rgba(63,114,86,.08);
@@ -238,10 +238,10 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project.expanded .project-back{display:inline-flex}
 .project.expanded .project-toggle{display:none}
 
-.floating-back-btn{display:none;position:fixed;bottom:1.8rem;right:1.8rem;z-index:500;align-items:center;gap:.6rem;padding:.85rem 1.5rem;background:var(--fg);color:var(--bg-2);border:none;border-radius:100px;cursor:pointer;font-family:var(--sans);font-size:.92rem;font-weight:600;box-shadow:0 12px 32px rgba(27,23,20,.28);transition:transform .2s}
-.floating-back-btn:hover{transform:translateY(-2px)}
-body.has-expanded-project .floating-back-btn{display:inline-flex}
-@media(max-width:768px){.floating-back-btn{bottom:1.2rem;right:1.2rem;padding:.75rem 1.2rem;font-size:.85rem}}
+.floating-back-btn{display:none;position:fixed;top:64px;left:0;right:0;z-index:90;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.9rem 1.5rem;background:var(--fg);color:var(--bg-2);border:none;border-radius:0;cursor:pointer;font-family:var(--sans);font-size:.92rem;font-weight:600;box-shadow:0 4px 20px rgba(27,23,20,.25);transition:background .2s}
+.floating-back-btn:hover{background:var(--accent-deep)}
+body.has-expanded-project .floating-back-btn{display:flex}
+@media(max-width:768px){.floating-back-btn{top:57px;padding:.75rem 1.2rem;font-size:.85rem}}
 
 .project-tabs{display:flex;gap:.4rem;padding:.9rem 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
@@ -382,7 +382,7 @@ footer{background:var(--bg-2);padding:3.5rem 3rem 2rem;border-top:1px solid var(
 .toast i{color:var(--accent)}
 
 /* === CMS EDIT MODE STYLES === */
-/* Editable outline/background only ever show while logged in and in edit mode — never for regular visitors */
+/* Editable outline/background only ever show while logged in and in edit mode. Never for regular visitors */
 body.edit-mode [data-cms-id] { outline: 1px dashed rgba(193, 89, 46, 0.3); outline-offset: 4px; transition: outline-color 0.2s; cursor: text; }
 body.edit-mode [data-cms-id]:hover { outline-color: var(--accent); background: rgba(193, 89, 46, 0.05); }
 body.edit-mode img[data-cms-id] { cursor: pointer; }
@@ -416,7 +416,7 @@ body.edit-mode img[data-cms-id]:hover { outline: 2px solid var(--accent); }
 .admin-btn.danger:hover { background: rgba(255, 107, 107, 0.1); border-color: #ff6b6b; }
 
 /* Scroll-reveal: fade + slide up once when a section enters view. Respects reduced motion.
-   Only hides content when JS is confirmed running (html.js-enabled) — if JS fails, everything stays visible. */
+   Only hides content when JS is confirmed running (html.js-enabled). If JS fails, everything stays visible. */
 html.js-enabled .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){
@@ -491,7 +491,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="hero-text">
       <div class="hero-eyebrow"><span class="dot"></span>Custom Web Application Studio</div>
       <h1>Software,<br><span class="accent">engineered</span><br><span class="display">for your business.</span></h1>
-      <p class="hero-sub">LuluLab builds custom web applications from scratch — no templates, no page builders. We design around how your business actually works, and build it directly with the people who'll use it.</p>
+      <p class="hero-sub">LuluLab builds custom web applications from scratch, with no templates and no page builders. We design around how your business actually works, and build it directly with the people who'll use it.</p>
       <div class="hero-actions">
         <a href="#portfolio" class="btn-primary">View Our Work <i class="fas fa-arrow-right"></i></a>
         <a href="#contact" class="btn-secondary"><i class="far fa-envelope"></i>Start a Brief</a>
@@ -507,7 +507,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         <span class="terminal-dot red"></span>
         <span class="terminal-dot yellow"></span>
         <span class="terminal-dot green"></span>
-        <span class="terminal-title">build.js — lululab.studio</span>
+        <span class="terminal-title">build.js · lululab.studio</span>
       </div>
       <div class="terminal-body">
         <div class="terminal-line"><span class="prompt">$</span> <span class="comment">// building from scratch</span></div>
@@ -549,7 +549,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
       </div>
       <div class="profile-content reveal">
         <p class="lead">We start with your workflow, not a template, and build software specifically for what your business needs.</p>
-        <p>Our work combines product thinking, database design, and interface design — modeling real workflows, not CRUD demos. Each engagement runs as an ongoing partnership: features evolve through iteration, shaped by the people using the software.</p>
+        <p>Our work combines product thinking, database design, and interface design to model real workflows, not CRUD demos. Each engagement runs as an ongoing partnership: features evolve through iteration, shaped by the people using the software.</p>
         <div class="profile-contrast">
           <div class="contrast-card do-card">
             <div class="contrast-title"><i class="fas fa-check-circle"></i> What We Do</div>
@@ -585,7 +585,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
           <div class="principle-card">
             <div class="principle-icon"><i class="fas fa-diagram-project"></i></div>
             <h5>Real Architecture</h5>
-            <p>Real workflows, modeled properly — not CRUD demos.</p>
+            <p>Real workflows, modeled properly, not CRUD demos.</p>
           </div>
         </div>
       </div>
@@ -605,49 +605,49 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         <div class="service-num">01</div>
         <div class="service-icon"><i class="fas fa-code"></i></div>
         <div class="service-title">Custom Web Application Development</div>
-        <div class="service-desc">Built from scratch in vanilla JavaScript — no frameworks, no build step. Every line is written for your use case and stays yours.</div>
+        <div class="service-desc">Built from scratch in vanilla JavaScript, with no frameworks and no build step. Every line is written for your use case and stays yours.</div>
         <div class="service-tags"><span class="service-tag">Vanilla JS</span><span class="service-tag">Single-File</span><span class="service-tag">SPA</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
         <div class="service-icon"><i class="fas fa-diagram-project"></i></div>
         <div class="service-title">Business Process Digitization</div>
-        <div class="service-desc">We turn manual, spreadsheet-driven workflows into live, multi-user systems — leave, payroll, billing, performance tracking — modeled on how your team works.</div>
+        <div class="service-desc">We turn manual, spreadsheet-driven workflows into live, multi-user systems: leave, payroll, billing, performance tracking, all modeled on how your team works.</div>
         <div class="service-tags"><span class="service-tag">Workflow</span><span class="service-tag">Audit Trail</span><span class="service-tag">Real Ops</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
         <div class="service-icon"><i class="fas fa-bolt"></i></div>
         <div class="service-title">Real-Time Data Systems</div>
-        <div class="service-desc">Live sync across every connected device. Changes from one user appear instantly for everyone else — no polling, no refreshes.</div>
+        <div class="service-desc">Live sync across every connected device. Changes from one user appear instantly for everyone else, with no polling and no refreshes.</div>
         <div class="service-tags"><span class="service-tag">WebSocket</span><span class="service-tag">Live Sync</span><span class="service-tag">Multi-User</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
         <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
         <div class="service-title">Role-Based Access Engineering</div>
-        <div class="service-desc">Multi-role permission systems, not simple admin/user toggles — dual-role support and per-row checks enforced at both the interface and database layers.</div>
+        <div class="service-desc">Multi-role permission systems, not simple admin/user toggles. Dual-role support and per-row checks are enforced at both the interface and database layers.</div>
         <div class="service-tags"><span class="service-tag">RBAC</span><span class="service-tag">Per-Row</span><span class="service-tag">Multi-Role</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">05</div>
         <div class="service-icon"><i class="fas fa-database"></i></div>
         <div class="service-title">Cloud-Native Backends</div>
-        <div class="service-desc">Production-grade PostgreSQL design via Supabase — proper schemas, paginated reads, and targeted re-fetches for minimal egress.</div>
+        <div class="service-desc">Production-grade PostgreSQL design via Supabase: proper schemas, paginated reads, and targeted re-fetches for minimal egress.</div>
         <div class="service-tags"><span class="service-tag">PostgreSQL</span><span class="service-tag">Supabase</span><span class="service-tag">Scalable</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">06</div>
         <div class="service-icon"><i class="fas fa-cloud-arrow-up"></i></div>
         <div class="service-title">Single-File, Zero-DevOps Deployment</div>
-        <div class="service-desc">Deployed as a single portable HTML file — easy to host and hand off. No servers, no DevOps overhead.</div>
+        <div class="service-desc">Deployed as a single portable HTML file that's easy to host and hand off. No servers, no DevOps overhead.</div>
         <div class="service-tags"><span class="service-tag">Zero-DevOps</span><span class="service-tag">Portable</span><span class="service-tag">Low-Cost</span></div>
       </div>
       <div class="service-card">
         <div class="service-num">07</div>
         <div class="service-icon"><i class="fas fa-palette"></i></div>
         <div class="service-title">UI / UX & Visual Identity</div>
-        <div class="service-desc">Custom visual systems — colors and typography matched to your brand, with layouts designed for clarity.</div>
+        <div class="service-desc">Custom visual systems: colors and typography matched to your brand, with layouts designed for clarity.</div>
         <div class="service-tags"><span class="service-tag">Bespoke UI</span><span class="service-tag">Brand-Matched</span><span class="service-tag">Accessible</span></div>
       </div>
       <div class="service-card">
@@ -711,7 +711,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
       <div class="capability">
         <div class="capability-num">04</div>
         <div class="capability-title">Cloud File Storage</div>
-        <div class="capability-desc">Image uploads via Supabase Storage — drag-and-drop and clipboard-paste, attached to disputes and records.</div>
+        <div class="capability-desc">Image uploads via Supabase Storage, with drag-and-drop and clipboard-paste, attached to disputes and records.</div>
       </div>
       <div class="capability">
         <div class="capability-num">05</div>
@@ -742,7 +742,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="section-header reveal">
       <div class="section-eyebrow"><span class="line"></span>Selected Work</div>
       <h2 class="section-title">Two production apps, both live.</h2>
-      <p class="section-sub">Each project below is a real, deployed application — built from scratch with the client and in daily use. Use the tabs to see the architecture, modules, and gallery for each.</p>
+      <p class="section-sub">Each project below is a real, deployed application, built from scratch with the client and in daily use. Use the tabs to see the architecture, modules, and gallery for each.</p>
     </div>
 
     <div class="portfolio-projects">
@@ -754,7 +754,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
             <div class="project-num"><span class="line"></span>Operations</div>
             <h3 class="project-title">DRS Leave Tracker Hub</h3>
             <div class="project-tagline">Operations system for a 30+ person Philippine-based team.</div>
-            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Single-file web application covering leave management, performance scoring, payroll confirmation, priority task tracking, team funds, and more — backed by Supabase with real-time sync across every device.</p>
+            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Single-file web application covering leave management, performance scoring, payroll confirmation, priority task tracking, team funds, and more, backed by Supabase with real-time sync across every device.</p>
             <div class="project-meta">
               <span class="meta-chip accent">Vanilla JS</span>
               <span class="meta-chip accent">Supabase</span>
@@ -786,29 +786,29 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         <div class="project-content">
           <div class="tab-panel active" data-tab="overview">
             <h4>Built for a real team, not a demo.</h4>
-            <p>Built in HTML, CSS, and vanilla JavaScript with a Supabase (PostgreSQL) backend — no framework, no build step, deployed as a single file.</p>
-            <p>Covers leave management, performance scoring, payroll confirmation, priority tasks, and team funds — all on a live database with real-time sync, so changes appear instantly for everyone.</p>
+            <p>Built in HTML, CSS, and vanilla JavaScript with a Supabase (PostgreSQL) backend: no framework, no build step, deployed as a single file.</p>
+            <p>Covers leave management, performance scoring, payroll confirmation, priority tasks, and team funds, all on a live database with real-time sync, so changes appear instantly for everyone.</p>
             <div class="roles-visual">
               <h5><i class="fas fa-user-shield"></i>Five roles, each scoped to exactly what they need:</h5>
               <div class="roles-display">
-                <span class="role-pill">Staff <span class="role-desc">— daily entries, leave requests</span></span>
-                <span class="role-pill">Admin <span class="role-desc">— full roster & approval control</span></span>
-                <span class="role-pill">Treasurer <span class="role-desc">— team funds management</span></span>
-                <span class="role-pill">IPS <span class="role-desc">— performance scoring</span></span>
-                <span class="role-pill">QA <span class="role-desc">— incident tracking & disputes</span></span>
+                <span class="role-pill">Staff <span class="role-desc">: daily entries, leave requests</span></span>
+                <span class="role-pill">Admin <span class="role-desc">: full roster & approval control</span></span>
+                <span class="role-pill">Treasurer <span class="role-desc">: team funds management</span></span>
+                <span class="role-pill">IPS <span class="role-desc">: performance scoring</span></span>
+                <span class="role-pill">QA <span class="role-desc">: incident tracking & disputes</span></span>
               </div>
-              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support lets one account hold a second role — a Treasurer who's also QA, for example — without a separate login.</p>
+              <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Dual-role support lets one account hold a second role, like a Treasurer who's also QA, without a separate login.</p>
             </div>
           </div>
 
           <div class="tab-panel" data-tab="architecture">
             <h4>Single-file deployment, live backend.</h4>
-            <p>One portable HTML file. The backend runs on Supabase — PostgreSQL, real-time subscriptions, file storage — so changes appear instantly for everyone.</p>
+            <p>One portable HTML file. The backend runs on Supabase: PostgreSQL, real-time subscriptions, file storage, so changes appear instantly for everyone.</p>
             <div class="arch-grid">
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File Deployment</div><div class="arch-item-desc">One portable HTML file — easy to host, version, and hand off.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File Deployment</div><div class="arch-item-desc">One portable HTML file that's easy to host, version, and hand off.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-database"></i>Live Supabase Backend</div><div class="arch-item-desc">PostgreSQL, real-time subscriptions, and file storage power every module. Changes sync instantly across devices.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-arrows-rotate"></i>Real-Time Sync (15+ Tables)</div><div class="arch-item-desc">Leave requests, performance entries, QA disputes, notifications, and more update live over dedicated WebSocket channels.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud-arrow-up"></i>Cloud File Storage</div><div class="arch-item-desc">Image uploads via Supabase Storage, with drag-and-drop and clipboard-paste support — not just links.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud-arrow-up"></i>Cloud File Storage</div><div class="arch-item-desc">Image uploads via Supabase Storage, with drag-and-drop and clipboard-paste support, not just links.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-link"></i>URL-Aware Navigation</div><div class="arch-item-desc">Each section has its own shareable, bookmarkable link via hash-based routing. Back/forward navigation works correctly.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-rotate"></i>Version-Aware Refresh</div><div class="arch-item-desc">Background checks for new deployments prompt a refresh, keeping every user on the latest version.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-shield-halved"></i>Per-Row Permission Checks</div><div class="arch-item-desc">Checks go beyond page access to specific records, enforced in the interface and re-verified at the database layer.</div></div>
@@ -818,15 +818,15 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
 
           <div class="tab-panel" data-tab="modules">
             <h4>Ten modules, one system.</h4>
-            <p>Each module is a full sub-system with its own workflows and permissions — not a CRUD table with a form attached.</p>
+            <p>Each module is a full sub-system with its own workflows and permissions, not a CRUD table with a form attached.</p>
             <div class="features-list">
-              <div class="feature-item"><div class="feature-title">Leave Tracker</div><div class="feature-desc">Full lifecycle — request, approve, reject, cancel — for Vacation, Sick, and Emergency leave, with half-day and hourly increments. Automatic VL/SL balance tracking with sick-to-vacation spillover, leave-without-pay detection, a color-coded calendar, and a live admin approval queue.</div></div>
-              <div class="feature-item"><div class="feature-title">IPS — Individual Performance Score</div><div class="feature-desc">Weighted scoring (QA Accuracy 50%, Productivity 30%, Error Correction 20%), leave-aware targets, structured QA incident tracking, an employee dispute workflow with three-way resolution, full audit trail with images, year-at-a-glance view, and downloadable reports.</div></div>
+              <div class="feature-item"><div class="feature-title">Leave Tracker</div><div class="feature-desc">Full lifecycle (request, approve, reject, cancel) for Vacation, Sick, and Emergency leave, with half-day and hourly increments. Automatic VL/SL balance tracking with sick-to-vacation spillover, leave-without-pay detection, a color-coded calendar, and a live admin approval queue.</div></div>
+              <div class="feature-item"><div class="feature-title">IPS: Individual Performance Score</div><div class="feature-desc">Weighted scoring (QA Accuracy 50%, Productivity 30%, Error Correction 20%), leave-aware targets, structured QA incident tracking, an employee dispute workflow with three-way resolution, full audit trail with images, year-at-a-glance view, and downloadable reports.</div></div>
               <div class="feature-item"><div class="feature-title">PrioList & Red Files</div><div class="feature-desc">Daily priority list that resets automatically. Red Files claim system prevents two people from working the same flagged file at once. Admin-controlled visibility toggle.</div></div>
               <div class="feature-item"><div class="feature-title">Payroll Confirmation</div><div class="feature-desc">Structured sign-off workflow for payroll periods, integrated with leave balances and OT filing.</div></div>
               <div class="feature-item"><div class="feature-title">OT Hours Filing</div><div class="feature-desc">Overtime requests with an amendment flow for correcting hours without un-confirming an entry, plus admin-only deletion.</div></div>
               <div class="feature-item"><div class="feature-title">Team Funds</div><div class="feature-desc">Shared account tracking with QR code upload for payment collection, including drag-and-drop and paste image upload.</div></div>
-              <div class="feature-item"><div class="feature-title">Employee Management</div><div class="feature-desc">Centralized roster control for named administrators — account creation, role assignment, starting leave balances.</div></div>
+              <div class="feature-item"><div class="feature-title">Employee Management</div><div class="feature-desc">Centralized roster control for named administrators: account creation, role assignment, starting leave balances.</div></div>
               <div class="feature-item"><div class="feature-title">LI Restriction Daily Report</div><div class="feature-desc">Dedicated tracking view with a live countdown ticker.</div></div>
               <div class="feature-item"><div class="feature-title">Task Manager</div><div class="feature-desc">Private task-tracking space for the two lead administrators.</div></div>
               <div class="feature-item"><div class="feature-title">Notifications & Live Alerts</div><div class="feature-desc">Personal alerts bubble, role-aware notification bells, one-click deep links to records, and browser-tab badge counts.</div></div>
@@ -842,7 +842,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
               </div>
             </div>
             <div class="note-composer">
-              <textarea placeholder="Write a note about this project — a feature highlight, a technical decision, a result..."></textarea>
+              <textarea placeholder="Write a note about this project: a feature highlight, a technical decision, a result..."></textarea>
               <div class="note-composer-actions">
                 <button type="button" class="note-composer-btn cancel">Cancel</button>
                 <button type="button" class="note-composer-btn primary save">Save Note</button>
@@ -864,9 +864,9 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         <div class="project-header">
           <div>
             <div class="project-num"><span class="line"></span>Payroll &amp; Billing</div>
-            <h3 class="project-title">Dream Rental Solutions — Invoice & Payroll System</h3>
+            <h3 class="project-title">Dream Rental Solutions: Invoice & Payroll System</h3>
             <div class="project-tagline">Payroll and invoicing platform for a short-term rental business.</div>
-            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Custom payroll and invoicing system, deployed as a single HTML file via GitHub Pages with a live Supabase (PostgreSQL) database. Replaces manual spreadsheets with a secure, real-time, multi-user platform — zero server maintenance.</p>
+            <p style="color:var(--fg-2);max-width:680px;margin-bottom:1rem;">Custom payroll and invoicing system, deployed as a single HTML file via GitHub Pages with a live Supabase (PostgreSQL) database. Replaces manual spreadsheets with a secure, real-time, multi-user platform, with zero server maintenance.</p>
             <div class="project-meta">
               <span class="meta-chip accent">Vanilla JS</span>
               <span class="meta-chip accent">Supabase</span>
@@ -898,13 +898,13 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         <div class="project-content">
           <div class="tab-panel active" data-tab="overview">
             <h4>Real payroll logic, not a CRUD demo.</h4>
-            <p>Built for a short-term rental property management business. Replaces manual spreadsheets with a secure, real-time, multi-user platform for payroll, billing, and operational data — zero server maintenance.</p>
-            <p>Vanilla JavaScript, no framework. Live in production on GitHub Pages with a cloud database — changes from one user appear instantly for the other, no refresh needed.</p>
+            <p>Built for a short-term rental property management business. Replaces manual spreadsheets with a secure, real-time, multi-user platform for payroll, billing, and operational data, with zero server maintenance.</p>
+            <p>Vanilla JavaScript, no framework. Live in production on GitHub Pages with a cloud database, so changes from one user appear instantly for the other, no refresh needed.</p>
             <div class="roles-visual">
               <h5><i class="fas fa-user-shield"></i>Two users, tightly scoped permissions:</h5>
               <div class="roles-display">
-                <span class="role-pill">Admin (Jeinna) <span class="role-desc">— full access, all 6 tabs</span></span>
-                <span class="role-pill">Limited (Greg) <span class="role-desc">— locked to Payroll tab only</span></span>
+                <span class="role-pill">Admin (Jeinna) <span class="role-desc">: full access, all 6 tabs</span></span>
+                <span class="role-pill">Limited (Greg) <span class="role-desc">: locked to Payroll tab only</span></span>
               </div>
               <p style="margin-top:1rem;font-size:.87rem;color:var(--fg-3);">Greg can log entries but can't touch Summary, Database, or Billing. Every action he takes is logged and visible to the admin.</p>
             </div>
@@ -912,10 +912,10 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
 
           <div class="tab-panel" data-tab="architecture">
             <h4>~90% fewer database reads than polling.</h4>
-            <p>Built on Supabase Realtime WebSocket subscriptions instead of polling — only the affected table re-fetches on each change, cutting egress significantly.</p>
+            <p>Built on Supabase Realtime WebSocket subscriptions instead of polling. Only the affected table re-fetches on each change, cutting egress significantly.</p>
             <div class="arch-grid">
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-file-code"></i>Single-File SPA</div><div class="arch-item-desc">No build tools or frameworks. Ships as one HTML file with vanilla JS and CSS custom properties.</div></div>
-              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-bolt"></i>Realtime WebSocket</div><div class="arch-item-desc">Push-based change notifications on every subscribed table — no polling. Reconnects automatically with backoff; falls back to 10-second polling if WebSocket is unavailable.</div></div>
+              <div class="arch-item"><div class="arch-item-title"><i class="fas fa-bolt"></i>Realtime WebSocket</div><div class="arch-item-desc">Push-based change notifications on every subscribed table, with no polling. Reconnects automatically with backoff; falls back to 10-second polling if WebSocket is unavailable.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-key"></i>Session-Based Auth</div><div class="arch-item-desc">Role-aware authentication with a 1-hour inactivity timeout and sessionStorage persistence. Refreshing returns users to the exact tab they were on.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-list-ol"></i>Paginated REST Fetches</div><div class="arch-item-desc">HTTP Range headers bypass Supabase's 1,000-row API cap, supporting unlimited historical data with fingerprint-based deduplication.</div></div>
               <div class="arch-item"><div class="arch-item-title"><i class="fas fa-cloud"></i>GitHub Pages Deployment</div><div class="arch-item-desc">Drag-and-drop deploy, zero DevOps overhead. Runs in production on free static hosting backed by a cloud database.</div></div>
@@ -929,14 +929,14 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
             <h4>Six sections, one platform.</h4>
             <p>Each tab is a complete workspace, with its own filters, inline editing rules, export options, and real-time data flow.</p>
             <div class="features-list">
-              <div class="feature-item"><div class="feature-title">Dashboard</div><div class="feature-desc">Four live stat cards — current month payroll, all-time payroll, active cleaner count, properties in database — plus a recent entries table and top earners panel. Entries touched by the limited user are highlighted for admin visibility.</div></div>
-              <div class="feature-item"><div class="feature-title">Log Work Entry</div><div class="feature-desc">Cleaner dropdown auto-populates from the database; property dropdown narrows to the selected cleaner; rate auto-fills. Three work types — Cleaning, Inspection, Misc/Bonus. Form state persists across tab switches.</div></div>
-              <div class="feature-item"><div class="feature-title">Sorted Summary</div><div class="feature-desc">Full payroll record with four live filters — date range, cleaner, property. Admin inline editing: date, rate override, additional rate, notes, delete. Greg's edits highlighted field-by-field. CSV export.</div></div>
+              <div class="feature-item"><div class="feature-title">Dashboard</div><div class="feature-desc">Four live stat cards (current month payroll, all-time payroll, active cleaner count, properties in database) plus a recent entries table and top earners panel. Entries touched by the limited user are highlighted for admin visibility.</div></div>
+              <div class="feature-item"><div class="feature-title">Log Work Entry</div><div class="feature-desc">Cleaner dropdown auto-populates from the database; property dropdown narrows to the selected cleaner; rate auto-fills. Three work types: Cleaning, Inspection, Misc/Bonus. Form state persists across tab switches.</div></div>
+              <div class="feature-item"><div class="feature-title">Sorted Summary</div><div class="feature-desc">Full payroll record with four live filters: date range, cleaner, property. Admin inline editing: date, rate override, additional rate, notes, delete. Greg's edits highlighted field-by-field. CSV export.</div></div>
               <div class="feature-item"><div class="feature-title">Employee Payroll Report</div><div class="feature-desc">Per-cleaner pay-statement cards with an active staff sidebar. Inline editing with confirmation dialogs, manual pay rows for bonuses, and two-way sync with Summary. Print/PDF and CSV export.</div></div>
               <div class="feature-item"><div class="feature-title">Billing System</div><div class="feature-desc">Client-facing invoices grouped by property brand. Misc line items per group with live-updating subtotals and a grand total card. CSV export includes billing and misc line items.</div></div>
-              <div class="feature-item"><div class="feature-title">Database Editor</div><div class="feature-desc">Employee rates, billing rates, and an add-new tab for rates, employees, and properties — admin only. Duplicate detection warns before creating a second copy.</div></div>
+              <div class="feature-item"><div class="feature-title">Database Editor</div><div class="feature-desc">Employee rates, billing rates, and an add-new tab for rates, employees, and properties, admin only. Duplicate detection warns before creating a second copy.</div></div>
               <div class="feature-item"><div class="feature-title">Floating Chat</div><div class="feature-desc">Private messaging between the two users from any tab, with an unread badge and persistent history in Supabase. Realtime-powered, no polling.</div></div>
-              <div class="feature-item"><div class="feature-title">Activity Log</div><div class="feature-desc">Admin-only log of every action the limited user takes — new entries, rate overrides, deletions, manual pay rows. Capped at 500 entries, with mark-all-read and clear options.</div></div>
+              <div class="feature-item"><div class="feature-title">Activity Log</div><div class="feature-desc">Admin-only log of every action the limited user takes: new entries, rate overrides, deletions, manual pay rows. Capped at 500 entries, with mark-all-read and clear options.</div></div>
             </div>
           </div>
 
@@ -949,7 +949,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
               </div>
             </div>
             <div class="note-composer">
-              <textarea placeholder="Write a note about this project — a feature highlight, a technical decision, a result..."></textarea>
+              <textarea placeholder="Write a note about this project: a feature highlight, a technical decision, a result..."></textarea>
               <div class="note-composer-actions">
                 <button type="button" class="note-composer-btn cancel">Cancel</button>
                 <button type="button" class="note-composer-btn primary save">Save Note</button>
@@ -977,8 +977,8 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
     </div>
     <div class="process-timeline reveal">
       <div class="process-step"><div class="process-step-num">01</div><div class="process-step-title">Discovery</div><div class="process-step-desc">We watch how your team actually works, including the parts still living in spreadsheets and group chats.</div></div>
-      <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permissions, and module breakdown — the schema everything else follows.</div></div>
-      <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early — not mockups.</div></div>
+      <div class="process-step"><div class="process-step-num">02</div><div class="process-step-title">Architecture</div><div class="process-step-desc">We design the data model, permissions, and module breakdown: the schema everything else follows.</div></div>
+      <div class="process-step"><div class="process-step-num">03</div><div class="process-step-title">Build</div><div class="process-step-desc">Single-file vanilla JS, no build step. You see working software early, not mockups.</div></div>
       <div class="process-step"><div class="process-step-num">04</div><div class="process-step-title">Iterate</div><div class="process-step-desc">Your team uses the software, tells us what's missing, and we ship the next round.</div></div>
       <div class="process-step"><div class="process-step-num">05</div><div class="process-step-title">Evolve</div><div class="process-step-desc">The software stays in daily use, with new modules and roles added as your needs grow.</div></div>
     </div>
@@ -1016,7 +1016,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
   <div class="footer-grid">
     <div>
       <div class="footer-brand"><span class="logo-mark">L</span>ululab</div>
-      <p class="footer-brand-desc">A custom web application studio, building business software from scratch — no templates, no page builders.</p>
+      <p class="footer-brand-desc">A custom web application studio, building business software from scratch, with no templates and no page builders.</p>
     </div>
     <div class="footer-col"><h5>Studio</h5><ul><li><a href="#profile">about</a></li><li><a href="#services">services</a></li><li><a href="#capabilities">capabilities</a></li><li><a href="#process">process</a></li></ul></div>
     <div class="footer-col"><h5>Work</h5><ul><li><a href="#portfolio">portfolio</a></li><li><a href="#contact">start a project</a></li><li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jeinna.louise@gmail.com&su=Project%20Inquiry" target="_blank" rel="noopener">email us</a></li><li><a href="#">github</a></li></ul></div>
@@ -1077,7 +1077,7 @@ try {
 }
 
 // Use v2 keys to bust old broken localStorage saves
-// Always check the local flag — login no longer depends on Supabase Auth.
+// Always check the local flag. Login no longer depends on Supabase Auth.
 let isLoggedIn = localStorage.getItem('lululab_admin_v2') === 'true';
 let isEditMode = false;
 
@@ -1177,17 +1177,26 @@ document.querySelectorAll('.project').forEach(project=>{
 });
 
 // === PORTFOLIO CARDS: click to expand into the full case study ===
+// Scrolls so the element's top clears both the fixed nav and, when a project
+// is expanded, the full-width "Back to Projects" bar sitting right below it.
+function scrollBelowFixedBars(el) {
+  const barVisible = document.body.classList.contains('has-expanded-project');
+  const offset = barVisible ? 130 : 80;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 function toggleProject(btn) {
   const project = btn.closest('.project');
   const nowExpanded = project.classList.toggle('expanded');
   const label = project.querySelector('.project-toggle .toggle-label');
   if (label) label.textContent = nowExpanded ? 'See Less' : 'See More';
   document.body.classList.toggle('has-expanded-project', !!document.querySelector('.project.expanded'));
-  setTimeout(() => project.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  setTimeout(() => scrollBelowFixedBars(project), 50);
 }
 
 // Used by the floating "Back to Projects" button, which isn't tied to a
-// specific card — it just closes whichever one is currently open.
+// specific card. It just closes whichever one is currently open.
 function collapseExpandedProject() {
   const project = document.querySelector('.project.expanded');
   if (!project) return;
@@ -1195,7 +1204,7 @@ function collapseExpandedProject() {
   const label = project.querySelector('.project-toggle .toggle-label');
   if (label) label.textContent = 'See More';
   document.body.classList.remove('has-expanded-project');
-  project.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollBelowFixedBars(project);
 }
 
 // ==========================================
@@ -1447,14 +1456,14 @@ function showToast(message,icon='fa-check-circle'){
 // ==========================================
 // CONTACT FORM
 // ==========================================
-// The form submits as a real (non-AJAX) POST directly to FormSubmit — this is
+// The form submits as a real (non-AJAX) POST directly to FormSubmit. This is
 // their most reliable integration path. AJAX submissions require an extra
 // one-time activation step that's easy to miss; a normal form POST triggers
 // that activation automatically and just works after the first submission.
 //
 // Note: the very first submission ever sent to jeinna.louise@gmail.com will
 // itself be held back by FormSubmit pending a confirmation click sent to that
-// inbox (check spam too) — every submission after that one delivers normally.
+// inbox (check spam too). Every submission after that one delivers normally.
 
 // Point "_next" back at this page's own contact section, with a marker so we
 // can show a success message after the redirect back.
@@ -1469,7 +1478,7 @@ function showToast(message,icon='fa-check-circle'){
 (function checkContactFormSuccess() {
   if (window.location.search.includes('sent=true')) {
     window.addEventListener('load', () => {
-      showToast('Thanks — we\'ll be in touch within 24 hours.', 'fa-paper-plane');
+      showToast('Thanks, we\'ll be in touch within 24 hours.', 'fa-paper-plane');
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     });
     const cleanUrl = window.location.pathname + window.location.hash;
@@ -1515,7 +1524,7 @@ function hideLogin() {
     document.getElementById('login-modal').classList.remove('active');
 }
 
-// Simple hardcoded credential check — same approach as DRS Payroll.
+// Simple hardcoded credential check, same approach as DRS Payroll.
 // No Supabase Auth account is needed; this is purely a client-side gate.
 const ADMIN_USERNAME = 'Jeinna';
 const ADMIN_PASSWORD = '$Jeinna1802$';
@@ -1671,20 +1680,20 @@ async function runConnectionDiagnostic() {
     console.log('%c[LuluLab CMS Diagnostic]', 'color:#FA9EBC;font-weight:bold');
     console.log('Supabase configured:', isSupabaseConfigured);
     if (!isSupabaseConfigured) {
-        console.warn('Supabase is NOT configured — check SUPABASE_URL / SUPABASE_ANON_KEY, and that the SDK script loaded.');
+        console.warn('Supabase is NOT configured. Check SUPABASE_URL / SUPABASE_ANON_KEY, and that the SDK script loaded.');
         return;
     }
     try {
         console.log('Edit-mode login: client-side check only (no Supabase Auth account needed).');
 
         const { error: cmsErr } = await sb.from('cms_content').select('id').limit(1);
-        console.log('cms_content table:', cmsErr ? `MISSING or blocked — ${cmsErr.message}` : 'reachable');
+        console.log('cms_content table:', cmsErr ? `MISSING or blocked: ${cmsErr.message}` : 'reachable');
 
         const { error: contactErr } = await sb.from('contact_messages').select('id').limit(1);
-        console.log('contact_messages table:', contactErr ? `MISSING or blocked — ${contactErr.message}` : 'reachable');
+        console.log('contact_messages table:', contactErr ? `MISSING or blocked: ${contactErr.message}` : 'reachable');
 
         const { data: bucketData, error: bucketErr } = await sb.storage.from('cms-images').list('', { limit: 1 });
-        console.log('cms-images storage bucket:', bucketErr ? `MISSING or blocked — ${bucketErr.message}` : 'reachable');
+        console.log('cms-images storage bucket:', bucketErr ? `MISSING or blocked: ${bucketErr.message}` : 'reachable');
     } catch (e) {
         console.error('Diagnostic failed:', e);
     }
