@@ -762,7 +762,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         </div>
 
         <button type="button" class="project-toggle" onclick="toggleProject(this)">
-          <span class="toggle-label">View Case Study</span><i class="fas fa-chevron-down"></i>
+          <span class="toggle-label">See More</span><i class="fas fa-chevron-down"></i>
         </button>
 
         <div class="project-tabs">
@@ -873,7 +873,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
         </div>
 
         <button type="button" class="project-toggle" onclick="toggleProject(this)">
-          <span class="toggle-label">View Case Study</span><i class="fas fa-chevron-down"></i>
+          <span class="toggle-label">See More</span><i class="fas fa-chevron-down"></i>
         </button>
 
         <div class="project-tabs">
@@ -986,11 +986,14 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
           <a href="#" class="contact-info-item"><i class="fas fa-clock"></i><span>Response within 24 hours</span></a>
         </div>
       </div>
-      <form class="contact-form reveal" id="contact-form">
-        <div class="form-group"><label>Your Name</label><input type="text" id="form-name" required placeholder="Jane Reyes"></div>
-        <div class="form-group"><label>Email</label><input type="email" id="form-email" required placeholder="jane@company.com"></div>
-        <div class="form-group"><label>Company</label><input type="text" id="form-company" placeholder="Acme Operations Inc."></div>
-        <div class="form-group"><label>What are you trying to solve?</label><textarea id="form-message" required placeholder="Briefly describe the workflow, the team size, and what's currently broken or manual..."></textarea></div>
+      <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/jeinna.louise@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New project brief from the LuluLab website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" id="form-next" value="">
+        <div class="form-group"><label>Your Name</label><input type="text" id="form-name" name="Name" required placeholder="Jane Reyes"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="form-email" name="Email" required placeholder="jane@company.com"></div>
+        <div class="form-group"><label>Company</label><input type="text" id="form-company" name="Company" placeholder="Acme Operations Inc."></div>
+        <div class="form-group"><label>What are you trying to solve?</label><textarea id="form-message" name="Message" required placeholder="Briefly describe the workflow, the team size, and what's currently broken or manual..."></textarea></div>
         <button type="submit" class="btn-primary" style="width:100%;justify-content:center">Send Project Brief <i class="fas fa-paper-plane"></i></button>
       </form>
     </div>
@@ -1004,7 +1007,7 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
       <p class="footer-brand-desc">A custom web application studio, building business software from scratch — no templates, no page builders.</p>
     </div>
     <div class="footer-col"><h5>Studio</h5><ul><li><a href="#profile">about</a></li><li><a href="#services">services</a></li><li><a href="#capabilities">capabilities</a></li><li><a href="#process">process</a></li></ul></div>
-    <div class="footer-col"><h5>Work</h5><ul><li><a href="#portfolio">portfolio</a></li><li><a href="#contact">start a project</a></li><li><a href="mailto:jeinna.louise@gmail.com">email us</a></li><li><a href="#">github</a></li></ul></div>
+    <div class="footer-col"><h5>Work</h5><ul><li><a href="#portfolio">portfolio</a></li><li><a href="#contact">start a project</a></li><li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=jeinna.louise@gmail.com&su=Project%20Inquiry" target="_blank" rel="noopener">email us</a></li><li><a href="#">github</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <!-- Made the copyright text clickable to open the login -->
@@ -1163,7 +1166,7 @@ function toggleProject(btn) {
   const project = btn.closest('.project');
   const nowExpanded = project.classList.toggle('expanded');
   const label = btn.querySelector('.toggle-label');
-  label.textContent = nowExpanded ? 'Show Less' : 'View Case Study';
+  label.textContent = nowExpanded ? 'See Less' : 'See More';
   if (nowExpanded) {
     setTimeout(() => project.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
@@ -1416,53 +1419,37 @@ function showToast(message,icon='fa-check-circle'){
 }
 
 // ==========================================
-// CONTACT FORM (Supabase + email delivery)
+// CONTACT FORM
 // ==========================================
-// FORMSUBMIT_EMAIL: where "Send Project Brief" submissions are delivered.
-// Note: the first submission to a new email address triggers a one-time
-// confirmation email from FormSubmit that must be clicked before delivery
-// starts working — this is normal for their free, no-signup service.
-const FORMSUBMIT_EMAIL = 'jeinna.louise@gmail.com';
+// The form submits as a real (non-AJAX) POST directly to FormSubmit — this is
+// their most reliable integration path. AJAX submissions require an extra
+// one-time activation step that's easy to miss; a normal form POST triggers
+// that activation automatically and just works after the first submission.
+//
+// Note: the very first submission ever sent to jeinna.louise@gmail.com will
+// itself be held back by FormSubmit pending a confirmation click sent to that
+// inbox (check spam too) — every submission after that one delivers normally.
 
-document.getElementById('contact-form')?.addEventListener('submit', async e => {
-  e.preventDefault();
-  const name = document.getElementById('form-name').value;
-  const email = document.getElementById('form-email').value;
-  const company = document.getElementById('form-company').value;
-  const message = document.getElementById('form-message').value;
+// Point "_next" back at this page's own contact section, with a marker so we
+// can show a success message after the redirect back.
+(function setupContactFormRedirect() {
+  const nextField = document.getElementById('form-next');
+  if (!nextField) return;
+  const base = window.location.href.split('#')[0].split('?')[0];
+  nextField.value = `${base}?sent=true#contact`;
+})();
 
-  // Best-effort: also store the message in Supabase if configured. This never
-  // blocks the actual email delivery below or the success message shown to the visitor.
-  if (isSupabaseConfigured) {
-    sb.from('contact_messages').insert([{ name, email, company, message }])
-      .catch(err => console.error('Supabase save failed', err));
-  }
-
-  let emailSent = false;
-  try {
-    const res = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject: `New project brief from ${name || 'website visitor'}`,
-        Name: name,
-        Email: email,
-        Company: company || '(not provided)',
-        Message: message
-      })
+// After FormSubmit redirects back here, show the success toast once.
+(function checkContactFormSuccess() {
+  if (window.location.search.includes('sent=true')) {
+    window.addEventListener('load', () => {
+      showToast('Thanks — we\'ll be in touch within 24 hours.', 'fa-paper-plane');
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     });
-    emailSent = res.ok;
-  } catch (err) {
-    console.error('Email delivery failed', err);
+    const cleanUrl = window.location.pathname + window.location.hash;
+    window.history.replaceState({}, document.title, cleanUrl);
   }
-
-  if (emailSent) {
-    showToast('Thanks — we\'ll be in touch within 24 hours.', 'fa-paper-plane');
-    e.target.reset();
-  } else {
-    showToast('Error sending message.', 'fa-triangle-exclamation');
-  }
-});
+})();
 
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
