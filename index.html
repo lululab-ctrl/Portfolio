@@ -231,11 +231,17 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project-toggle i{transition:transform .25s}
 .project.expanded .project-toggle i{transform:rotate(180deg)}
 
-.project-back{display:none;align-items:center;gap:.5rem;padding:1.1rem 2rem .4rem;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--accent)}
-.project:nth-of-type(2) .project-back{color:var(--blue-accent)}
-.project-back:hover{text-decoration:underline}
-.project.expanded .project-back{display:flex}
+.project-back{display:none;align-items:center;gap:.5rem;margin:1.2rem 0 0 2rem;padding:.6rem 1.1rem;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:100px;cursor:pointer;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--accent);box-shadow:0 2px 8px rgba(27,23,20,.08);transition:background .2s,transform .2s}
+.project-back:hover{background:var(--pink-soft);transform:translateX(-2px)}
+.project:nth-of-type(2) .project-back{color:var(--blue-accent);border-color:var(--border-blue)}
+.project:nth-of-type(2) .project-back:hover{background:var(--blue-soft)}
+.project.expanded .project-back{display:inline-flex}
 .project.expanded .project-toggle{display:none}
+
+.floating-back-btn{display:none;position:fixed;bottom:1.8rem;right:1.8rem;z-index:500;align-items:center;gap:.6rem;padding:.85rem 1.5rem;background:var(--fg);color:var(--bg-2);border:none;border-radius:100px;cursor:pointer;font-family:var(--sans);font-size:.92rem;font-weight:600;box-shadow:0 12px 32px rgba(27,23,20,.28);transition:transform .2s}
+.floating-back-btn:hover{transform:translateY(-2px)}
+body.has-expanded-project .floating-back-btn{display:inline-flex}
+@media(max-width:768px){.floating-back-btn{bottom:1.2rem;right:1.2rem;padding:.75rem 1.2rem;font-size:.85rem}}
 
 .project-tabs{display:flex;gap:.4rem;padding:.9rem 2.8rem;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;background:var(--bg-3)}
 .project-tabs::-webkit-scrollbar{display:none}
@@ -1035,6 +1041,9 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
   </div>
 </div>
 
+<!-- FLOATING "BACK TO PROJECTS" BUTTON (shown only while a case study is expanded) -->
+<button type="button" class="floating-back-btn" onclick="collapseExpandedProject()"><i class="fas fa-arrow-left"></i>Back to Projects</button>
+
 <!-- HIDDEN ADMIN TOOLBAR -->
 <div id="admin-toolbar" class="admin-toolbar">
   <div class="admin-status"><span class="dot"></span>Admin Mode</div>
@@ -1173,7 +1182,20 @@ function toggleProject(btn) {
   const nowExpanded = project.classList.toggle('expanded');
   const label = project.querySelector('.project-toggle .toggle-label');
   if (label) label.textContent = nowExpanded ? 'See Less' : 'See More';
+  document.body.classList.toggle('has-expanded-project', !!document.querySelector('.project.expanded'));
   setTimeout(() => project.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
+
+// Used by the floating "Back to Projects" button, which isn't tied to a
+// specific card — it just closes whichever one is currently open.
+function collapseExpandedProject() {
+  const project = document.querySelector('.project.expanded');
+  if (!project) return;
+  project.classList.remove('expanded');
+  const label = project.querySelector('.project-toggle .toggle-label');
+  if (label) label.textContent = 'See More';
+  document.body.classList.remove('has-expanded-project');
+  project.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ==========================================
