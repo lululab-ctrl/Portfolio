@@ -194,14 +194,21 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 
 .portfolio-section{background:var(--bg)}
 .portfolio-projects{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;align-items:start}
-.project{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s;position:relative}
-.project.expanded{grid-column:1/-1;box-shadow:0 16px 40px rgba(27,23,20,.08)}
+.project{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .25s;position:relative;box-shadow:0 2px 10px rgba(27,23,20,.04)}
+.project.expanded{grid-column:1/-1;box-shadow:0 20px 48px rgba(27,23,20,.1)}
 .project::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent);z-index:5}
 .project:nth-of-type(2)::before{background:var(--blue-accent)}
-.project:hover{border-color:var(--border-bright)}
-.project:nth-of-type(2):hover{border-color:var(--border-blue)}
+.project:not(.expanded):hover{border-color:var(--border-bright);box-shadow:0 16px 36px rgba(27,23,20,.1);transform:translateY(-4px)}
+.project:nth-of-type(2):not(.expanded):hover{border-color:var(--border-blue)}
+.project.expanded:hover{border-color:var(--border-bright)}
+.project:nth-of-type(2).expanded:hover{border-color:var(--border-blue)}
+
+.project-icon{width:44px;height:44px;border-radius:12px;background:var(--pink-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:1.1rem}
+.project:nth-of-type(2) .project-icon{background:var(--blue-soft);color:var(--blue-accent)}
+.project:not(.expanded) .project-icon{width:38px;height:38px;font-size:1rem;margin-bottom:.9rem}
+
 .project-header{padding:2.8rem;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;border-bottom:1px solid var(--border);position:relative;background:linear-gradient(135deg,var(--bg-2) 0%,var(--bg-3) 100%)}
-.project:not(.expanded) .project-header{grid-template-columns:1fr;padding:2rem;border-bottom:none}
+.project:not(.expanded) .project-header{grid-template-columns:1fr;padding:2.2rem;border-bottom:none}
 .project:not(.expanded) .project-stats{display:none}
 .project:not(.expanded) .project-header p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .project-num{font-family:var(--sans);font-size:.88rem;color:var(--accent);margin-bottom:.8rem;font-weight:600;display:flex;align-items:center;gap:.6rem}
@@ -224,18 +231,11 @@ section{position:relative;padding:7rem 3rem;z-index:2}
 .project:nth-of-type(2) .project-stat-num{color:var(--blue-accent)}
 .project-stat-label{font-family:var(--sans);font-size:.74rem;color:var(--fg-3);margin-top:.3rem;font-weight:500}
 
-.project-toggle{width:100%;padding:1rem 2rem;background:var(--bg-3);border:none;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:.6rem;cursor:pointer;font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--accent);transition:background .2s}
+.project-toggle{width:100%;padding:1.1rem 2rem;background:var(--bg-3);border:none;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:center;gap:.6rem;cursor:pointer;font-family:var(--sans);font-size:.92rem;font-weight:600;color:var(--accent);transition:background .2s,gap .2s}
 .project:nth-of-type(2) .project-toggle{color:var(--blue-accent)}
-.project-toggle:hover{background:var(--pink-soft)}
+.project-toggle:hover{background:var(--pink-soft);gap:.85rem}
 .project:nth-of-type(2) .project-toggle:hover{background:var(--blue-soft)}
 .project-toggle i{transition:transform .25s}
-.project.expanded .project-toggle i{transform:rotate(180deg)}
-
-.project-back{display:none;align-items:center;gap:.5rem;margin:1.2rem 0 0 2rem;padding:.6rem 1.1rem;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:100px;cursor:pointer;font-family:var(--sans);font-size:.85rem;font-weight:600;color:var(--accent);box-shadow:0 2px 8px rgba(27,23,20,.08);transition:background .2s,transform .2s}
-.project-back:hover{background:var(--pink-soft);transform:translateX(-2px)}
-.project:nth-of-type(2) .project-back{color:var(--blue-accent);border-color:var(--border-blue)}
-.project:nth-of-type(2) .project-back:hover{background:var(--blue-soft)}
-.project.expanded .project-back{display:inline-flex}
 .project.expanded .project-toggle{display:none}
 
 .floating-back-btn{display:none;position:fixed;top:64px;left:0;right:0;z-index:90;align-items:center;justify-content:center;gap:.6rem;width:100%;padding:.9rem 1.5rem;background:var(--fg);color:var(--bg-2);border:none;border-radius:0;cursor:pointer;font-family:var(--sans);font-size:.92rem;font-weight:600;box-shadow:0 4px 20px rgba(27,23,20,.25);transition:background .2s}
@@ -748,9 +748,9 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
     <div class="portfolio-projects">
       <!-- PROJECT 1 -->
       <div class="project reveal" data-project="1">
-        <button type="button" class="project-back" onclick="toggleProject(this)"><i class="fas fa-arrow-left"></i>Back to all projects</button>
         <div class="project-header">
           <div>
+            <div class="project-icon"><i class="fas fa-users-gear"></i></div>
             <div class="project-num"><span class="line"></span>Operations</div>
             <h3 class="project-title">DRS Leave Tracker Hub</h3>
             <div class="project-tagline">Operations system for a 30+ person Philippine-based team.</div>
@@ -860,9 +860,9 @@ html.js-enabled .reveal.visible{opacity:1;transform:translateY(0)}
 
       <!-- PROJECT 2 -->
       <div class="project reveal" data-project="2">
-        <button type="button" class="project-back" onclick="toggleProject(this)"><i class="fas fa-arrow-left"></i>Back to all projects</button>
         <div class="project-header">
           <div>
+            <div class="project-icon"><i class="fas fa-file-invoice-dollar"></i></div>
             <div class="project-num"><span class="line"></span>Payroll &amp; Billing</div>
             <h3 class="project-title">Dream Rental Solutions: Invoice & Payroll System</h3>
             <div class="project-tagline">Payroll and invoicing platform for a short-term rental business.</div>
